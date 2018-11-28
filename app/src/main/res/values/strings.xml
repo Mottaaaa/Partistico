@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Partistico</string>
+    <string name="athelete_list_activity">Atletas</string>
 </resources>
