@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AthleteListActivity"
-                android:label="This is the Hello World Application">>
+                android:label="Atletas">>
         </activity>
     </application>
 
