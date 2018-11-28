@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".AthleteListActivity"
-                android:label="Atletas">>
+                android:label="Atletas">
+        </activity>
+        <activity android:name=".AthleteProfileActivity"
+                android:label="Atleta">
+
         </activity>
     </application>
 
