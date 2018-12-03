@@ -3,16 +3,18 @@ package Model;
 public class Athlete {
 
     //public nahSei icon;
-    public String name;
-    public String age;
-    public String expirationDate;
-    public String echelon;
+    private String name;
+    private String age;
+    private String expirationDate;
+    private String echelon;
+    private String gender;
 
-    public Athlete(/*nahSei icon*/ String name, String age, String expirationDate, String echelon) {
+    public Athlete(/*nahSei icon*/ String name, String age, String expirationDate, String echelon, String gender) {
         this.name = name;
         this.age = age;
         this.expirationDate = expirationDate;
         this.echelon = echelon;
+        this.gender = gender;
     }
 
     public String getName() {
@@ -45,5 +47,13 @@ public class Athlete {
 
     public void setEchelon(String echelon) {
         this.echelon = echelon;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

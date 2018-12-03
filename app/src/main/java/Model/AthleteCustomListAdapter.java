@@ -13,20 +13,19 @@ import mlcl.partistico.R;
 public class AthleteCustomListAdapter extends ArrayAdapter<Athlete> {
 
     private final Activity context;
-    private final Athlete[] athletes;
+    private static Athlete[] athletes = Utils.getInstance().getAthletes();
 
-    public AthleteCustomListAdapter(Activity context, Athlete[] athletes) {
-        super(context, R.layout.athlete_list, athletes);
+    public AthleteCustomListAdapter(Activity context) {
+        super(context, R.layout.athlete_list_item, athletes);
         // TODO Auto-generated constructor stub
 
         this.context = context;
-        this.athletes = athletes;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
 
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.athlete_list, null, true);
+        View rowView = inflater.inflate(R.layout.athlete_list_item, null, true);
 
         ImageView icon = (ImageView) rowView.findViewById(R.id.icon);
         TextView name = (TextView) rowView.findViewById(R.id.name);
@@ -34,12 +33,17 @@ public class AthleteCustomListAdapter extends ArrayAdapter<Athlete> {
         TextView expirationDate = (TextView) rowView.findViewById(R.id.expirationDate);
         TextView echelon = (TextView) rowView.findViewById(R.id.echelon);
 
-        icon.setImageResource(R.drawable.hitler);
-        name.setText(athletes[position].name);
-        age.setText(athletes[position].age + " Anos");
-        expirationDate.setText("Validade Atestado: " + athletes[position].expirationDate);
-        echelon.setText(athletes[position].echelon);
-        return rowView;
 
+        icon.setImageResource(R.drawable.hitler);
+        if(position == 1)
+            icon.setImageResource(R.drawable.stalin);
+
+        name.setText(athletes[position].getName());
+        age.setText(athletes[position].getAge() + " Anos");
+        expirationDate.setText("Validade Atestado: " + athletes[position].getExpirationDate());
+        echelon.setText(athletes[position].getEchelon());
+
+        rowView.setTag(position);
+        return rowView;
     }
 }
