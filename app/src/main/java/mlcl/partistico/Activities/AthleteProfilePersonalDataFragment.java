@@ -1,4 +1,4 @@
-package mlcl.partistico;
+package mlcl.partistico.Activities;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import mlcl.partistico.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AthleteProfileHistoryFragment extends Fragment {
+public class AthleteProfilePersonalDataFragment extends Fragment {
 
 
-    public AthleteProfileHistoryFragment() {
+    public AthleteProfilePersonalDataFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class AthleteProfileHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_athlete_profile_history, container, false);
+        return inflater.inflate(R.layout.fragment_athlete_profile_personal_data, container, false);
     }
 
 }
