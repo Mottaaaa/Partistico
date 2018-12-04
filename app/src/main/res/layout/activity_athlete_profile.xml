@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activities.AthleteProfileActivity">
+    tools:context=".Activities.AthleteProfileActivity"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -28,53 +29,71 @@
         </android.support.v7.widget.Toolbar>
 
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="?attr/colorPrimary" />
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/background_light"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
-                <Space
+                <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="60dp"
+                    android:background="?attr/colorPrimary" />
 
-                <TextView
-                    android:id="@+id/lbl_name"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textAlignment="center"
-                    android:textColor="@color/titleColor"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:background="@android:color/background_light"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lbl_club"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Club"
-                    android:textAlignment="center"
-                    android:textColor="@color/labelColor"
-                    android:textSize="12sp" />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp" />
+
+                    <TextView
+                        android:id="@+id/lbl_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textAlignment="center"
+                        android:textColor="@color/titleColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lbl_club"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Club"
+                        android:textAlignment="center"
+                        android:textColor="@color/labelColor"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_gravity="top|center"
+                android:src="@drawable/stalin"
+                app:civ_fill_color="@color/profileBackground" />
+
+
+        </FrameLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
             app:tabBackground="@android:color/background_light"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabSelectedTextColor="@color/colorPrimary"
