@@ -5,12 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical"
-        android:padding="5dp" />
+        android:src="@drawable/profile_icon"
+        app:civ_fill_color="@color/profileBackground" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +34,7 @@
                 android:padding="2dp"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#33CC33" />
+                android:textColor="@color/textColor" />
 
             <TextView
                 android:id="@+id/echelon"

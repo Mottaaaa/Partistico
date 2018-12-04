@@ -45,7 +45,7 @@ public class AthleteProfilePersonalDataFragment extends Fragment {
             TextView echelon = (TextView) getView().findViewById(R.id.tv_echelon);
             TextView gender = (TextView) getView().findViewById(R.id.tv_gender);
 
-            age.setText(Utils.getInstance().getActiveAthlete().getAge());
+            age.setText(Utils.getInstance().getActiveAthlete().getBirthday());
             expirationDate.setText(Utils.getInstance().getActiveAthlete().getExpirationDate());
             echelon.setText(Utils.getInstance().getActiveAthlete().getEchelon());
             gender.setText(Utils.getInstance().getActiveAthlete().getGender());

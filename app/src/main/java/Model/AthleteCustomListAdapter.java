@@ -34,12 +34,10 @@ public class AthleteCustomListAdapter extends ArrayAdapter<Athlete> {
         TextView echelon = (TextView) rowView.findViewById(R.id.echelon);
 
 
-        icon.setImageResource(R.drawable.hitler);
-        if(position == 1)
-            icon.setImageResource(R.drawable.stalin);
+        icon.setImageBitmap(athletes[position].getImage());
 
         name.setText(athletes[position].getName());
-        age.setText(athletes[position].getAge() + " Anos");
+        age.setText(athletes[position].getBirthday() + " Anos");
         expirationDate.setText("Validade Atestado: " + athletes[position].getExpirationDate());
         echelon.setText(athletes[position].getEchelon());
 

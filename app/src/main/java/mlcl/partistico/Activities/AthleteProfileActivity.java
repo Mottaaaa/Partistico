@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import Model.Athlete;
 import Model.Utils;
 import mlcl.partistico.R;
 
@@ -57,16 +59,15 @@ public class AthleteProfileActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
-        //coisas
         TextView name = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_name);
-        //TextView age = (TextView) AthleteProfileActivity.this.findViewById(R.id.tv_birdthay_date);
-        //TextView expirationDate = (TextView) AthleteProfileActivity.this.findViewById(R.id.tv_medical_expiration);
-        //TextView echelon = (TextView) AthleteProfileActivity.this.findViewById(R.id.tv_echelon);
+        ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.profile_image);
 
+        Utils util = Utils.getInstance();
+        util.setActivity(this);
+
+
+        profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());
         name.setText(Utils.getInstance().getActiveAthlete().getName());
-        //age.setText(Utils.getInstance().getActiveAthlete().getAge());
-       // expirationDate.setText(Utils.getInstance().getActiveAthlete().getExpirationDate());
-        //echelon.setText(Utils.getInstance().getActiveAthlete().getEchelon());
     }
 
 
@@ -154,6 +155,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
                     break;
                 case 2:
                     fragment = new AthleteProfileHistoryFragment();
+                    break;
             }
 
             return fragment;
