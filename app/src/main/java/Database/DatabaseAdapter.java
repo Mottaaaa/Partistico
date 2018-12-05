@@ -47,9 +47,12 @@ public class DatabaseAdapter {
             club.getImage().compress(Bitmap.CompressFormat.PNG, 100, bos);
             byte[] bArray = bos.toByteArray();
             newValues.put(BDClub.KEY_IMAGE, bArray);
+            newValues.put(BDClub.FOREIGN_DATABASE_ID, club.getId());
 
             db = dbHelper.getWritableDatabase();
             id = db.insert(BDClub.TABLE_CLUB, null, newValues);
+
+
         } catch (Exception ex) {
             System.out.println("Esceptions:" + ex);
         }
@@ -58,7 +61,7 @@ public class DatabaseAdapter {
 
     public List<BDClub> getClubs() {
         List<BDClub> clubs = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.KEY_IMAGE},
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.KEY_IMAGE, BDClub.FOREIGN_DATABASE_ID},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -68,6 +71,7 @@ public class DatabaseAdapter {
                 byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDClub.KEY_IMAGE));
                 Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                 club.setImage(image);
+                club.setId(cursor.getInt(cursor.getColumnIndex(BDClub.FOREIGN_DATABASE_ID)));
                 clubs.add(club);
             } while (cursor.moveToNext());
         }
@@ -88,11 +92,13 @@ public class DatabaseAdapter {
             newValues.put(BDAthlete.KEY_EXPIRATION_DATE, athlete.getExpirationDate());
             newValues.put(BDAthlete.KEY_ECHELON, athlete.getEchelon());
             newValues.put(BDAthlete.KEY_GENDER, athlete.getGender());
-            newValues.put(BDAthlete.KEY_NOTES, athlete.getNotes());
             newValues.put(BDAthlete.KEY_HISTORY, athlete.getHistory());
+            newValues.put(BDAthlete.KEY_CLUB_ID, athlete.getClubID());
+            newValues.put(BDAthlete.FOREIGN_DATABASE_ID, athlete.getId());
 
             db = dbHelper.getWritableDatabase();
             id = db.insert(BDAthlete.TABLE_ATHLETE, null, newValues);
+
         } catch (Exception ex) {
             System.out.println("Esceptions:" + ex);
         }
@@ -102,7 +108,7 @@ public class DatabaseAdapter {
     public List<BDAthlete> getAthletes() {
         List<BDAthlete> athletes = new ArrayList<>();
         Cursor cursor = dbHelper.getReadableDatabase().query(BDAthlete.TABLE_ATHLETE, new String[]{BDAthlete.KEY_NAME, BDAthlete.KEY_IMAGE,
-                        BDAthlete.KEY_BIRTHDAY, BDAthlete.KEY_EXPIRATION_DATE, BDAthlete.KEY_ECHELON, BDAthlete.KEY_GENDER, BDAthlete.KEY_NOTES, BDAthlete.KEY_HISTORY},
+                        BDAthlete.KEY_BIRTHDAY, BDAthlete.KEY_EXPIRATION_DATE, BDAthlete.KEY_ECHELON, BDAthlete.KEY_GENDER, BDAthlete.KEY_HISTORY, BDAthlete.KEY_CLUB_ID, BDAthlete.FOREIGN_DATABASE_ID},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -118,8 +124,88 @@ public class DatabaseAdapter {
                 athelete.setExpirationDate(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_EXPIRATION_DATE)));
                 athelete.setEchelon(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_ECHELON)));
                 athelete.setGender(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_GENDER)));
-                athelete.setNotes(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NOTES)));
                 athelete.setHistory(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_HISTORY)));
+                athelete.setClubID(cursor.getInt(cursor.getColumnIndex(BDAthlete.KEY_CLUB_ID)));
+                athelete.setId(cursor.getInt(cursor.getColumnIndex(BDAthlete.FOREIGN_DATABASE_ID)));
+
+                athletes.add(athelete);
+            } while (cursor.moveToNext());
+        }
+
+        return athletes;
+    }
+
+    public BDClub getClubByID(int clubID) {
+        BDClub club = new BDClub();
+
+        Cursor cursor = db.query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.KEY_IMAGE, BDClub.FOREIGN_DATABASE_ID},
+                "id=?", new String[]{clubID + ""}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            club.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
+            byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDAthlete.KEY_IMAGE));
+            Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            club.setImage(image);
+            club.setId(cursor.getInt(cursor.getColumnIndex(BDClub.FOREIGN_DATABASE_ID)));
+        }
+
+        return club;
+    }
+
+    public List<BDAthlete> getAthletesByClub(int clubID) {
+        List<BDAthlete> athletes = new ArrayList<>();
+
+        Cursor cursor = db.query(BDAthlete.TABLE_ATHLETE, new String[]{BDAthlete.KEY_NAME, BDAthlete.KEY_IMAGE,
+                        BDAthlete.KEY_BIRTHDAY, BDAthlete.KEY_EXPIRATION_DATE, BDAthlete.KEY_ECHELON, BDAthlete.KEY_GENDER, BDAthlete.KEY_HISTORY, BDAthlete.KEY_CLUB_ID, BDAthlete.FOREIGN_DATABASE_ID},
+                "club_id=?", new String[]{clubID + ""}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDAthlete athelete = new BDAthlete();
+
+                athelete.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                athelete.setImage(image);
+                athelete.setBirthday(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_BIRTHDAY)));
+                athelete.setExpirationDate(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_EXPIRATION_DATE)));
+                athelete.setEchelon(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_ECHELON)));
+                athelete.setGender(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_GENDER)));
+                athelete.setHistory(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_HISTORY)));
+                athelete.setClubID(cursor.getInt(cursor.getColumnIndex(BDAthlete.KEY_CLUB_ID)));
+                athelete.setId(cursor.getInt(cursor.getColumnIndex(BDAthlete.FOREIGN_DATABASE_ID)));
+
+                athletes.add(athelete);
+            } while (cursor.moveToNext());
+        }
+
+        return athletes;
+    }
+
+    public List<BDAthlete> getAthleteByName(String name) {
+        List<BDAthlete> athletes = new ArrayList<>();
+
+        Cursor cursor = db.query(BDAthlete.TABLE_ATHLETE, new String[]{BDAthlete.KEY_NAME, BDAthlete.KEY_IMAGE,
+                        BDAthlete.KEY_BIRTHDAY, BDAthlete.KEY_EXPIRATION_DATE, BDAthlete.KEY_ECHELON, BDAthlete.KEY_GENDER, BDAthlete.KEY_HISTORY, BDAthlete.KEY_CLUB_ID, BDAthlete.FOREIGN_DATABASE_ID},
+                BDAthlete.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDAthlete athelete = new BDAthlete();
+
+                athelete.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                athelete.setImage(image);
+                athelete.setBirthday(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_BIRTHDAY)));
+                athelete.setExpirationDate(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_EXPIRATION_DATE)));
+                athelete.setEchelon(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_ECHELON)));
+                athelete.setGender(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_GENDER)));
+                athelete.setHistory(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_HISTORY)));
+                athelete.setClubID(cursor.getInt(cursor.getColumnIndex(BDAthlete.KEY_CLUB_ID)));
+                athelete.setId(cursor.getInt(cursor.getColumnIndex(BDAthlete.FOREIGN_DATABASE_ID)));
 
                 athletes.add(athelete);
             } while (cursor.moveToNext());

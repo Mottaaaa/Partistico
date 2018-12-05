@@ -23,4 +23,7 @@
 
         Duis eu blandit metus. Etiam eu placerat nisi, sed dapibus ligula. Curabitur sagittis turpis id erat ultricies rutrum. Morbi eu est bibendum, scelerisque tortor et, posuere lacus. In.
     </string>
+
+    <string name="search_title"></string>
+    <string name="search_hint">BOSTA</string>
 </resources>

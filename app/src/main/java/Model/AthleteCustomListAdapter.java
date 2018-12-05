@@ -23,12 +23,13 @@ import mlcl.partistico.R;
 public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
 
     private final Activity context;
-    private static List<BDAthlete> athletes = Utils.getInstance().getDBAthletes();
+    private List<BDAthlete> athletes;
 
-    public AthleteCustomListAdapter(Activity context) {
+    public AthleteCustomListAdapter(Activity context, List<BDAthlete> athletes) {
         super(context, R.layout.athlete_list_item, athletes);
         // TODO Auto-generated constructor stub
 
+        this.athletes = athletes;
         this.context = context;
     }
 

@@ -59,13 +59,11 @@ public class AthleteProfileActivity extends AppCompatActivity {
 
         TextView name = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_name);
         ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.profile_image);
-
-        Utils util = Utils.getInstance();
-        //util.setActivity(this);
-
+        TextView club = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_club);
 
         profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());
         name.setText(Utils.getInstance().getActiveAthlete().getName());
+        club.setText(Utils.getInstance().getClubByID(Utils.getInstance().getActiveAthlete().getClubID()).getName());
     }
 
 
@@ -149,9 +147,6 @@ public class AthleteProfileActivity extends AppCompatActivity {
                     fragment = new AthleteProfilePersonalDataFragment();
                     break;
                 case 1:
-                    fragment = new AthleteProfileNotesFragment();
-                    break;
-                case 2:
                     fragment = new AthleteProfileHistoryFragment();
                     break;
             }
@@ -161,8 +156,8 @@ public class AthleteProfileActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
     }
 }
