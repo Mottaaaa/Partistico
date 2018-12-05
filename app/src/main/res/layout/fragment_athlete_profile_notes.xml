@@ -9,13 +9,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,25 +29,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a ante nisl. Nunc porta varius turpis in porta. Maecenas molestie ante eget felis porta tincidunt. Vestibulum eu auctor sem. In ac sodales magna. Vivamus sem nisl, dictum quis placerat sed, consequat vitae libero. Praesent fringilla ligula turpis, ac bibendum risus feugiat semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi fermentum magna vitae elementum volutpat. Donec ac facilisis lorem. Nam purus arcu, viverra pharetra ex non, lobortis pretium ligula. Quisque nisl felis, vestibulum eget molestie eu, varius ut lectus. Nulla et felis eget nibh tempus placerat.
-
-    Etiam vel magna in turpis consequat vulputate ut in urna. Cras mattis urna vitae feugiat consequat. Pellentesque eu nisi ut elit gravida egestas. Nullam felis augue, volutpat a porttitor ut, feugiat vitae augue. Aenean cursus aliquet rutrum. Ut in nisl vel mi dictum convallis sit amet et nunc. Morbi sed eros vitae lectus dictum tristique vitae non diam."
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a ante nisl. Nunc porta varius turpis in porta. Maecenas molestie ante eget felis porta tincidunt. Vestibulum eu auctor sem. In ac sodales magna. Vivamus sem nisl, dictum quis placerat sed, consequat vitae libero. Praesent fringilla ligula turpis, ac bibendum risus feugiat semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi fermentum magna vitae elementum volutpat. Donec ac facilisis lorem. Nam purus arcu, viverra pharetra ex non, lobortis pretium ligula. Quisque nisl felis, vestibulum eget molestie eu, varius ut lectus. Nulla et felis eget nibh tempus placerat."
                 android:textAlignment="viewStart"
                 android:textColor="@color/labelColor" />
 
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/round_button"
-        android:drawableTop="@drawable/ic_edit_black_24dp"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

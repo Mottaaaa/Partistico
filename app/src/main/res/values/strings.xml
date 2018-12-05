@@ -10,7 +10,17 @@
     <string name="echelon">Escalão</string>
     <string name="birthday_date">Data de Nascimento</string>
     <string name="medical_exam_validation_date">Validade do Exame Médico</string>
+    <string name="lorem500">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae tempus tortor, eget feugiat magna. Vivamus convallis metus leo, ut pharetra libero tincidunt id. In non neque facilisis, vehicula ex in, porttitor tellus. Nulla pretium porta massa. Nullam vulputate dui vel dolor pellentesque imperdiet. Duis odio tellus, gravida eget sapien quis, finibus sollicitudin justo. Nulla tincidunt finibus varius. Integer commodo risus eget ex lacinia, efficitur ultrices felis vestibulum. Ut hendrerit suscipit mollis. Donec et eleifend purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi vestibulum risus ut massa tempus malesuada. Maecenas vitae rhoncus orci, in iaculis ligula. Quisque vel elementum magna.
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+        Donec tempor laoreet odio a molestie. Ut quis ligula turpis. Fusce eu finibus nulla. Ut non mattis nunc. Nullam imperdiet facilisis mollis. Duis hendrerit nibh ligula, vel porttitor tellus cursus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non feugiat ipsum, a molestie elit. Proin libero lacus, congue sollicitudin pellentesque eget, accumsan vitae nisi. Cras rutrum risus dolor, nec accumsan augue egestas suscipit.
+
+        Donec dictum porttitor arcu vel pulvinar. Sed tellus nisi, faucibus sed massa non, ultricies viverra sem. Vivamus vel semper eros, et venenatis nibh. Duis eu posuere nunc. Nulla vestibulum, ante ut malesuada venenatis, ligula urna ullamcorper tellus, ac efficitur tellus dolor sit amet nisl. Quisque sed sem ac ex fermentum vestibulum. Etiam justo diam, rutrum eu aliquam quis, accumsan pretium quam. Quisque non faucibus sapien. Phasellus blandit fringilla diam efficitur fermentum. Vivamus congue purus sed ultrices tincidunt. Nam et gravida diam. Praesent nec orci non ligula efficitur mollis.
+
+        Nullam ipsum eros, placerat at tempus eget, laoreet id ex. Aliquam erat volutpat. Mauris tellus risus, auctor in blandit a, interdum in ex. Aenean egestas rhoncus nunc sed bibendum. Duis id cursus nulla. Suspendisse venenatis, odio ut interdum semper, leo lorem malesuada lacus, ut gravida odio sapien ac elit. Cras sed volutpat neque. Aenean pellentesque mauris at tortor vulputate dignissim. Etiam iaculis metus quis tortor eleifend malesuada. Maecenas elementum, lorem ac placerat rhoncus, tortor risus semper sem, a luctus sem nunc et tortor.
+
+        Suspendisse quis sem et nulla efficitur tristique volutpat id arcu. Curabitur porttitor, eros a tempus commodo, dolor orci gravida odio, elementum elementum tellus risus vel eros. Nullam eget ante non libero viverra mattis. Duis vel libero mattis, consequat neque nec, volutpat justo. Donec porta, turpis vel fermentum convallis, sapien felis cursus tortor, et porta tortor lorem sit amet ante. Sed sit amet velit non odio sodales tincidunt quis vitae ipsum. Maecenas tortor sem, fermentum in neque ut, ullamcorper ullamcorper odio. Vivamus condimentum velit eget quam consequat, quis posuere libero eleifend. Suspendisse in arcu est. Vestibulum massa risus, efficitur ut magna varius, laoreet facilisis nibh. Ut sem dui, dignissim sit amet cursus nec, rhoncus vitae dui. Suspendisse sit amet lacus nec dui tincidunt pretium. Maecenas dapibus porttitor arcu vitae gravida.
+
+        Duis eu blandit metus. Etiam eu placerat nisi, sed dapibus ligula. Curabitur sagittis turpis id erat ultricies rutrum. Morbi eu est bibendum, scelerisque tortor et, posuere lacus. In.
+    </string>
 </resources>

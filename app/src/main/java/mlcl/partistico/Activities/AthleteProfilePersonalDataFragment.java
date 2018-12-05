@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import Database.BDAthlete;
 import Model.Utils;
 import mlcl.partistico.R;
 
@@ -38,7 +43,7 @@ public class AthleteProfilePersonalDataFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View view = getView();
-        if(view != null) {
+        if (view != null) {
             // coisas
             TextView age = (TextView) getView().findViewById(R.id.tv_birdthay_date);
             TextView expirationDate = (TextView) getView().findViewById(R.id.tv_medical_expiration);
@@ -51,5 +56,4 @@ public class AthleteProfilePersonalDataFragment extends Fragment {
             gender.setText(Utils.getInstance().getActiveAthlete().getGender());
         }
     }
-
 }

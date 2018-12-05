@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import Model.Athlete;
 import Model.Utils;
 import mlcl.partistico.R;
 
@@ -63,7 +61,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
         ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.profile_image);
 
         Utils util = Utils.getInstance();
-        util.setActivity(this);
+        //util.setActivity(this);
 
 
         profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());

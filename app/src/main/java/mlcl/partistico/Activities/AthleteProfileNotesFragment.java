@@ -45,8 +45,4 @@ public class AthleteProfileNotesFragment extends Fragment {
             notes.setText(Utils.getInstance().getActiveAthlete().getNotes());
         }
     }
-
-    public void edit(View v){
-
-    }
 }

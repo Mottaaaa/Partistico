@@ -24,7 +24,7 @@ public class AthleteListActivity extends AppCompatActivity {
         AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this);
         list = (ListView) findViewById(R.id.athleteList);
         list.setAdapter(adapter);
-        Utils.getInstance().setActivity(this);
+        //Utils.getInstance().setActivity(this);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
