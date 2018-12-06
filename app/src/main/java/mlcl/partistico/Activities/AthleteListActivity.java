@@ -1,8 +1,11 @@
 package mlcl.partistico.Activities;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ import mlcl.partistico.R;
 public class AthleteListActivity extends AppCompatActivity {
 
     ListView list;
+    final Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,60 +37,49 @@ public class AthleteListActivity extends AppCompatActivity {
         handleIntent(getIntent());
 
 
+        /*
         AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this, Utils.getInstance().getDBAthletes());
         list = (ListView) findViewById(R.id.athleteList);
         list.setAdapter(adapter);
-        //Utils.getInstance().setActivity(this);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
 
                 Utils.getInstance().setActiveAthlete((Integer) view.getTag());
                 Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
                 startActivity(intent);
 
-                //String Slecteditem = itemname[+position];
-                //Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
-
             }
         });
+        */
 
-        // Get the intent, verify the action and get the query
-        /*Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            search(query);
-        }*/
+        new GetListTask().execute();
 
     }
 
     private void search(String query) {
-
-
-
         List<BDAthlete> athletes;
-        athletes = Utils.getInstance().getAthletesByName(query);
+        if (query.equals(""))
+            athletes = Utils.getInstance().getDBAthletes();
+        else
+            athletes = Utils.getInstance().getAthletesByName(query);
 
         ListView list = (ListView) findViewById(R.id.athleteList);
         AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this, athletes);
         list.setAdapter(adapter);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
 
                 Utils.getInstance().setActiveAthlete((Integer) view.getTag());
                 Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
                 startActivity(intent);
-
-                //String Slecteditem = itemname[+position];
-                //Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -111,20 +105,34 @@ public class AthleteListActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-
                     search(s);
                     return true;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String s) {
+                    if (s.equals("")) {
+                        search(s);
+                    }
                     return false;
                 }
             });
         }
         return super.onCreateOptionsMenu(menu);
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -140,4 +148,42 @@ public class AthleteListActivity extends AppCompatActivity {
         }
     }
 
+    private class GetListTask extends AsyncTask<Void, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ListView list = (ListView) findViewById(R.id.athleteList);
+                    AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(activity, Utils.getInstance().getDBAthletes());
+                    list.setAdapter(adapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+
+                            Utils.getInstance().setActiveAthlete((Integer) view.getTag());
+                            Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.athleteListProgressBar);
+                    progress.setVisibility(View.INVISIBLE);
+                }
+            });
+
+            return null;
+        }
+    }
 }
+
+
+
+

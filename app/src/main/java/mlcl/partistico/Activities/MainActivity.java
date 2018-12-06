@@ -1,6 +1,8 @@
 package mlcl.partistico.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,36 +21,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Utils.getInstance().setContext(getApplicationContext());
-        Utils.getInstance().populateDB();
-        List<BDClub> teste = Utils.getInstance().getDBClubs();
-        System.out.println(teste.size());
-        List<BDAthlete> t2 = Utils.getInstance().getDBAthletes();
-        System.out.println(t2.size());
 
-        /*
-        //inserção
-        DatabaseAdapter dbAdapter = new DatabaseAdapter(getApplicationContext());
-        dbAdapter.open();
-        BDClub club1 = new BDClub("Teste",BitmapFactory.decodeResource(getResources(), R.drawable.hitler));
-        dbAdapter.insertClub(club1);
-        dbAdapter.close();
-        dbAdapter.open();
-        List<BDClub> clubs = dbAdapter.getClubs();
-        dbAdapter.close();
-        */
+        PopulateDBTask populateTask = new PopulateDBTask();
+        populateTask.execute();
 
     }
 
-    public void atheleteAction(View view){
+    public void atheleteAction(View view) {
 
         Intent intent = new Intent(this, AthleteListActivity.class);
         startActivity(intent);
     }
 
-    public void atheleteProfileAction(View view){
-
-        Intent intent = new Intent(this, AthleteProfileActivity.class);
+    public void nonAthleteAction(View view) {
+        /*
+        Intent intent = new Intent(this, NonAthleteListActivity.class);
         startActivity(intent);
+        */
+    }
+
+    private class PopulateDBTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            Utils.getInstance().setContext(getApplicationContext());
+            Utils.getInstance().populateDB();
+
+            return null;
+        }
+
     }
 }

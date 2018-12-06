@@ -10,11 +10,7 @@ import android.graphics.BitmapFactory;
 
 
 import java.io.ByteArrayOutputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DatabaseAdapter {
@@ -212,5 +208,34 @@ public class DatabaseAdapter {
         }
 
         return athletes;
+    }
+
+    public BDAthlete getAthleteByID(int id){
+        BDAthlete athelete = new BDAthlete();
+
+        Cursor cursor = db.query(BDAthlete.TABLE_ATHLETE, new String[]{BDAthlete.KEY_NAME, BDAthlete.KEY_IMAGE,
+                        BDAthlete.KEY_BIRTHDAY, BDAthlete.KEY_EXPIRATION_DATE, BDAthlete.KEY_ECHELON, BDAthlete.KEY_GENDER, BDAthlete.KEY_HISTORY, BDAthlete.KEY_CLUB_ID, BDAthlete.FOREIGN_DATABASE_ID},
+                BDAthlete.FOREIGN_DATABASE_ID + " = ?", new String[]{"" + id}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                athelete.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                athelete.setImage(image);
+                athelete.setBirthday(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_BIRTHDAY)));
+                athelete.setExpirationDate(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_EXPIRATION_DATE)));
+                athelete.setEchelon(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_ECHELON)));
+                athelete.setGender(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_GENDER)));
+                athelete.setHistory(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_HISTORY)));
+                athelete.setClubID(cursor.getInt(cursor.getColumnIndex(BDAthlete.KEY_CLUB_ID)));
+                athelete.setId(cursor.getInt(cursor.getColumnIndex(BDAthlete.FOREIGN_DATABASE_ID)));
+
+            } while (cursor.moveToNext());
+        }
+
+        return athelete;
     }
 }

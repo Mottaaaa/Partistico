@@ -14,7 +14,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-
             //inserir aqui mais instruções de criação de tabelas
             db.execSQL(BDClub.DATABASE_CREATE);
             db.execSQL(BDAthlete.DATABASE_CREATE);

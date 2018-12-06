@@ -56,12 +56,14 @@ public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
         int year = Integer.parseInt(calend[2]);
         age.setText(getAge(year, month, day) + " Anos");
 
-        expirationDate.setText("Validade Atestado: " + athletes.get(position).getExpirationDate().toString());
+        expirationDate.setText("Validade Atestado: " + athletes.get(position).getExpirationDate());
 
         echelon.setText(athletes.get(position).getEchelon());
 
-        rowView.setTag(position);
+        rowView.setTag(athletes.get(position).getId());
+
         return rowView;
+
     }
 
     private String getAge(int year, int month, int day) {
@@ -81,5 +83,7 @@ public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
 
         return ageS;
     }
+
+
 
 }
