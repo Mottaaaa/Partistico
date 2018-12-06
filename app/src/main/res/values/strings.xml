@@ -26,4 +26,5 @@
 
     <string name="search_title"></string>
     <string name="search_hint">Insira o nome</string>
+    <string name="title_actity_nonAthlete_list">Não Atletas</string>
 </resources>

@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities;
+package mlcl.partistico.Activities.AthleteActivities;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;

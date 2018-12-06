@@ -1,11 +1,9 @@
-package mlcl.partistico.Activities;
+package mlcl.partistico.Activities.NonAthleteActivities;
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -17,58 +15,36 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import Database.BDAthlete;
-import Model.AthleteCustomListAdapter;
+import Database.BDNonAthlete;
+import Model.NonAthleteCustomListAdapter;
 import Model.Utils;
 import mlcl.partistico.R;
 
-public class AthleteListActivity extends AppCompatActivity {
+public class NonAthleteListActivity extends AppCompatActivity {
 
-    ListView list;
-    final Activity activity = this;
+    final NonAthleteListActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_athlete_list);
+        setContentView(R.layout.activity_non_athlete_list);
+
         handleIntent(getIntent());
 
-
-        /*
-        AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this, Utils.getInstance().getDBAthletes());
-        list = (ListView) findViewById(R.id.athleteList);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                Utils.getInstance().setActiveAthlete((Integer) view.getTag());
-                Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        */
-
         new GetListTask().execute();
-
     }
 
     private void search(String query) {
-        List<BDAthlete> athletes;
+        List<BDNonAthlete> nonAthletes;
         if (query.equals(""))
-            athletes = Utils.getInstance().getDBAthletes();
+            nonAthletes = Utils.getInstance().getNonAthletes();
         else
-            athletes = Utils.getInstance().getAthletesByName(query);
+            nonAthletes = Utils.getInstance().getNonAthleteByName(query);
 
-        ListView list = (ListView) findViewById(R.id.athleteList);
-        AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this, athletes);
+        ListView list = (ListView) findViewById(R.id.nonAthleteList);
+        NonAthleteCustomListAdapter adapter = new NonAthleteCustomListAdapter(this, nonAthletes);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,8 +54,8 @@ public class AthleteListActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Utils.getInstance().setActiveAthlete((Integer) view.getTag());
-                Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(NonAthleteListActivity.this, AthleteProfileActivity.class);
+                //startActivity(intent);
 
             }
         });
@@ -157,8 +133,8 @@ public class AthleteListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.athleteList);
-                    AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(activity, Utils.getInstance().getDBAthletes());
+                    ListView list = (ListView) findViewById(R.id.nonAthleteList);
+                    NonAthleteCustomListAdapter adapter = new NonAthleteCustomListAdapter(activity, Utils.getInstance().getNonAthletes());
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -167,23 +143,18 @@ public class AthleteListActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
 
-                            Utils.getInstance().setActiveAthlete((Integer) view.getTag());
-                            Intent intent = new Intent(AthleteListActivity.this, AthleteProfileActivity.class);
-                            startActivity(intent);
+                            Utils.getInstance().setActiveNonAthlete((Integer) view.getTag());
+                            //Intent intent = new Intent(NonAthleteListActivity.this, AthleteProfileActivity.class);
+                            //startActivity(intent);
                         }
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.athleteListProgressBar);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.nonAthleteListProgressBar);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
-
             return null;
         }
     }
 }
-
-
-
-

@@ -238,4 +238,121 @@ public class DatabaseAdapter {
 
         return athelete;
     }
+
+
+    public long insertNonAthlete(BDNonAthlete nonAthlete) {
+        long id = -1;
+        try {
+            ContentValues newValues = new ContentValues();
+            newValues.put(BDNonAthlete.KEY_NAME, nonAthlete.getName());
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            nonAthlete.getImage().compress(Bitmap.CompressFormat.PNG, 100, bos);
+            byte[] bArray = bos.toByteArray();
+            newValues.put(BDNonAthlete.KEY_IMAGE, bArray);
+
+            newValues.put(BDNonAthlete.KEY_BIRTHDAY, nonAthlete.getBirthday());
+            newValues.put(BDNonAthlete.KEY_ROLE, nonAthlete.getRole());
+            newValues.put(BDNonAthlete.KEY_GENDER, nonAthlete.getGender());
+            newValues.put(BDNonAthlete.KEY_HISTORY, nonAthlete.getHistory());
+            newValues.put(BDNonAthlete.KEY_CLUB_ID, nonAthlete.getClubID());
+            newValues.put(BDNonAthlete.FOREIGN_DATABASE_ID, nonAthlete.getId());
+
+            db = dbHelper.getWritableDatabase();
+            id = db.insert(BDNonAthlete.TABLE_NON_ATHLETE, null, newValues);
+
+        } catch (Exception ex) {
+            System.out.println("Esceptions:" + ex);
+        }
+        return id;
+    }
+
+    public List<BDNonAthlete> getNonAthletes() {
+        List<BDNonAthlete> nonAthletes = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDNonAthlete.TABLE_NON_ATHLETE, new String[]{BDNonAthlete.KEY_NAME, BDNonAthlete.KEY_IMAGE,
+                        BDNonAthlete.KEY_BIRTHDAY, BDNonAthlete.KEY_ROLE, BDNonAthlete.KEY_GENDER, BDNonAthlete.KEY_HISTORY, BDNonAthlete.KEY_CLUB_ID, BDNonAthlete.FOREIGN_DATABASE_ID},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDNonAthlete nonAthlete = new BDNonAthlete();
+
+                nonAthlete.setName(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDNonAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                nonAthlete.setImage(image);
+                nonAthlete.setBirthday(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_BIRTHDAY)));
+                nonAthlete.setRole(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_ROLE)));
+                nonAthlete.setGender(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_GENDER)));
+                nonAthlete.setHistory(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_HISTORY)));
+                nonAthlete.setClubID(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.KEY_CLUB_ID)));
+                nonAthlete.setId(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.FOREIGN_DATABASE_ID)));
+
+                nonAthletes.add(nonAthlete);
+            } while (cursor.moveToNext());
+        }
+
+        return nonAthletes;
+    }
+
+
+    public BDNonAthlete getNonAthleteByID(int id){
+        BDNonAthlete nonAthlete = new BDNonAthlete();
+
+        Cursor cursor = db.query(BDNonAthlete.TABLE_NON_ATHLETE, new String[]{BDNonAthlete.KEY_NAME, BDNonAthlete.KEY_IMAGE,
+                        BDNonAthlete.KEY_BIRTHDAY, BDNonAthlete.KEY_ROLE, BDNonAthlete.KEY_GENDER, BDNonAthlete.KEY_HISTORY, BDNonAthlete.KEY_CLUB_ID, BDNonAthlete.FOREIGN_DATABASE_ID},
+                BDNonAthlete.FOREIGN_DATABASE_ID + " = ?", new String[]{"" + id}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                nonAthlete.setName(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDNonAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                nonAthlete.setImage(image);
+                nonAthlete.setBirthday(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_BIRTHDAY)));
+                nonAthlete.setRole(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_ROLE)));
+                nonAthlete.setGender(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_GENDER)));
+                nonAthlete.setHistory(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_HISTORY)));
+                nonAthlete.setClubID(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.KEY_CLUB_ID)));
+                nonAthlete.setId(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.FOREIGN_DATABASE_ID)));
+
+            } while (cursor.moveToNext());
+        }
+
+        return nonAthlete;
+    }
+
+
+    public List<BDNonAthlete> getNonAthleteByName(String name) {
+        List<BDNonAthlete> nonAthletes = new ArrayList<>();
+
+        Cursor cursor = db.query(BDNonAthlete.TABLE_NON_ATHLETE, new String[]{BDNonAthlete.KEY_NAME, BDNonAthlete.KEY_IMAGE,
+                        BDNonAthlete.KEY_BIRTHDAY, BDNonAthlete.KEY_ROLE, BDNonAthlete.KEY_GENDER, BDNonAthlete.KEY_HISTORY, BDNonAthlete.KEY_CLUB_ID, BDNonAthlete.FOREIGN_DATABASE_ID},
+                BDNonAthlete.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDNonAthlete nonAthlete = new BDNonAthlete();
+
+                nonAthlete.setName(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_NAME)));
+
+                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDNonAthlete.KEY_IMAGE));
+                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                nonAthlete.setImage(image);
+                nonAthlete.setBirthday(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_BIRTHDAY)));
+                nonAthlete.setRole(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_ROLE)));
+                nonAthlete.setGender(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_GENDER)));
+                nonAthlete.setHistory(cursor.getString(cursor.getColumnIndex(BDNonAthlete.KEY_HISTORY)));
+                nonAthlete.setClubID(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.KEY_CLUB_ID)));
+                nonAthlete.setId(cursor.getInt(cursor.getColumnIndex(BDNonAthlete.FOREIGN_DATABASE_ID)));
+
+                nonAthletes.add(nonAthlete);
+            } while (cursor.moveToNext());
+        }
+
+        return nonAthletes;
+    }
 }

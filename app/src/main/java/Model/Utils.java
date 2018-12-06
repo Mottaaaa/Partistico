@@ -8,6 +8,7 @@ import java.util.List;
 
 import Database.BDAthlete;
 import Database.BDClub;
+import Database.BDNonAthlete;
 import Database.DatabaseAdapter;
 import mlcl.partistico.R;
 
@@ -16,6 +17,7 @@ public class Utils {
     private Context context;
     private static Utils instance;
     private BDAthlete activeAthlete;
+    private BDNonAthlete activeNonAthlete;
 
     private Utils() {
     }
@@ -43,6 +45,14 @@ public class Utils {
         this.activeAthlete = getAthleteByID(id);
     }
 
+    public BDNonAthlete getActiveNonAthlete() {
+        return activeNonAthlete;
+    }
+
+    public void setActiveNonAthlete(int id) {
+        this.activeNonAthlete = getNonAthleteByID(id);
+    }
+
     public void populateDB() {
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
@@ -50,6 +60,7 @@ public class Utils {
         //Populate Clubs
         dbAdapter.insertClub(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
         dbAdapter.insertClub(new BDClub(2, "Allies", BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill)));
+        dbAdapter.insertClub(new BDClub(3, "Neutrals", BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin)));
 
         //Populate Athletes
         dbAdapter.insertAthlete(new BDAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler), "Adolf Hitler", "20/04/1898", "30/04/1945", "Führer", "Masculino", "Genocida", 1));
@@ -57,6 +68,11 @@ public class Utils {
         dbAdapter.insertAthlete(new BDAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill), "Winston Churchill", "30/11/1874", "24/01/1965", "Prime Minister", "Masculino", "Fez um brilhante discurso", 2));
         dbAdapter.insertAthlete(new BDAthlete(4, BitmapFactory.decodeResource(context.getResources(), R.drawable.mussolini), "Benito Mussolini", "29/07/1883", "28/04/1945", "Duce", "Masculino", "Compincha do Hitler", 1));
         dbAdapter.insertAthlete(new BDAthlete(5, BitmapFactory.decodeResource(context.getResources(), R.drawable.hirohito), "Hirohito", "29/04/1901", "07/01/1989", "Emperor", "Masculino", "Levou com duas bombas que se lixou", 1));
+
+        //Populate NonAthletes
+        dbAdapter.insertNonAthlete((new BDNonAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Caiu da cadeira", 3)));
+        dbAdapter.insertNonAthlete((new BDNonAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.franco), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3)));
+        dbAdapter.insertNonAthlete((new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2)));
 
         dbAdapter.close();
     }
@@ -102,5 +118,29 @@ public class Utils {
         BDAthlete athlete = dbAdapter.getAthleteByID(id);
         dbAdapter.close();
         return athlete;
+    }
+
+    public BDNonAthlete getNonAthleteByID(int id) {
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        BDNonAthlete nonAthlete = dbAdapter.getNonAthleteByID(id);
+        dbAdapter.close();
+        return nonAthlete;
+    }
+
+    public List<BDNonAthlete> getNonAthleteByName(String name){
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthleteByName(name);
+        dbAdapter.close();
+        return nonAthletes;
+    }
+
+    public List<BDNonAthlete> getNonAthletes(){
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthletes();
+        dbAdapter.close();
+        return nonAthletes;
     }
 }

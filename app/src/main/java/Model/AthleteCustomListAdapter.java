@@ -27,7 +27,6 @@ public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
 
     public AthleteCustomListAdapter(Activity context, List<BDAthlete> athletes) {
         super(context, R.layout.athlete_list_item, athletes);
-        // TODO Auto-generated constructor stub
 
         this.athletes = athletes;
         this.context = context;

@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //inserir aqui mais instruções de criação de tabelas
             db.execSQL(BDClub.DATABASE_CREATE);
             db.execSQL(BDAthlete.DATABASE_CREATE);
+            db.execSQL(BDNonAthlete.DATABASE_CREATE);
 
         } catch
                 (Exception er) {
@@ -31,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //inserir drop table para cada tabela que quisermos
             db.execSQL("DROP TABLE IF EXISTS " + BDClub.TABLE_CLUB);
             db.execSQL("DROP TABLE IF EXISTS " + BDAthlete.TABLE_ATHLETE);
+            db.execSQL("DROP TABLE IF EXISTS " + BDNonAthlete.TABLE_NON_ATHLETE);
 
             onCreate(db);
         }

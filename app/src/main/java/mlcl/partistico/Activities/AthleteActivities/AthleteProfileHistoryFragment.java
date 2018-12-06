@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities;
+package mlcl.partistico.Activities.AthleteActivities;
 
 
 import android.os.Bundle;

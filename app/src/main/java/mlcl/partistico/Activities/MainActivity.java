@@ -1,17 +1,14 @@
 package mlcl.partistico.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.List;
-
-import Database.BDAthlete;
-import Database.BDClub;
 import Model.Utils;
+import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
+import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
 import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nonAthleteAction(View view) {
-        /*
         Intent intent = new Intent(this, NonAthleteListActivity.class);
         startActivity(intent);
-        */
     }
 
     private class PopulateDBTask extends AsyncTask<Void, Void, Void> {
