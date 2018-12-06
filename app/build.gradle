@@ -30,4 +30,7 @@ dependencies {
 
     //Add Library
     api 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    apply plugin: 'com.google.gms.google-services'
+
 }
