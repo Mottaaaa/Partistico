@@ -54,8 +54,8 @@ public class NonAthleteListActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Utils.getInstance().setActiveAthlete((Integer) view.getTag());
-                //Intent intent = new Intent(NonAthleteListActivity.this, AthleteProfileActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(NonAthleteListActivity.this, NonAthleteProfileActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -144,8 +144,8 @@ public class NonAthleteListActivity extends AppCompatActivity {
                                                 int position, long id) {
 
                             Utils.getInstance().setActiveNonAthlete((Integer) view.getTag());
-                            //Intent intent = new Intent(NonAthleteListActivity.this, AthleteProfileActivity.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(NonAthleteListActivity.this, NonAthleteProfileActivity.class);
+                            startActivity(intent);
                         }
                     });
                     adapter.notifyDataSetChanged();

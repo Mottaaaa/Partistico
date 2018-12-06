@@ -56,9 +56,9 @@
         </activity>
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteListActivity"
+            android:label="@string/title_actity_nonAthlete_list"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
-            android:label="@string/title_actity_nonAthlete_list">
+            android:parentActivityName=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -70,6 +70,11 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity
+            android:name=".Activities.NonAthleteActivities.NonAthleteProfileActivity"
+            android:label="@string/title_activity_non_athlete_profile"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activities.NonAthleteActivities.NonAthleteListActivity"></activity>
     </application>
 
 </manifest>
