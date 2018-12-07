@@ -144,10 +144,10 @@ public class CompetitionProfileActivity extends AppCompatActivity {
                     fragment = new CompetitionProfileGeneralDataFragment();
                     break;
                 case 1:
-                    fragment = new CompetitionProfileGeneralDataFragment();
+                    fragment = new CompetitionProfileInformationFragment();
                     break;
                 case 2:
-                    fragment = new CompetitionProfileGeneralDataFragment();
+                    fragment = new CompetitionProfileLocalizationFragment();
                     break;
             }
 

@@ -2,7 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="mlcl.partistico">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait">
@@ -46,7 +59,6 @@
             android:parentActivityName=".Activities.AthleteActivities.AthleteListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteListActivity"
             android:label="@string/title_actity_nonAthlete_list"
@@ -64,14 +76,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteProfileActivity"
             android:label="@string/title_activity_non_athlete_profile"
             android:parentActivityName=".Activities.NonAthleteActivities.NonAthleteListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Activities.CompetitionActivities.CompetitionListActivity"
             android:label="@string/title_activity_competition_list"
@@ -89,13 +99,27 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity
             android:name=".Activities.CompetitionActivities.CompetitionProfileActivity"
             android:label="@string/title_activity_competition_profile"
             android:parentActivityName=".Activities.CompetitionActivities.CompetitionListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".Activities.GoogleMapActivity"
+            android:label="@string/title_activity_competition_profile_localization_fragment"></activity>
     </application>
 
 </manifest>
