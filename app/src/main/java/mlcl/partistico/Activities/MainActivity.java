@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
             Utils.getInstance().setContext(getApplicationContext());
             Utils.getInstance().populateDB();
 
+            FirebaseAdapter f = new FirebaseAdapter(getApplicationContext());
+            f.bosta();
+
             return null;
         }
 

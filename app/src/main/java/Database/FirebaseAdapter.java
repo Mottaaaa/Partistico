@@ -1,25 +1,16 @@
 package Database;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import mlcl.partistico.R;
+import Model.bosta;
 
 public class FirebaseAdapter {
     private FirebaseDatabase database;
@@ -42,7 +33,34 @@ public class FirebaseAdapter {
         athlete = null;
     }
 
-    public String getOla(){
+    public void bosta() {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                bosta o = dataSnapshot.getValue(bosta.class);
+
+                Object value;
+
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                for (DataSnapshot snap : children) {
+                    value = snap.getValue();
+                }
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        database.getReference().addListenerForSingleValueEvent(postListener);
+    }
+
+    /*public String getOla(){
         database.getReference("clubs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,7 +73,7 @@ public class FirebaseAdapter {
             }
         });
         return str;
-    }
+    }**/
 
     /*
     public void populateClubs() {
