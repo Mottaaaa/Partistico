@@ -46,7 +46,7 @@ public class CompetitionListActivity extends AppCompatActivity {
         else
             competitions = Utils.getInstance().getDBCompetitionsByName(query);
 
-        ListView list = (ListView) findViewById(R.id.competitionList);
+        ListView list = (ListView) findViewById(R.id.list_competition);
         CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(this, competitions);
         list.setAdapter(adapter);
 
@@ -57,8 +57,8 @@ public class CompetitionListActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Utils.getInstance().setActiveCompetition((Integer) view.getTag());
-                //Intent intent = new Intent(CompetitionListActivity.this, AthleteProfileActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(CompetitionListActivity.this, CompetitionProfileActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -136,7 +136,7 @@ public class CompetitionListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.competitionList);
+                    ListView list = (ListView) findViewById(R.id.list_competition);
                     CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(activity, Utils.getInstance().getDBCompetitions());
                     list.setAdapter(adapter);
 
@@ -153,7 +153,7 @@ public class CompetitionListActivity extends AppCompatActivity {
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.competitionListProgressBar);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_competitionList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });

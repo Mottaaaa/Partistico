@@ -48,7 +48,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.container_athlete);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -57,8 +57,8 @@ public class AthleteProfileActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
+        ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.iv_profile_image);
         TextView name = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_name);
-        ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.profile_image);
         TextView club = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_club);
 
         profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());

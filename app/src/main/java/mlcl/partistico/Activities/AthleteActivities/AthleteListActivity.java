@@ -45,7 +45,7 @@ public class AthleteListActivity extends AppCompatActivity {
         else
             athletes = Utils.getInstance().getAthletesByName(query);
 
-        ListView list = (ListView) findViewById(R.id.athleteList);
+        ListView list = (ListView) findViewById(R.id.list_athlete);
         AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(this, athletes);
         list.setAdapter(adapter);
 
@@ -135,7 +135,7 @@ public class AthleteListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.athleteList);
+                    ListView list = (ListView) findViewById(R.id.list_athlete);
                     AthleteCustomListAdapter adapter = new AthleteCustomListAdapter(activity, Utils.getInstance().getDBAthletes());
                     list.setAdapter(adapter);
 
@@ -152,7 +152,7 @@ public class AthleteListActivity extends AppCompatActivity {
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.athleteListProgressBar);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_athleteList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
