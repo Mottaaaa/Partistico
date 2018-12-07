@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         PopulateDBTask populateTask = new PopulateDBTask();
         FirebaseAdapter fb = new FirebaseAdapter(getApplicationContext());
-        fb.populateClubs();
-        fb.populateAthletes();
-        fb.populateNonAthletes();
 
         populateTask.execute();
 

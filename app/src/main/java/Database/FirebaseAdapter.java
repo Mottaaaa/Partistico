@@ -30,6 +30,7 @@ public class FirebaseAdapter {
     List<BDNonAthlete> nonAthletes;
     BDNonAthlete nonAthlete;
     BDAthlete athlete;
+    String str = "";
 
     public FirebaseAdapter(Context context) {
         this.database = FirebaseDatabase.getInstance("https://cmpartistico.firebaseio.com/");
@@ -41,46 +42,22 @@ public class FirebaseAdapter {
         athlete = null;
     }
 
-
-    public List<BDClub> getClubs() {
-
-        list.clear();
-
+    public String getOla(){
         database.getReference("clubs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("Error", "TESTEEEEEEEEEEEE");
-                if (dataSnapshot.exists()){
-                    for(DataSnapshot snap : dataSnapshot.getChildren()){
-                        BDClub temp = snap.getValue(BDClub.class);
-                        list.add(temp);
-                    }
-                }
+                str = dataSnapshot.getValue(String.class);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
-
-        return list;
+        return str;
     }
 
-    public BDClub getClubByID(int id) {
-        final int idTemp = id;
-
-        List<BDClub> l = getClubs();
-        for(BDClub club : l){
-            if(club.getId()==id){
-                return club;
-            }
-        }
-        return null;
-    }
-
-
+    /*
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
 
@@ -110,4 +87,5 @@ public class FirebaseAdapter {
 
         database.getReference().child("nonathletes").setValue(nonAthletes);
     }
+    */
 }

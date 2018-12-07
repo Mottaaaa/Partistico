@@ -106,11 +106,11 @@ public class Utils {
     }
 
     public BDClub getClubByID(int clubID) {
-        //DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
-        FirebaseAdapter dbAdapter = new FirebaseAdapter(context);
-        //dbAdapter.open();
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        //FirebaseAdapter dbAdapter = new FirebaseAdapter(context);
+        dbAdapter.open();
         BDClub club = dbAdapter.getClubByID(clubID);
-        //dbAdapter.close();
+        dbAdapter.close();
         return club;
     }
 
@@ -192,5 +192,10 @@ public class Utils {
         BDCompetition competition = dbAdapter.getCompetitionByID(id);
         dbAdapter.close();
         return competition;
+    }
+
+    public String getOla(){
+        FirebaseAdapter adapter = new FirebaseAdapter(context);
+        return adapter.getOla();
     }
 }
