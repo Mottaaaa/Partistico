@@ -9,7 +9,7 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/nonAthleteIcon"
+        android:id="@+id/iv_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_vertical"
@@ -27,7 +27,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/nonAthleteName"
+                android:id="@+id/lbl_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -35,28 +35,28 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/textColor"
+                tools:text="@string/test" />
 
             <TextView
-                android:id="@+id/nonAthleteRole"
+                android:id="@+id/lbl_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
+                android:layout_gravity="center_vertical|end"
                 android:ellipsize="end"
-                android:gravity="right|center_vertical"
+                android:gravity="center_vertical|end"
                 android:maxLines="1"
-                android:text="TextView"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="@string/test" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/nonAthleteAge"
+            android:id="@+id/lbl_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:text="TextView" />
+            android:layout_marginStart="14dp"
+            android:text="@string/test" />
 
     </LinearLayout>
 

@@ -29,10 +29,10 @@ public class CompetitionCustomListAdapter extends ArrayAdapter<BDCompetition> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.competition_list_item, null, true);
 
-        TextView name = (TextView) rowView.findViewById(R.id.name);
-        TextView address = (TextView) rowView.findViewById(R.id.address);
-        TextView dates = (TextView) rowView.findViewById(R.id.dates);
-        TextView type = (TextView) rowView.findViewById(R.id.type);
+        TextView name = (TextView) rowView.findViewById(R.id.lbl_name);
+        TextView address = (TextView) rowView.findViewById(R.id.lbl_address);
+        TextView dates = (TextView) rowView.findViewById(R.id.lbl_dates);
+        TextView type = (TextView) rowView.findViewById(R.id.lbl_type);
 
         name.setText(competitions.get(position).getName());
         address.setText(competitions.get(position).getAddress());

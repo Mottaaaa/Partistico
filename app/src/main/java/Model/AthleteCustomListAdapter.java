@@ -31,11 +31,11 @@ public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.athlete_list_item, null, true);
 
-        ImageView icon = (ImageView) rowView.findViewById(R.id.icon);
-        TextView name = (TextView) rowView.findViewById(R.id.name);
-        TextView age = (TextView) rowView.findViewById(R.id.age);
-        TextView expirationDate = (TextView) rowView.findViewById(R.id.expirationDate);
-        TextView echelon = (TextView) rowView.findViewById(R.id.echelon);
+        ImageView icon = (ImageView) rowView.findViewById(R.id.iv_icon);
+        TextView name = (TextView) rowView.findViewById(R.id.lbl_name);
+        TextView age = (TextView) rowView.findViewById(R.id.lbl_age);
+        TextView expirationDate = (TextView) rowView.findViewById(R.id.lbl_expirationDate);
+        TextView echelon = (TextView) rowView.findViewById(R.id.lbl_echelon);
 
 
         icon.setImageBitmap(athletes.get(position).getImage());

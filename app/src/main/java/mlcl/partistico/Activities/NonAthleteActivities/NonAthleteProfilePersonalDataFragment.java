@@ -36,13 +36,13 @@ public class NonAthleteProfilePersonalDataFragment extends Fragment {
         View view = getView();
         if (view != null) {
             // coisas
-            TextView age = (TextView) getView().findViewById(R.id.tv_nonAthlete_birdthay_date);
-            TextView role = (TextView) getView().findViewById(R.id.tv_nonAthlete_role);
-            TextView gender = (TextView) getView().findViewById(R.id.tv_nonAthlete_gender);
+            TextView age = (TextView) getView().findViewById(R.id.tv_birthday_date);
+            TextView gender = (TextView) getView().findViewById(R.id.tv_gender);
+            TextView role = (TextView) getView().findViewById(R.id.tv_role);
 
             age.setText(Utils.getInstance().getActiveNonAthlete().getBirthday());
-            role.setText(Utils.getInstance().getActiveNonAthlete().getRole());
             gender.setText(Utils.getInstance().getActiveNonAthlete().getGender());
+            role.setText(Utils.getInstance().getActiveNonAthlete().getRole());
         }
     }
 

@@ -30,10 +30,10 @@ public class NonAthleteCustomListAdapter extends ArrayAdapter<BDNonAthlete> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.non_athlete_list_item, null, true);
 
-        ImageView icon = (ImageView) rowView.findViewById(R.id.nonAthleteIcon);
-        TextView name = (TextView) rowView.findViewById(R.id.nonAthleteName);
-        TextView age = (TextView) rowView.findViewById(R.id.nonAthleteAge);
-        TextView role = (TextView) rowView.findViewById(R.id.nonAthleteRole);
+        ImageView icon = (ImageView) rowView.findViewById(R.id.iv_icon);
+        TextView name = (TextView) rowView.findViewById(R.id.lbl_name);
+        TextView age = (TextView) rowView.findViewById(R.id.lbl_age);
+        TextView role = (TextView) rowView.findViewById(R.id.lbl_role);
 
 
         icon.setImageBitmap(nonAthletes.get(position).getImage());

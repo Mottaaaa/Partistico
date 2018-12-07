@@ -9,19 +9,18 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -30,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a ante nisl. Nunc porta varius turpis in porta. Maecenas molestie ante eget felis porta tincidunt. Vestibulum eu auctor sem. In ac sodales magna. Vivamus sem nisl, dictum quis placerat sed, consequat vitae libero. Praesent fringilla ligula turpis, ac bibendum risus feugiat semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi fermentum magna vitae elementum volutpat. Donec ac facilisis lorem. Nam purus arcu, viverra pharetra ex non, lobortis pretium ligula. Quisque nisl felis, vestibulum eget molestie eu, varius ut lectus. Nulla et felis eget nibh tempus placerat."
+                android:text="@string/test"
                 android:textAlignment="viewStart"
                 android:textColor="@color/labelColor" />
 

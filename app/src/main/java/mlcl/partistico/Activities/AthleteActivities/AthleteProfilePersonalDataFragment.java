@@ -45,15 +45,15 @@ public class AthleteProfilePersonalDataFragment extends Fragment {
         View view = getView();
         if (view != null) {
             // coisas
-            TextView age = (TextView) getView().findViewById(R.id.tv_birdthay_date);
-            TextView expirationDate = (TextView) getView().findViewById(R.id.tv_medical_expiration);
-            TextView echelon = (TextView) getView().findViewById(R.id.tv_echelon);
+            TextView age = (TextView) getView().findViewById(R.id.tv_birthday_date);
             TextView gender = (TextView) getView().findViewById(R.id.tv_gender);
+            TextView echelon = (TextView) getView().findViewById(R.id.tv_echelon);
+            TextView expirationDate = (TextView) getView().findViewById(R.id.tv_medical_expiration);
 
             age.setText(Utils.getInstance().getActiveAthlete().getBirthday());
-            expirationDate.setText(Utils.getInstance().getActiveAthlete().getExpirationDate());
-            echelon.setText(Utils.getInstance().getActiveAthlete().getEchelon());
             gender.setText(Utils.getInstance().getActiveAthlete().getGender());
+            echelon.setText(Utils.getInstance().getActiveAthlete().getEchelon());
+            expirationDate.setText(Utils.getInstance().getActiveAthlete().getExpirationDate());
         }
     }
 }

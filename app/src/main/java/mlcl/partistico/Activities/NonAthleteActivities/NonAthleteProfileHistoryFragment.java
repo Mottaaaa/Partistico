@@ -35,7 +35,7 @@ public class NonAthleteProfileHistoryFragment extends Fragment {
 
         View view = getView();
         if (view != null) {
-            TextView history = (TextView) getView().findViewById(R.id.lbl_nonAthlete_history);
+            TextView history = (TextView) getView().findViewById(R.id.lbl_history);
             history.setText(Utils.getInstance().getActiveNonAthlete().getHistory());
         }
     }

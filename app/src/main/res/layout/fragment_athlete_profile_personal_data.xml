@@ -7,14 +7,11 @@
     tools:context=".Activities.AthleteActivities.AthleteProfilePersonalDataFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +22,7 @@
             android:layout_height="17dp" />
 
         <TextView
-            android:id="@+id/lbl_birtday_date"
+            android:id="@+id/lbl_birthday_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/birthday_date"
@@ -36,10 +33,10 @@
             tools:layout_editor_absoluteY="15dp" />
 
         <TextView
-            android:id="@+id/tv_birdthay_date"
+            android:id="@+id/tv_birthday_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva a data"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -62,7 +59,7 @@
             android:id="@+id/lbl_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gender"
+            android:text="@string/echelons"
             android:textColor="@color/labelColor"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -73,7 +70,7 @@
             android:id="@+id/tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva o sexo"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -96,7 +93,7 @@
             android:id="@+id/lbl_echelon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/echelon"
+            android:text="@string/specializations"
             android:textColor="@color/labelColor"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -107,7 +104,7 @@
             android:id="@+id/tv_echelon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva o escalão"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -141,7 +138,7 @@
             android:id="@+id/tv_medical_expiration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva a Validade do exame médico"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"

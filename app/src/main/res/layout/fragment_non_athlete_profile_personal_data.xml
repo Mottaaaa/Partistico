@@ -7,14 +7,11 @@
     tools:context=".Activities.NonAthleteActivities.NonAthleteProfilePersonalDataFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +22,7 @@
             android:layout_height="17dp" />
 
         <TextView
-            android:id="@+id/lbl__nonAthlete_birtday_date"
+            android:id="@+id/lbl_birthday_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/birthday_date"
@@ -36,10 +33,10 @@
             tools:layout_editor_absoluteY="15dp" />
 
         <TextView
-            android:id="@+id/tv_nonAthlete_birdthay_date"
+            android:id="@+id/tv_birthday_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva a data"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -59,7 +56,7 @@
             android:layout_height="17dp" />
 
         <TextView
-            android:id="@+id/lbl_nonAthlete_gender"
+            android:id="@+id/lbl_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gender"
@@ -70,10 +67,10 @@
             tools:layout_editor_absoluteY="15dp" />
 
         <TextView
-            android:id="@+id/tv_nonAthlete_gender"
+            android:id="@+id/tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva o sexo"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -93,10 +90,10 @@
             android:layout_height="17dp" />
 
         <TextView
-            android:id="@+id/lbl_nonAthlete_role"
+            android:id="@+id/lbl_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/echelon"
+            android:text="@string/role"
             android:textColor="@color/labelColor"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -104,10 +101,10 @@
             tools:layout_editor_absoluteY="15dp" />
 
         <TextView
-            android:id="@+id/tv_nonAthlete_role"
+            android:id="@+id/tv_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui leva o cargo"
+            android:text="@string/test"
             android:textColor="@color/textColor"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="17dp"
@@ -121,10 +118,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/labelColor" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="17dp" />
 
     </LinearLayout>
 
