@@ -1,5 +1,6 @@
 package mlcl.partistico.Activities.AthleteActivities;
 
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +35,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private TextView club;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
 
         ImageView profile = (ImageView) AthleteProfileActivity.this.findViewById(R.id.iv_profile_image);
         TextView name = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_name);
-        TextView club = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_club);
+        club = (TextView) AthleteProfileActivity.this.findViewById(R.id.lbl_club);
 
         profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());
         name.setText(Utils.getInstance().getActiveAthlete().getName());

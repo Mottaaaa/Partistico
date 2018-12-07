@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +16,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import mlcl.partistico.R;
@@ -22,67 +24,66 @@ import mlcl.partistico.R;
 public class FirebaseAdapter {
     private FirebaseDatabase database;
     private Context context;
-    List<BDClub> clubs;
+    BDClub[] clubs;
+    List<BDClub> list;
     List<BDAthlete> athletes;
     List<BDNonAthlete> nonAthletes;
-    BDClub club;
     BDNonAthlete nonAthlete;
     BDAthlete athlete;
 
     public FirebaseAdapter(Context context) {
         this.database = FirebaseDatabase.getInstance("https://cmpartistico.firebaseio.com/");
         this.context = context;
-        this.clubs = new ArrayList<>();
         this.athletes = new ArrayList<>();
         this.nonAthletes = new ArrayList<>();
-        club = null;
+        this.list = new ArrayList<>();
         nonAthlete = null;
         athlete = null;
     }
 
 
     public List<BDClub> getClubs() {
-        database.getReference("clubs").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                clubs.clear();
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    BDClub club = snap.getValue(BDClub.class);
-                    clubs.add(club);
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                clubs.clear();
-                System.out.println("The read failed: " + databaseError.getMessage());
-            }
-        });
+        list.clear();
 
-        return this.clubs;
-    }
-
-    public BDClub getClubByID(int id) {
-        Query query = database.getReference().child("clubs").orderByChild("id").equalTo(id);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("clubs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-
+                Log.i("Error", "TESTEEEEEEEEEEEE");
+                if (dataSnapshot.exists()){
+                    for(DataSnapshot snap : dataSnapshot.getChildren()){
+                        BDClub temp = snap.getValue(BDClub.class);
+                        list.add(temp);
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
+
         });
 
-        return club;
+        return list;
+    }
+
+    public BDClub getClubByID(int id) {
+        final int idTemp = id;
+
+        List<BDClub> l = getClubs();
+        for(BDClub club : l){
+            if(club.getId()==id){
+                return club;
+            }
+        }
+        return null;
     }
 
 
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
+
         clubs.add(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
         clubs.add(new BDClub(2, "Allies", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
         clubs.add(new BDClub(3, "Neutrals", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
