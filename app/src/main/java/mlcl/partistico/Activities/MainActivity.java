@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import Database.FirebaseAdapter;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         PopulateDBTask populateTask = new PopulateDBTask();
+        FirebaseAdapter fb = new FirebaseAdapter(getApplicationContext());
+        fb.populateClubs();
+        fb.populateAthletes();
+        fb.populateNonAthletes();
+
         populateTask.execute();
 
     }

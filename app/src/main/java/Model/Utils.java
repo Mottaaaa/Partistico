@@ -11,6 +11,7 @@ import Database.BDClub;
 import Database.BDCompetition;
 import Database.BDNonAthlete;
 import Database.DatabaseAdapter;
+import Database.FirebaseAdapter;
 import mlcl.partistico.R;
 
 public class Utils {
@@ -104,10 +105,11 @@ public class Utils {
     }
 
     public BDClub getClubByID(int clubID) {
-        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
-        dbAdapter.open();
+        //DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        FirebaseAdapter dbAdapter = new FirebaseAdapter(context);
+        //dbAdapter.open();
         BDClub club = dbAdapter.getClubByID(clubID);
-        dbAdapter.close();
+        //dbAdapter.close();
         return club;
     }
 
