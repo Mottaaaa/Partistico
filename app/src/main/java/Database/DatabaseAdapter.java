@@ -460,8 +460,7 @@ public class DatabaseAdapter {
                 competition.setEndDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_END_DATE)));
                 competition.setTypeOfCompetition(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_TYPE_OF_COMPETITION)));
                 competition.setEchelons(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_ECHELONS)));
-                competition.setSpecializations(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_ECHELONS)));
-                competition.setEchelons(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_SPECIALIZATIONS)));
+                competition.setSpecializations(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_SPECIALIZATIONS)));
                 competition.setInformation(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_INFORMATION)));
                 competition.setId(cursor.getInt(cursor.getColumnIndex(BDCompetition.FOREIGN_DATABASE_ID)));
 

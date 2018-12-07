@@ -45,11 +45,8 @@
             android:label="@string/title_activity_athlete_profile"
             android:parentActivityName=".Activities.AthleteActivities.AthleteListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="mlcl.partistico.Activities.AthleteActivities.AthleteListActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteListActivity"
             android:label="@string/title_actity_nonAthlete_list"
@@ -67,12 +64,14 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteProfileActivity"
             android:label="@string/title_activity_non_athlete_profile"
             android:parentActivityName=".Activities.NonAthleteActivities.NonAthleteListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Activities.CompetitionActivities.CompetitionListActivity"
             android:label="@string/title_activity_competition_list"
@@ -90,10 +89,13 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name=".Activities.CompetitionActivities.CompetitionProfileActivity"
             android:label="@string/title_activity_competition_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".Activities.CompetitionActivities.CompetitionListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

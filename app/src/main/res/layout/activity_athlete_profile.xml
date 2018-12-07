@@ -87,7 +87,7 @@
         </FrameLayout>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabs_athelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/background_light"
