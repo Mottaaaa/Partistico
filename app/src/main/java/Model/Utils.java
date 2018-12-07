@@ -75,7 +75,6 @@ public class Utils {
         dbAdapter.insertClub(new BDClub(3, "Neutrals", BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin)));
 
         //Populate Athletes
-        dbAdapter.insertAthlete(new BDAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler), "Adolf Hitler", "20/04/1898", "30/04/1945", "Führer", "Masculino", "Genocida", 1));
         dbAdapter.insertAthlete(new BDAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin), "Joseph Stalin", "18/12/1878", "05/03/1953", "General Secretary", "Masculino", "Arquinimigo do Hitler", 2));
         dbAdapter.insertAthlete(new BDAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill), "Winston Churchill", "30/11/1874", "24/01/1965", "Prime Minister", "Masculino", "Fez um brilhante discurso", 2));
         dbAdapter.insertAthlete(new BDAthlete(4, BitmapFactory.decodeResource(context.getResources(), R.drawable.mussolini), "Benito Mussolini", "29/07/1883", "28/04/1945", "Duce", "Masculino", "Compincha do Hitler", 1));

@@ -51,7 +51,7 @@ public class DatabaseAdapter {
 
 
         } catch (Exception ex) {
-            System.out.println("Esceptions:" + ex);
+            ex.printStackTrace();
         }
         return id;
     }
@@ -115,7 +115,7 @@ public class DatabaseAdapter {
             id = db.insert(BDAthlete.TABLE_ATHLETE, null, newValues);
 
         } catch (Exception ex) {
-            System.out.println("Esceptions:" + ex);
+            ex.printStackTrace();
         }
         return id;
     }
@@ -264,7 +264,7 @@ public class DatabaseAdapter {
             id = db.insert(BDNonAthlete.TABLE_NON_ATHLETE, null, newValues);
 
         } catch (Exception ex) {
-            System.out.println("Esceptions:" + ex);
+            ex.printStackTrace();
         }
         return id;
     }
@@ -375,7 +375,7 @@ public class DatabaseAdapter {
             id = db.insert(BDCompetition.TABLE_COMPETITION, null, newValues);
 
         } catch (Exception ex) {
-            System.out.println("Esceptions:" + ex);
+            ex.printStackTrace();
         }
         return id;
     }
