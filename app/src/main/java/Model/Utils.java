@@ -90,8 +90,8 @@ public class Utils {
         dbAdapter.insertNonAthlete((new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2)));
 
         //Populate Competition
-        dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "World", "28/07/1914", "11/11/1918", "WAR", "1/3/5/7", "1/3/5", "A Primeira Grande Guerra")));
-        dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "World", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
+        dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "38.5587448/-9.0402922644068", "28/07/1914", "11/11/1918", "WAR", "1/3/5/7", "1/3/5", "A Primeira Grande Guerra")));
+        dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "38.520872350000005/-8.83894542882081", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
         dbAdapter.close();
     }
