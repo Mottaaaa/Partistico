@@ -39,5 +39,4 @@ public class NonAthleteProfileHistoryFragment extends Fragment {
             history.setText(Utils.getInstance().getActiveNonAthlete().getHistory());
         }
     }
-
 }
