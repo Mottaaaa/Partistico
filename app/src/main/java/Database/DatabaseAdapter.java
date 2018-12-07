@@ -362,7 +362,7 @@ public class DatabaseAdapter {
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(BDCompetition.KEY_NAME, competition.getName());
-            newValues.put(BDCompetition.KEY_ADDRESS, competition.getAddress());
+            newValues.put(BDCompetition.KEY_COORDINATES, competition.getCoordinates());
             newValues.put(BDCompetition.KEY_START_DATE, competition.getStartDate());
             newValues.put(BDCompetition.KEY_END_DATE, competition.getEndDate());
             newValues.put(BDCompetition.KEY_TYPE_OF_COMPETITION, competition.getTypeOfCompetition());
@@ -383,7 +383,7 @@ public class DatabaseAdapter {
     public List<BDCompetition> getCompetitions() {
 
         List<BDCompetition> competitions = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_COORDINATES, BDCompetition.KEY_START_DATE,
                         BDCompetition.KEY_END_DATE, BDCompetition.KEY_TYPE_OF_COMPETITION, BDCompetition.KEY_ECHELONS, BDCompetition.KEY_SPECIALIZATIONS, BDCompetition.KEY_INFORMATION, BDCompetition.FOREIGN_DATABASE_ID},
                 null, null, null, null, null);
 
@@ -393,7 +393,7 @@ public class DatabaseAdapter {
                 BDCompetition competition = new BDCompetition();
 
                 competition.setName(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_NAME)));
-                competition.setAddress(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_ADDRESS)));
+                competition.setCoordinates(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_COORDINATES)));
                 competition.setStartDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_START_DATE)));
                 competition.setEndDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_END_DATE)));
                 competition.setTypeOfCompetition(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_TYPE_OF_COMPETITION)));
@@ -415,7 +415,7 @@ public class DatabaseAdapter {
 
         List<BDCompetition> competitions = new ArrayList<>();
 
-        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
+        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_COORDINATES, BDCompetition.KEY_START_DATE,
                         BDCompetition.KEY_END_DATE, BDCompetition.KEY_TYPE_OF_COMPETITION, BDCompetition.KEY_ECHELONS, BDCompetition.KEY_SPECIALIZATIONS, BDCompetition.KEY_INFORMATION, BDCompetition.FOREIGN_DATABASE_ID},
                 BDCompetition.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
@@ -425,7 +425,7 @@ public class DatabaseAdapter {
                 BDCompetition competition = new BDCompetition();
 
                 competition.setName(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_NAME)));
-                competition.setAddress(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_ADDRESS)));
+                competition.setCoordinates(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_COORDINATES)));
                 competition.setStartDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_START_DATE)));
                 competition.setEndDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_END_DATE)));
                 competition.setTypeOfCompetition(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_TYPE_OF_COMPETITION)));
@@ -447,7 +447,7 @@ public class DatabaseAdapter {
 
         BDCompetition competition = new BDCompetition();
 
-        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
+        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_COORDINATES, BDCompetition.KEY_START_DATE,
                         BDCompetition.KEY_END_DATE, BDCompetition.KEY_TYPE_OF_COMPETITION, BDCompetition.KEY_ECHELONS, BDCompetition.KEY_SPECIALIZATIONS, BDCompetition.KEY_INFORMATION, BDCompetition.FOREIGN_DATABASE_ID},
                 BDCompetition.FOREIGN_DATABASE_ID + " = ?", new String[]{"" + id}, null, null, null);
 
@@ -455,7 +455,7 @@ public class DatabaseAdapter {
             do {
 
                 competition.setName(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_NAME)));
-                competition.setAddress(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_ADDRESS)));
+                competition.setCoordinates(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_COORDINATES)));
                 competition.setStartDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_START_DATE)));
                 competition.setEndDate(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_END_DATE)));
                 competition.setTypeOfCompetition(cursor.getString(cursor.getColumnIndex(BDCompetition.KEY_TYPE_OF_COMPETITION)));

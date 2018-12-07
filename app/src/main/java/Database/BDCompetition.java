@@ -1,7 +1,6 @@
 package Database;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BDCompetition {
@@ -10,7 +9,7 @@ public class BDCompetition {
     public static final String TABLE_COMPETITION = "Competition";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
-    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_COORDINATES = "coordinates";
     public static final String KEY_START_DATE = "startDate";
     public static final String KEY_END_DATE = "endDate";
     public static final String KEY_TYPE_OF_COMPETITION = "typeOfCompetition";
@@ -21,7 +20,7 @@ public class BDCompetition {
 
     private int id;
     private String name;
-    private String address;
+    private String coordinates;
     private String startDate;
     private String endDate;
     private String typeOfCompetition;
@@ -31,15 +30,15 @@ public class BDCompetition {
 
     public static final String DATABASE_CREATE = "create table " + TABLE_COMPETITION +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null, "
-            + KEY_ADDRESS + " text not null, " + KEY_START_DATE + " text not null, "
+            + KEY_COORDINATES + " text not null, " + KEY_START_DATE + " text not null, "
             + KEY_END_DATE + " text not null, " + KEY_TYPE_OF_COMPETITION + " text not null, "
             + KEY_ECHELONS + " text not null, " + KEY_SPECIALIZATIONS + " text not null,"
             + KEY_INFORMATION + " text not null, " + FOREIGN_DATABASE_ID + " integer not null);";
 
-    public BDCompetition(int id, String name, String address, String startDate, String endDate, String typeOfCompetition, String echelons, String specializations, String information) {
+    public BDCompetition(int id, String name, String coordinates, String startDate, String endDate, String typeOfCompetition, String echelons, String specializations, String information) {
         this.id = id;
         this.name = name;
-        this.address = address;
+        this.coordinates = coordinates;
         this.startDate = startDate;
         this.endDate = endDate;
         this.typeOfCompetition = typeOfCompetition;
@@ -67,12 +66,27 @@ public class BDCompetition {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public double[] getCoordinatesArray() {
+
+        String splitedCoordinates[] = coordinates.split("/");
+
+        double[] coordinatesArray = new double[2];
+
+        for (int i = 0; i < 2; i++) {
+
+            coordinatesArray[i] = Double.parseDouble(splitedCoordinates[i]);
+        }
+
+        return coordinatesArray;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getCoordinates(){
+
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
     }
 
     public String getStartDate() {
