@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 
 import Model.Utils;
 
-public class BDClub {
+public class BDClub implements Serializable {
 
     public static final String TABLE_CLUB = "CLUB";
     public static final String KEY_ID = "id";
@@ -29,6 +30,16 @@ public class BDClub {
         this.image = Utils.bitmapToString(image);
     }
 
+    public BDClub(int id, String name, String image) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+    }
+
+    public BDClub(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public BDClub() {
     }

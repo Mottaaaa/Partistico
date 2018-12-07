@@ -4,12 +4,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Base64;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import Database.BDAthlete;
@@ -24,7 +32,7 @@ public class Utils {
 
     private Context context;
     private static Utils instance;
-
+    private Bitmap image;
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
@@ -93,7 +101,7 @@ public class Utils {
 
     public void populateDB() {
 
-        /*
+
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
 
@@ -119,7 +127,7 @@ public class Utils {
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "World", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
         dbAdapter.close();
-        */
+
     }
 
     //BDClub
@@ -261,25 +269,5 @@ public class Utils {
         fa.getNonAthletes();
     }
 
-    public void getAthleteImagesFromFirebase(int id){
-        Bitmap my_image;
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
-        StorageReference ref = storage.getReference().child("ImagensExercicios/abdominal_1.bmp");
-        try {
-            final File localFile = File.createTempFile("Images", "bmp");
-            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

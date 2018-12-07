@@ -5,11 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +30,11 @@ public class FirebaseAdapter {
     List<BDAthlete> athletes;
     List<BDNonAthlete> nonAthletes;
     Utils util;
+    Bitmap image;
+    private static File localAthleteFile;
+    private static File localNonAthleteFile;
+    private static File localClubFile;
+
 
     public FirebaseAdapter(Context context, Utils util) {
         this.util = util;
@@ -33,7 +45,17 @@ public class FirebaseAdapter {
         this.list = new ArrayList<>();
     }
 
-    public void getClubs(){
+    public static void createTempFiles() {
+        try {
+            localAthleteFile = File.createTempFile("Images/athlete", "bmp");
+            localNonAthleteFile = File.createTempFile("Images/nonathlete", "bmp");
+            localClubFile = File.createTempFile("Images/club", "bmp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getClubs() {
 
         list.clear();
 
@@ -42,16 +64,15 @@ public class FirebaseAdapter {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     //BDClub club = snap.getValue(BDClub.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    Bitmap image = Utils.stringToBitmap(snap.child("image").getValue(String.class));
+                    String image = snap.child("image").getValue(String.class);
                     BDClub club = new BDClub(id, name, image);
                     list.add(club);
+                    //getClubImageFromFirebase(id);
                 }
-
                 util.populateClubs(list);
             }
 
@@ -64,7 +85,7 @@ public class FirebaseAdapter {
         database.getReference("clubs").addValueEventListener(listener);
     }
 
-    public void getAthletes(){
+    public void getAthletes() {
 
         athletes.clear();
 
@@ -73,10 +94,22 @@ public class FirebaseAdapter {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    BDAthlete athlete = snap.getValue(BDAthlete.class);
+                    //BDAthlete athlete = snap.getValue(BDAthlete.class);
+                    int id = snap.child("id").getValue(int.class);
+                    String name = snap.child("name").getValue(String.class);
+                    String image = snap.child("image").getValue(String.class);
+                    String birthday = snap.child("birthday").getValue(String.class);
+                    String expirationDate = snap.child("expirationDate").getValue(String.class);
+                    String echelon = snap.child("echelon").getValue(String.class);
+                    String gender = snap.child("gender").getValue(String.class);
+                    String history = snap.child("history").getValue(String.class);
+                    int clubID = snap.child("clubID").getValue(int.class);
+
+                    BDAthlete athlete = new BDAthlete(id, image, name, birthday, expirationDate, echelon, gender, history, clubID);
                     athletes.add(athlete);
+                    //getAthleteImageFromFirebase(id);
+                    ;
                 }
 
                 util.populateAthletes(athletes);
@@ -91,7 +124,7 @@ public class FirebaseAdapter {
         database.getReference("athletes").addValueEventListener(listener);
     }
 
-    public void getNonAthletes(){
+    public void getNonAthletes() {
 
         nonAthletes.clear();
 
@@ -100,10 +133,21 @@ public class FirebaseAdapter {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    BDNonAthlete nonAthlete = snap.getValue(BDNonAthlete.class);
+                    //BDNonAthlete nonAthlete = snap.getValue(BDNonAthlete.class);
+
+                    int id = snap.child("id").getValue(int.class);
+                    String name = snap.child("name").getValue(String.class);
+                    String image = snap.child("image").getValue(String.class);
+                    String birthday = snap.child("birthday").getValue(String.class);
+                    String role = snap.child("role").getValue(String.class);
+                    String gender = snap.child("gender").getValue(String.class);
+                    String history = snap.child("history").getValue(String.class);
+                    int clubID = snap.child("clubID").getValue(int.class);
+
+                    BDNonAthlete nonAthlete = new BDNonAthlete(id, image, name, birthday, role, gender, history, clubID);
                     nonAthletes.add(nonAthlete);
+                    //getNonAthleteImageFromFirebase(id);
                 }
 
                 util.populateNonAthletes(nonAthletes);
@@ -115,11 +159,11 @@ public class FirebaseAdapter {
             }
         };
 
-        database.getReference("clubs").addValueEventListener(listener);
+        database.getReference("nonathletes").addValueEventListener(listener);
     }
 
 
-    public void populate(){
+    public void populate() {
         populateNonAthletes();
         populateAthletes();
         populateClubs();
@@ -128,30 +172,108 @@ public class FirebaseAdapter {
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
 
-        clubs.add(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
-        clubs.add(new BDClub(2, "Allies", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
-        clubs.add(new BDClub(3, "Neutrals", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
+        clubs.add(new BDClub(1, "Axis", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
+        clubs.add(new BDClub(2, "Allies", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
+        clubs.add(new BDClub(3, "Neutrals", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
 
         database.getReference().child("clubs").setValue(clubs);
     }
 
     public void populateAthletes() {
         List<BDAthlete> athletes = new ArrayList<>();
-        athletes.add(new BDAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler), "Adolf Hitler", "20/04/1889", "30/04/1945", "Führer", "Masculino", "Genocia", 2));
-        athletes.add(new BDAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin), "Joseph Stalin", "18/12/1878", "05/03/1953", "General Secretary", "Masculino", "Arquinimigo do Hitler", 2));
-        athletes.add(new BDAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill), "Winston Churchill", "30/11/1874", "24/01/1965", "Prime Minister", "Masculino", "Fez um brilhante discurso", 2));
-        athletes.add(new BDAthlete(4, BitmapFactory.decodeResource(context.getResources(), R.drawable.mussolini), "Benito Mussolini", "29/07/1883", "28/04/1945", "Duce", "Masculino", "Compincha do Hitler", 1));
-        athletes.add(new BDAthlete(5, BitmapFactory.decodeResource(context.getResources(), R.drawable.hirohito), "Hirohito", "29/04/1901", "07/01/1989", "Emperor", "Masculino", "Levou com duas bombas que se lixou", 1));
+        athletes.add(new BDAthlete(1, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)), "Adolf Hitler", "20/04/1889", "30/04/1945", "Führer", "Masculino", "Genocia", 2));
+        athletes.add(new BDAthlete(2, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin)), "Joseph Stalin", "18/12/1878", "05/03/1953", "General Secretary", "Masculino", "Arquinimigo do Hitler", 2));
+        athletes.add(new BDAthlete(3, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill)), "Winston Churchill", "30/11/1874", "24/01/1965", "Prime Minister", "Masculino", "Fez um brilhante discurso", 2));
+        athletes.add(new BDAthlete(4, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.mussolini)), "Benito Mussolini", "29/07/1883", "28/04/1945", "Duce", "Masculino", "Compincha do Hitler", 1));
+        athletes.add(new BDAthlete(5, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hirohito)), "Hirohito", "29/04/1901", "07/01/1989", "Emperor", "Masculino", "Levou com duas bombas que se lixou", 1));
 
         database.getReference().child("athletes").setValue(athletes);
     }
 
     public void populateNonAthletes() {
         List<BDNonAthlete> nonAthletes = new ArrayList<>();
-        nonAthletes.add(new BDNonAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Caiu da cadeira", 3));
-        nonAthletes.add(new BDNonAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.franco), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3));
-        nonAthletes.add(new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2));
+        nonAthletes.add(new BDNonAthlete(1, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar)), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Caiu da cadeira", 3));
+        nonAthletes.add(new BDNonAthlete(2, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.franco)), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3));
+        nonAthletes.add(new BDNonAthlete(3, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt)), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2));
 
         database.getReference().child("nonathletes").setValue(nonAthletes);
+    }
+
+    public void getAthleteImageFromFirebase(int id) {
+        final int i = id;
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
+        StorageReference ref = storage.getReference().child("athletes/" + id + ".png");
+        ref.getFile(localAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                image = BitmapFactory.decodeFile(localAthleteFile.getAbsolutePath());
+                setAthleteImg(i, image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+
+    }
+
+    public void getNonAthleteImageFromFirebase(int id) {
+        final int i = id;
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
+        StorageReference ref = storage.getReference().child("nonathletes/" + id + "png");
+        ref.getFile(localNonAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                image = BitmapFactory.decodeFile(localNonAthleteFile.getAbsolutePath());
+                setNonAthleteImg(i, image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+
+    }
+
+    public void getClubImageFromFirebase(int id) {
+        final int i = id;
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
+        StorageReference ref = storage.getReference().child("clubs/" + id + "png");
+        ref.getFile(localClubFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                image = BitmapFactory.decodeFile(localClubFile.getAbsolutePath());
+                setClubsImg(i, image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+
+    }
+
+    public void setAthleteImg(int id, Bitmap image) {
+        for (BDAthlete athlete : athletes) {
+            if (athlete.getId() == id) {
+                athlete.setImage(image);
+            }
+        }
+    }
+
+    public void setNonAthleteImg(int id, Bitmap image) {
+        for (BDNonAthlete nonAthlete : nonAthletes) {
+            if (nonAthlete.getId() == id) {
+                nonAthlete.setImage(image);
+            }
+        }
+    }
+
+    public void setClubsImg(int id, Bitmap image) {
+        for (BDClub club : list) {
+            if (club.getId() == id) {
+                club.setImage(image);
+            }
+        }
     }
 }

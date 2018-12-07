@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Utils.getInstance().setContext(getApplicationContext());
-            Utils.getInstance().populateDB();
-            //Utils.getInstance().getDataFromFirebase();
+            FirebaseAdapter.createTempFiles();
+            //Utils.getInstance().populateDB();
+            Utils.getInstance().getDataFromFirebase();
 
 
             return null;

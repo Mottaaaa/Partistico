@@ -2,9 +2,11 @@ package Database;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 import Model.Utils;
 
-public class BDNonAthlete {
+public class BDNonAthlete implements Serializable {
 
     public static final String TABLE_NON_ATHLETE = "NonAthlete";
     public static final String KEY_ID = "id";
@@ -44,7 +46,28 @@ public class BDNonAthlete {
         this.clubID = clubID;
     }
 
+    public BDNonAthlete(int id, String image, String name, String birthday, String role, String gender, String history, int clubID) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.birthday = birthday;
+        this.role = role;
+        this.gender = gender;
+        this.history = history;
+        this.clubID = clubID;
+    }
+
     public BDNonAthlete() {
+    }
+
+    public BDNonAthlete(int id, String name, String birthday, String role, String gender, String history, int clubID) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.role = role;
+        this.gender = gender;
+        this.history = history;
+        this.clubID = clubID;
     }
 
     public int getId() {
