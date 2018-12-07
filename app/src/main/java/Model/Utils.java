@@ -1,9 +1,15 @@
 package Model;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import Database.BDAthlete;
@@ -58,6 +64,25 @@ public class Utils {
         this.activeNonAthlete = getNonAthleteByID(id);
     }
 
+    public static String bitmapToString(Bitmap image){
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG,100, byteStream);
+        byte [] b = byteStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public static Bitmap stringToBitmap(String str){
+        try{
+            byte [] encodeByte = Base64.decode(str,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
     public BDCompetition getActiveCompetition() {
         return activeCompetition;
     }
@@ -67,10 +92,10 @@ public class Utils {
     }
 
     public void populateDB() {
+
+        /*
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
-
-
 
         //Populate Clubs
         dbAdapter.insertClub(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
@@ -94,6 +119,7 @@ public class Utils {
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "World", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
         dbAdapter.close();
+        */
     }
 
     //BDClub
@@ -195,8 +221,65 @@ public class Utils {
         return competition;
     }
 
-    /*public String getOla(){
-        FirebaseAdapter adapter = new FirebaseAdapter(context);
-        return adapter.getOla();
-    }*/
+    public void populateClubs(List<BDClub> clubs){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDClub club : clubs){
+            adapter.insertClub(club);
+        }
+
+        adapter.close();
+    }
+
+    public void populateAthletes(List<BDAthlete> athletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDAthlete athlete : athletes){
+            adapter.insertAthlete(athlete);
+        }
+
+        adapter.close();
+    }
+
+    public void populateNonAthletes(List<BDNonAthlete> nonAthletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDNonAthlete nonAthlete : nonAthletes){
+            adapter.insertNonAthlete(nonAthlete);
+        }
+
+        adapter.close();
+    }
+
+    public void getDataFromFirebase(){
+        FirebaseAdapter fa = new FirebaseAdapter(context,this);
+        fa.getClubs();
+        fa.getAthletes();
+        fa.getNonAthletes();
+    }
+
+    public void getAthleteImagesFromFirebase(int id){
+        Bitmap my_image;
+        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
+        StorageReference ref = storage.getReference().child("ImagensExercicios/abdominal_1.bmp");
+        try {
+            final File localFile = File.createTempFile("Images", "bmp");
+            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

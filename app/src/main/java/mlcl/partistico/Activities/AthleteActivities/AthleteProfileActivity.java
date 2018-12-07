@@ -65,6 +65,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
 
         profile.setImageBitmap(Utils.getInstance().getActiveAthlete().getImage());
         name.setText(Utils.getInstance().getActiveAthlete().getName());
+
         club.setText(Utils.getInstance().getClubByID(Utils.getInstance().getActiveAthlete().getClubID()).getName());
     }
 
@@ -125,6 +126,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
             return rootView;
         }
     }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

@@ -2,6 +2,8 @@ package Database;
 
 import android.graphics.Bitmap;
 
+import Model.Utils;
+
 public class BDNonAthlete {
 
     public static final String TABLE_NON_ATHLETE = "NonAthlete";
@@ -16,7 +18,7 @@ public class BDNonAthlete {
     public static final String FOREIGN_DATABASE_ID = "foreignID";
 
     private int id;
-    private Bitmap image;
+    private String image;
     private String name;
     private String birthday;
     private String role;
@@ -33,7 +35,7 @@ public class BDNonAthlete {
 
     public BDNonAthlete(int id, Bitmap image, String name, String birthday, String role, String gender, String history, int clubID) {
         this.id = id;
-        this.image = image;
+        this.image = Utils.bitmapToString(image);
         this.name = name;
         this.birthday = birthday;
         this.role = role;
@@ -54,11 +56,11 @@ public class BDNonAthlete {
     }
 
     public Bitmap getImage() {
-        return image;
+        return Utils.stringToBitmap(image);
     }
 
     public void setImage(Bitmap image) {
-        this.image = image;
+        this.image = Utils.bitmapToString(image);
     }
 
     public String getName() {

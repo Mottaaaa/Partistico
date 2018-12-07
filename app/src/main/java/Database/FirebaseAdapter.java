@@ -1,6 +1,9 @@
 package Database;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,72 +13,118 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.bosta;
+import Model.Utils;
+import mlcl.partistico.R;
 
 public class FirebaseAdapter {
     private FirebaseDatabase database;
     private Context context;
-    BDClub[] clubs;
     List<BDClub> list;
     List<BDAthlete> athletes;
     List<BDNonAthlete> nonAthletes;
-    BDNonAthlete nonAthlete;
-    BDAthlete athlete;
-    String str = "";
+    Utils util;
 
-    public FirebaseAdapter(Context context) {
+    public FirebaseAdapter(Context context, Utils util) {
+        this.util = util;
         this.database = FirebaseDatabase.getInstance("https://cmpartistico.firebaseio.com/");
         this.context = context;
         this.athletes = new ArrayList<>();
         this.nonAthletes = new ArrayList<>();
         this.list = new ArrayList<>();
-        nonAthlete = null;
-        athlete = null;
     }
 
-    public void bosta() {
-        ValueEventListener postListener = new ValueEventListener() {
+    public void getClubs(){
+
+        list.clear();
+
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                bosta o = dataSnapshot.getValue(bosta.class);
 
-                Object value;
 
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
-                for (DataSnapshot snap : children) {
-                    value = snap.getValue();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    //BDClub club = snap.getValue(BDClub.class);
+                    int id = snap.child("id").getValue(int.class);
+                    String name = snap.child("name").getValue(String.class);
+                    Bitmap image = Utils.stringToBitmap(snap.child("image").getValue(String.class));
+                    BDClub club = new BDClub(id, name, image);
+                    list.add(club);
                 }
-                // ...
+
+                util.populateClubs(list);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                // ...
+
             }
         };
-        database.getReference().addListenerForSingleValueEvent(postListener);
+
+        database.getReference("clubs").addValueEventListener(listener);
     }
 
-    /*public String getOla(){
-        database.getReference("clubs").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getAthletes(){
+
+        athletes.clear();
+
+        ValueEventListener listener = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                str = dataSnapshot.getValue(String.class);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    BDAthlete athlete = snap.getValue(BDAthlete.class);
+                    athletes.add(athlete);
+                }
+
+                util.populateAthletes(athletes);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
-        return str;
-    }**/
+        };
 
-    /*
+        database.getReference("athletes").addValueEventListener(listener);
+    }
+
+    public void getNonAthletes(){
+
+        nonAthletes.clear();
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    BDNonAthlete nonAthlete = snap.getValue(BDNonAthlete.class);
+                    nonAthletes.add(nonAthlete);
+                }
+
+                util.populateNonAthletes(nonAthletes);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        database.getReference("clubs").addValueEventListener(listener);
+    }
+
+
+    public void populate(){
+        populateNonAthletes();
+        populateAthletes();
+        populateClubs();
+    }
+
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
 
@@ -105,5 +154,4 @@ public class FirebaseAdapter {
 
         database.getReference().child("nonathletes").setValue(nonAthletes);
     }
-    */
 }
