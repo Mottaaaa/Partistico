@@ -1,5 +1,9 @@
 package Database;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class BDCompetition {
 
 
@@ -27,7 +31,7 @@ public class BDCompetition {
 
     public static final String DATABASE_CREATE = "create table " + TABLE_COMPETITION +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null, "
-            + KEY_ADDRESS + " text not null, "+ KEY_START_DATE + " text not null, "
+            + KEY_ADDRESS + " text not null, " + KEY_START_DATE + " text not null, "
             + KEY_END_DATE + " text not null, " + KEY_TYPE_OF_COMPETITION + " text not null, "
             + KEY_ECHELONS + " text not null, " + KEY_SPECIALIZATIONS + " text not null,"
             + KEY_INFORMATION + " text not null, " + FOREIGN_DATABASE_ID + " integer not null);";
@@ -99,12 +103,38 @@ public class BDCompetition {
         return echelons;
     }
 
+    public List<Integer> getEchelonsList() {
+
+        String splitedEchelons[] = echelons.split("/");
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < splitedEchelons.length; i++) {
+
+            list.add(Integer.parseInt(splitedEchelons[i]));
+        }
+
+        return list;
+    }
+
     public void setEchelons(String echelons) {
         this.echelons = echelons;
     }
 
     public String getSpecializations() {
         return specializations;
+    }
+
+    public List<Integer> getSpecializationsList() {
+
+        String splitedSpecializations[] = specializations.split("/");
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < splitedSpecializations.length; i++) {
+
+            list.add(Integer.parseInt(splitedSpecializations[i]));
+        }
+
+        return list;
     }
 
     public void setSpecializations(String specializations) {
