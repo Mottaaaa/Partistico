@@ -29,5 +29,10 @@
     <string name="title_actity_nonAthlete_list">Não Atletas</string>
     <string name="title_activity_non_athlete_profile">Não Atleta - Perfil</string>
     <string name="title_activity_competition_list">Provas</string>
+    <string name="title_activity_competition_profile">CompetitionProfileActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

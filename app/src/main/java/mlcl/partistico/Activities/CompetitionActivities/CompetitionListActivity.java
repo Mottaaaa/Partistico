@@ -147,8 +147,8 @@ public class CompetitionListActivity extends AppCompatActivity {
                                                 int position, long id) {
 
                             Utils.getInstance().setActiveCompetition((Integer) view.getTag());
-                            //Intent intent = new Intent(CompetitionListActivity.this, AthleteProfileActivity.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(CompetitionListActivity.this, CompetitionProfileActivity.class);
+                            startActivity(intent);
                         }
                     });
                     adapter.notifyDataSetChanged();
