@@ -91,15 +91,15 @@ public class CompetitionProfileGeneralDataFragment extends Fragment {
                     break;
             }
 
-            tvEchelon.setAlpha(1);
-            ivEchelon.setImageAlpha(100);
+            tvEchelon.setAlpha(1f);
+            ivEchelon.setAlpha(1f);
         }
     }
 
     private void activateSpecializations(List<Integer> specializations) {
 
         TextView tvSpecialization = null;
-        ImageView iSpecialization = null;
+        ImageView ivSpecialization = null;
 
         for (int specialization : specializations) {
 
@@ -107,32 +107,32 @@ public class CompetitionProfileGeneralDataFragment extends Fragment {
 
                 case 1:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization1);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot1);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot1);
                     break;
                 case 2:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization2);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot2);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot2);
                     break;
                 case 3:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization3);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot3);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot3);
                     break;
                 case 4:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization4);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot4);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot4);
                     break;
                 case 5:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization5);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot5);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot5);
                     break;
                 case 6:
                     tvSpecialization = (TextView) getView().findViewById(R.id.tv_specialization6);
-                    iSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot6);
+                    ivSpecialization = (ImageView) getView().findViewById(R.id.iv_specialization_dot6);
                     break;
             }
 
-            tvSpecialization.setAlpha(1);
-            iSpecialization.setImageAlpha(100);
+            tvSpecialization.setAlpha(1f);
+            ivSpecialization.setAlpha(1f);
         }
     }
 }

@@ -56,7 +56,7 @@ public class NonAthleteProfileActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container_nonAthlete);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.nonAthlete_tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_nonAthlete);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));

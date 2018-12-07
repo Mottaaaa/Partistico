@@ -92,7 +92,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon1"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -118,7 +118,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon2"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -144,7 +144,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon3"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -170,7 +170,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -178,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon4"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -204,7 +204,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -212,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon5"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -230,7 +230,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -238,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon6"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -256,7 +256,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -264,7 +264,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon7"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -282,7 +282,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -290,7 +290,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/echelon8"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -348,7 +348,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -356,7 +356,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization1"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -374,7 +374,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -382,7 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization2"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -400,7 +400,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -408,7 +408,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization3"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -435,7 +435,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -443,7 +443,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization4"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -461,7 +461,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -469,7 +469,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization5"
                         android:textColor="#000" />
                 </LinearLayout>
@@ -487,7 +487,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:src="@drawable/ic_lens_black_24dp" />
 
                     <TextView
@@ -495,7 +495,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:alpha="0.3"
+                        android:alpha="0.2"
                         android:text="@string/specialization6"
                         android:textColor="#000" />
                 </LinearLayout>

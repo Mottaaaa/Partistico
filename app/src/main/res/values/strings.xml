@@ -30,7 +30,7 @@
     <string name="title_actity_nonAthlete_list">Não Atletas</string>
     <string name="title_activity_non_athlete_profile">Não Atleta - Perfil</string>
     <string name="title_activity_competition_list">Provas</string>
-    <string name="title_activity_competition_profile">CompetitionProfileActivity</string>
+    <string name="title_activity_competition_profile">Prova</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
@@ -56,6 +56,11 @@
     <string name="specialization4">Patinagem Livre</string>
     <string name="specialization5">Pares Artísticos</string>
     <string name="specialization6">Solo Dance</string>
+
+
+    <string name="competition_general_tab">Geral</string>
+    <string name="competition_information_tab">Informações</string>
+    <string name="competition_localization_tab">Localização</string>
 
     <string name="test">TESTE</string>
 
