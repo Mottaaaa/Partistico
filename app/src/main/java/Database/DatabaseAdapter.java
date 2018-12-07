@@ -415,9 +415,9 @@ public class DatabaseAdapter {
 
         List<BDCompetition> competitions = new ArrayList<>();
 
-        Cursor cursor = db.query(BDNonAthlete.TABLE_NON_ATHLETE, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
+        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
                         BDCompetition.KEY_END_DATE, BDCompetition.KEY_TYPE_OF_COMPETITION, BDCompetition.KEY_ECHELONS, BDCompetition.KEY_SPECIALIZATIONS, BDCompetition.KEY_INFORMATION, BDCompetition.FOREIGN_DATABASE_ID},
-                BDNonAthlete.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+                BDCompetition.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -447,9 +447,9 @@ public class DatabaseAdapter {
 
         BDCompetition competition = new BDCompetition();
 
-        Cursor cursor = db.query(BDNonAthlete.TABLE_NON_ATHLETE, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
+        Cursor cursor = db.query(BDCompetition.TABLE_COMPETITION, new String[]{BDCompetition.KEY_NAME, BDCompetition.KEY_ADDRESS, BDCompetition.KEY_START_DATE,
                         BDCompetition.KEY_END_DATE, BDCompetition.KEY_TYPE_OF_COMPETITION, BDCompetition.KEY_ECHELONS, BDCompetition.KEY_SPECIALIZATIONS, BDCompetition.KEY_INFORMATION, BDCompetition.FOREIGN_DATABASE_ID},
-                BDNonAthlete.FOREIGN_DATABASE_ID + " = ?", new String[]{"" + id}, null, null, null);
+                BDCompetition.FOREIGN_DATABASE_ID + " = ?", new String[]{"" + id}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
