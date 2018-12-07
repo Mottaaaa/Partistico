@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(BDClub.DATABASE_CREATE);
             db.execSQL(BDAthlete.DATABASE_CREATE);
             db.execSQL(BDNonAthlete.DATABASE_CREATE);
+            db.execSQL(BDCompetition.DATABASE_CREATE);
 
         } catch
                 (Exception er) {
@@ -33,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + BDClub.TABLE_CLUB);
             db.execSQL("DROP TABLE IF EXISTS " + BDAthlete.TABLE_ATHLETE);
             db.execSQL("DROP TABLE IF EXISTS " + BDNonAthlete.TABLE_NON_ATHLETE);
+            db.execSQL("DROP TABLE IF EXISTS " + BDCompetition.TABLE_COMPETITION);
 
             onCreate(db);
         }

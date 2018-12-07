@@ -8,6 +8,7 @@ import java.util.List;
 
 import Database.BDAthlete;
 import Database.BDClub;
+import Database.BDCompetition;
 import Database.BDNonAthlete;
 import Database.DatabaseAdapter;
 import mlcl.partistico.R;
@@ -16,8 +17,10 @@ public class Utils {
 
     private Context context;
     private static Utils instance;
+
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
+    private BDCompetition activeCompetition;
 
     private Utils() {
     }
@@ -50,7 +53,16 @@ public class Utils {
     }
 
     public void setActiveNonAthlete(int id) {
+
         this.activeNonAthlete = getNonAthleteByID(id);
+    }
+
+    public BDCompetition getActiveCompetition() {
+        return activeCompetition;
+    }
+
+    public void setActiveCompetition(int id) {
+        this.activeCompetition = getCompetitionByID(id);
     }
 
     public void populateDB() {
@@ -74,9 +86,14 @@ public class Utils {
         dbAdapter.insertNonAthlete((new BDNonAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.franco), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3)));
         dbAdapter.insertNonAthlete((new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2)));
 
+        //Populate Cometition
+        dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "World", "28/07/1914", "11/11/1918", "WAR", "UK, US, Germany, France, Russia", "Trench and Gas", "A Primeira Grande Guerra")));
+        dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "World", "1/09/1939", "2/09/1945", "WAR", "UK, US, Germany, Italy, France, Russia, Japan, China", "Blitzkrieg, Nukes, Mass Bombing...", "A Segunda Grande Guerra")));
+
         dbAdapter.close();
     }
 
+    //BDClub
     public List<BDClub> getDBClubs() {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
@@ -86,6 +103,15 @@ public class Utils {
         return clubs;
     }
 
+    public BDClub getClubByID(int clubID) {
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        BDClub club = dbAdapter.getClubByID(clubID);
+        dbAdapter.close();
+        return club;
+    }
+
+    //BDAthlete
     public List<BDAthlete> getDBAthletes() {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
@@ -94,14 +120,6 @@ public class Utils {
         dbAdapter.close();
 
         return athletes;
-    }
-
-    public BDClub getClubByID(int clubID) {
-        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
-        dbAdapter.open();
-        BDClub club = dbAdapter.getClubByID(clubID);
-        dbAdapter.close();
-        return club;
     }
 
     public List<BDAthlete> getAthletesByName(String name) {
@@ -120,6 +138,23 @@ public class Utils {
         return athlete;
     }
 
+    //BDNonAthlete
+    public List<BDNonAthlete> getNonAthletes() {
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthletes();
+        dbAdapter.close();
+        return nonAthletes;
+    }
+
+    public List<BDNonAthlete> getNonAthleteByName(String name) {
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthleteByName(name);
+        dbAdapter.close();
+        return nonAthletes;
+    }
+
     public BDNonAthlete getNonAthleteByID(int id) {
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
@@ -128,19 +163,31 @@ public class Utils {
         return nonAthlete;
     }
 
-    public List<BDNonAthlete> getNonAthleteByName(String name){
+    //BDCompetition
+    public List<BDCompetition> getDBCompetitions() {
+
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
-        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthleteByName(name);
+        List<BDCompetition> competitions = dbAdapter.getCompetitions();
         dbAdapter.close();
-        return nonAthletes;
+        return competitions;
     }
 
-    public List<BDNonAthlete> getNonAthletes(){
+    public List<BDCompetition> getDBCompetitionsByName(String name) {
+
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
-        List<BDNonAthlete> nonAthletes = dbAdapter.getNonAthletes();
+        List<BDCompetition> competitions = dbAdapter.getCompetitionsByName(name);
         dbAdapter.close();
-        return nonAthletes;
+        return competitions;
+    }
+
+    public BDCompetition getCompetitionByID(int id) {
+
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        BDCompetition competition = dbAdapter.getCompetitionByID(id);
+        dbAdapter.close();
+        return competition;
     }
 }

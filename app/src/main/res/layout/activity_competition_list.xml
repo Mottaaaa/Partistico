@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.NonAthleteActivities.NonAthleteListActivity">
+    tools:context=".Activities.CompetitionActivities.CompetitionListActivity">
 
 
     <FrameLayout
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/nonAthleteList"
+            android:id="@+id/bostabostabosta"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/divider"
@@ -31,13 +31,12 @@
             app:layout_constraintTop_toTopOf="parent"></ListView>
 
         <ProgressBar
-            android:id="@+id/nonAthleteListProgressBar"
+            android:id="@+id/competitionListProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:visibility="visible" />
     </FrameLayout>
-
 
 </android.support.constraint.ConstraintLayout>

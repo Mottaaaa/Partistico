@@ -73,8 +73,9 @@
         <activity
             android:name=".Activities.NonAthleteActivities.NonAthleteProfileActivity"
             android:label="@string/title_activity_non_athlete_profile"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Activities.NonAthleteActivities.NonAthleteListActivity"></activity>
+            android:parentActivityName=".Activities.NonAthleteActivities.NonAthleteListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.CompetitionActivities.CompetitionListActivity"></activity>
     </application>
 
 </manifest>

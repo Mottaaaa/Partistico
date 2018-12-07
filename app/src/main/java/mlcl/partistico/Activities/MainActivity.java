@@ -8,6 +8,7 @@ import android.view.View;
 
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
+import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
 import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
 import mlcl.partistico.R;
 
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void nonAthleteAction(View view) {
         Intent intent = new Intent(this, NonAthleteListActivity.class);
+        startActivity(intent);
+    }
+
+    public void competitionAction(View view) {
+        Intent intent = new Intent(this, CompetitionListActivity.class);
         startActivity(intent);
     }
 

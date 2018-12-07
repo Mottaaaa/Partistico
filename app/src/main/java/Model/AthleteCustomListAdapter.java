@@ -8,16 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Period;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import Database.BDAthlete;
-import Database.BDClub;
 import mlcl.partistico.R;
 
 public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
@@ -82,7 +76,4 @@ public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
 
         return ageS;
     }
-
-
-
 }
