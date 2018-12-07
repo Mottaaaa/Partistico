@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/bostabostabosta"
+            android:id="@+id/competitionList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/divider"

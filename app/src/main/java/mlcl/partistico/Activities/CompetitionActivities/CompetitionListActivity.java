@@ -31,7 +31,7 @@ public class CompetitionListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_athlete_list);
+        setContentView(R.layout.activity_competition_list);
         handleIntent(getIntent());
 
         new GetListTask().execute();
@@ -46,7 +46,7 @@ public class CompetitionListActivity extends AppCompatActivity {
         else
             competitions = Utils.getInstance().getDBCompetitionsByName(query);
 
-        ListView list = (ListView) findViewById(R.id.athleteList);
+        ListView list = (ListView) findViewById(R.id.competitionList);
         CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(this, competitions);
         list.setAdapter(adapter);
 
@@ -136,7 +136,7 @@ public class CompetitionListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.bostabostabosta);
+                    ListView list = (ListView) findViewById(R.id.competitionList);
                     CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(activity, Utils.getInstance().getDBCompetitions());
                     list.setAdapter(adapter);
 
@@ -146,14 +146,14 @@ public class CompetitionListActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
 
-                            Utils.getInstance().setActiveAthlete((Integer) view.getTag());
+                            Utils.getInstance().setActiveCompetition((Integer) view.getTag());
                             //Intent intent = new Intent(CompetitionListActivity.this, AthleteProfileActivity.class);
                             //startActivity(intent);
                         }
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.athleteListProgressBar);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.competitionListProgressBar);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
