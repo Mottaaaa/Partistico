@@ -18,23 +18,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/nonAthleteList"
+            android:id="@+id/list_nonAthlete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/divider"
             android:dividerHeight="1dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></ListView>
 
         <ProgressBar
-            android:id="@+id/nonAthleteListProgressBar"
+            android:id="@+id/progress_bar_nonAthleteList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:visibility="visible" />
     </FrameLayout>

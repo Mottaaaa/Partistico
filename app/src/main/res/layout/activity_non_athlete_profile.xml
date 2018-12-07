@@ -35,7 +35,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
@@ -55,20 +54,20 @@
                         android:layout_height="50dp" />
 
                     <TextView
-                        android:id="@+id/lbl_nonAthlete_name"
+                        android:id="@+id/lbl_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Name"
+                        android:text="@string/test"
                         android:textAlignment="center"
                         android:textColor="@color/titleColor"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/lbl_nonAthlete_club"
+                        android:id="@+id/lbl_club"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Club"
+                        android:text="@string/test"
                         android:textAlignment="center"
                         android:textColor="@color/labelColor"
                         android:textSize="16sp" />
@@ -76,9 +75,8 @@
 
             </LinearLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_nonAthlete_image"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_profile_image"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_gravity="top|center"
@@ -115,7 +113,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/nonAthlete_container"
+        android:id="@+id/container_nonAthlete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">

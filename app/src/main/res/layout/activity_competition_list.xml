@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ListView
-            android:id="@+id/competitionList"
+            android:id="@+id/list_competition"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/divider"
@@ -31,10 +31,9 @@
             app:layout_constraintTop_toTopOf="parent"></ListView>
 
         <ProgressBar
-            android:id="@+id/competitionListProgressBar"
+            android:id="@+id/progress_bar_competitionList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:visibility="visible" />
     </FrameLayout>

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import Model.Utils;
 import mlcl.partistico.R;
 
 public class CompetitionProfileActivity extends AppCompatActivity {
@@ -50,13 +51,20 @@ public class CompetitionProfileActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.container_competition);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+
+        TextView name = (TextView) findViewById(R.id.lbl_name);
+        TextView type = (TextView) findViewById(R.id.lbl_type);
+
+        name.setText(Utils.getInstance().getActiveCompetition().getName());
+        type.setText(Utils.getInstance().getActiveCompetition().getTypeOfCompetition());
 
     }
 

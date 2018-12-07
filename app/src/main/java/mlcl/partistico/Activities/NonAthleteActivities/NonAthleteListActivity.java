@@ -43,7 +43,7 @@ public class NonAthleteListActivity extends AppCompatActivity {
         else
             nonAthletes = Utils.getInstance().getNonAthleteByName(query);
 
-        ListView list = (ListView) findViewById(R.id.nonAthleteList);
+        ListView list = (ListView) findViewById(R.id.list_nonAthlete);
         NonAthleteCustomListAdapter adapter = new NonAthleteCustomListAdapter(this, nonAthletes);
         list.setAdapter(adapter);
 
@@ -133,7 +133,7 @@ public class NonAthleteListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.nonAthleteList);
+                    ListView list = (ListView) findViewById(R.id.list_nonAthlete);
                     NonAthleteCustomListAdapter adapter = new NonAthleteCustomListAdapter(activity, Utils.getInstance().getNonAthletes());
                     list.setAdapter(adapter);
 
@@ -150,7 +150,7 @@ public class NonAthleteListActivity extends AppCompatActivity {
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.nonAthleteListProgressBar);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_nonAthleteList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
