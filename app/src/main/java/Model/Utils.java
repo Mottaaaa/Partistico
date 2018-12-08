@@ -39,6 +39,7 @@ public class Utils {
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
+    private BDWarmup activeWarmup;
 
     private Utils() {
     }
@@ -64,6 +65,14 @@ public class Utils {
     public void setActiveAthlete(int id) {
 
         this.activeAthlete = getAthleteByID(id);
+    }
+
+    public BDWarmup getActiveWarmup() {
+        return activeWarmup;
+    }
+
+    public void setActiveWarmup(int id) {
+        this.activeWarmup = getWarmupByID(id);
     }
 
     public BDNonAthlete getActiveNonAthlete() {

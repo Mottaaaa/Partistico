@@ -121,7 +121,8 @@
 
         <activity android:name=".Activities.WarmupActivities.WarmupListActivity"
             android:parentActivityName=".Activities.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_warmup_list">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
