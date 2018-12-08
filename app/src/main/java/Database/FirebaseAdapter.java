@@ -59,13 +59,14 @@ public class FirebaseAdapter {
 
     public void getClubs() {
 
+        final DatabaseAdapter adapter = new DatabaseAdapter(context);
         list.clear();
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                adapter.deleteClubTable();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     //BDClub club = snap.getValue(BDClub.class);
                     int id = snap.child("id").getValue(int.class);
@@ -90,13 +91,14 @@ public class FirebaseAdapter {
 
     public void getAthletes() {
 
+        final DatabaseAdapter adapter = new DatabaseAdapter(context);
         athletes.clear();
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                adapter.deleteAthleteTable();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     //BDAthlete athlete = snap.getValue(BDAthlete.class);
                     int id = snap.child("id").getValue(int.class);
