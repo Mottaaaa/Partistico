@@ -45,10 +45,11 @@ public class WarmupListActivity extends AppCompatActivity {
         popup = new PopupWindow(this);
         layout = getLayoutInflater().inflate(R.layout.add_warmup_popup, null);
         popup.setContentView(layout);
+        popup.getBackground().setAlpha(100);
         popup.setFocusable(true);
         popup.setOutsideTouchable(false);
         popup.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        popup.setHeight(WindowManager.LayoutParams.MATCH_PARENT);
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         addBtn = (Button) findViewById(R.id.btn_add);
@@ -99,7 +100,7 @@ public class WarmupListActivity extends AppCompatActivity {
     }
 
     private void addAction(View view){
-        popup.showAtLocation(layout, Gravity.CENTER, 50, 50);
+        popup.showAtLocation(layout, Gravity.CENTER,0,0);
     }
 
     @Override
