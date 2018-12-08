@@ -9,10 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.bumptech.glide.util.Util;
-
-import Database.DatabaseAdapter;
-import Model.GpsTracker;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
@@ -22,18 +18,16 @@ import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GpsTracker gpsTracker;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -60,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void warmupAction(View view){
+    public void warmupAction(View view) {
         Intent intent = new Intent(this, WarmupListActivity.class);
         startActivity(intent);
     }
@@ -71,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Utils.getInstance().setContext(getApplicationContext());
-            Utils.getInstance().delete();
-            //Utils.getInstance().delete();
             //FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
             Utils.getInstance().populateDB();
@@ -81,6 +73,5 @@ public class MainActivity extends AppCompatActivity {
 
             return null;
         }
-
     }
 }
