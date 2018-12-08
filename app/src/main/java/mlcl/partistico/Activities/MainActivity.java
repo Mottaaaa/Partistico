@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             Utils.getInstance().setContext(getApplicationContext());
             FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
-            //Utils.getInstance().populateDB();
+            Utils.getInstance().populateDB();
             //Utils.getInstance().getDataFromFirebase();
 
 

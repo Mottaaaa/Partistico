@@ -24,7 +24,9 @@ import java.util.List;
 import Database.BDAthlete;
 import Database.BDClub;
 import Database.BDCompetition;
+import Database.BDExercise;
 import Database.BDNonAthlete;
+import Database.BDWarmup;
 import Database.DatabaseAdapter;
 import Database.FirebaseAdapter;
 import mlcl.partistico.R;
@@ -132,6 +134,17 @@ public class Utils {
     }
 
     //BDClub
+    public void populateClubs(List<BDClub> clubs){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDClub club : clubs){
+            adapter.insertClub(club);
+        }
+
+        adapter.close();
+    }
+
     public List<BDClub> getDBClubs() {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
@@ -151,6 +164,17 @@ public class Utils {
     }
 
     //BDAthlete
+    public void populateAthletes(List<BDAthlete> athletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDAthlete athlete : athletes){
+            adapter.insertAthlete(athlete);
+        }
+
+        adapter.close();
+    }
+
     public List<BDAthlete> getDBAthletes() {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
@@ -178,6 +202,17 @@ public class Utils {
     }
 
     //BDNonAthlete
+    public void populateNonAthletes(List<BDNonAthlete> nonAthletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDNonAthlete nonAthlete : nonAthletes){
+            adapter.insertNonAthlete(nonAthlete);
+        }
+
+        adapter.close();
+    }
+
     public List<BDNonAthlete> getNonAthletes() {
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
@@ -230,39 +265,79 @@ public class Utils {
         return competition;
     }
 
-    public void populateClubs(List<BDClub> clubs){
+    //BDWarmup
+    public void insertWarmup(BDWarmup warmup){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-
-        for(BDClub club : clubs){
-            adapter.insertClub(club);
-        }
-
+        adapter.insertWarmup(warmup);
         adapter.close();
     }
 
-    public void populateAthletes(List<BDAthlete> athletes){
+    public List<BDWarmup> getWarmups(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
+        List<BDWarmup> warmups = adapter.getWarmups();
+        adapter.close();
+        return warmups;
+    }
 
-        for(BDAthlete athlete : athletes){
-            adapter.insertAthlete(athlete);
-        }
+    public List<BDWarmup> getWarmupsByName(String name){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        List<BDWarmup> warmups = adapter.getWarmupsByName(name);
+        adapter.close();
+        return warmups;
+    }
 
+    public BDWarmup getWarmupByID(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        BDWarmup warmup = adapter.getWarmupByID(id);
+        adapter.close();
+        return warmup;
+    }
+
+    //BDExercises
+    public void insertExercise(BDExercise exercise){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.insertExercise(exercise);
         adapter.close();
     }
 
-    public void populateNonAthletes(List<BDNonAthlete> nonAthletes){
+    public List<BDExercise> getExercises(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-
-        for(BDNonAthlete nonAthlete : nonAthletes){
-            adapter.insertNonAthlete(nonAthlete);
-        }
-
+        List<BDExercise> exercises = adapter.getExercises();
         adapter.close();
+        return exercises;
     }
 
+    public List<BDExercise> getExercisesByName(String name){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        List<BDExercise> exercises = adapter.getExercisesByName(name);
+        adapter.close();
+        return exercises;
+    }
+
+    public BDExercise getExerciseByID(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        BDExercise exercise = adapter.getExerciseByID(id);
+        adapter.close();
+        return exercise;
+    }
+
+    public List<BDExercise> getExercisesByWarmup(int warmupID){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        List<BDExercise> exercises = adapter.getExercisesByWarmup(warmupID);
+        adapter.close();
+        return exercises;
+    }
+
+    //Firebase
     public void getDataFromFirebase(){
         FirebaseAdapter fa = new FirebaseAdapter(context,this);
         fa.getClubs();
