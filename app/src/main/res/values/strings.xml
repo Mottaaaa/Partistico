@@ -31,7 +31,8 @@
     <string name="title_activity_non_athlete_profile">Não Atleta - Perfil</string>
     <string name="title_activity_competition_list">Provas</string>
     <string name="title_activity_competition_profile">Prova</string>
-    <string name="title_activity_warmup_list">Aquecimentos</string>
+    <string name="title_activity_exercise_list">Exercícios</string>
+    <string name="title_activity_exercise_profile">Exercício</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
