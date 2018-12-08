@@ -32,6 +32,15 @@ public class DatabaseAdapter {
         db.close();
     }
 
+    public void delete(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDClub.TABLE_CLUB,null,null);
+        db.delete(BDAthlete.TABLE_ATHLETE,null,null);
+        db.delete(BDNonAthlete.TABLE_NON_ATHLETE,null,null);
+        db.delete(BDCompetition.TABLE_COMPETITION,null,null);
+        db.delete(BDTraining.TABLE_TRAINING,null,null);
+    }
+
     // Escrever abaixo desta linha para fazer os gets e sets à base de dados
 
     //BDClub
@@ -663,7 +672,4 @@ public class DatabaseAdapter {
         return exercises;
     }
 
-    public void delete(){
-        dbHelper.delete();
-    }
 }
