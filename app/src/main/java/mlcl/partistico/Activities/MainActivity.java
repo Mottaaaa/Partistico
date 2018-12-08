@@ -11,6 +11,7 @@ import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
 import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
+import mlcl.partistico.Activities.WarmupActivities.WarmupListActivity;
 import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void competitionAction(View view) {
         Intent intent = new Intent(this, CompetitionListActivity.class);
+        startActivity(intent);
+    }
+
+    public void warmupAction(View view){
+        Intent intent = new Intent(this, WarmupListActivity.class);
         startActivity(intent);
     }
 
