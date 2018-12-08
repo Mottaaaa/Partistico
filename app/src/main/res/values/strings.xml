@@ -69,5 +69,11 @@
     <string name="reject">Rejeitar</string>
     <string name="accept">Aceitar</string>
 
+    <string name="btn_atheletes">Atletas</string>
+    <string name="btn_non_atheletes">Não Atletas</string>
+    <string name="btn_competition">Provas</string>
+    <string name="btn_exercises">Exercícios</string>
+    <string name="btn_exit">Sair</string>
+
 
 </resources>
