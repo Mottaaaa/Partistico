@@ -132,14 +132,23 @@ public class CompetitionProfileLocalizationFragment extends Fragment implements 
     public String[] getLocation(View view) {
 
         String[] arr = new String[2];
-        gpsTracker = new GpsTracker(Utils.getInstance().getContext());
-        if (gpsTracker.canGetLocation()) {
-            double latitude = gpsTracker.getLatitude();
-            double longitude = gpsTracker.getLongitude();
-            arr[0] = String.valueOf(latitude);
-            arr[1] = String.valueOf(longitude);
-        } else {
-            gpsTracker.showSettingsAlert();
+
+        try {
+
+            gpsTracker = new GpsTracker(Utils.getInstance().getContext());
+            if (gpsTracker.canGetLocation()) {
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
+                arr[0] = String.valueOf(latitude);
+                arr[1] = String.valueOf(longitude);
+            } else {
+                gpsTracker.showSettingsAlert();
+            }
+
+            return arr;
+        } catch (Exception ex) {
+            arr[0] = "0.0";
+            arr[1] = "0.0";
         }
 
         return arr;
