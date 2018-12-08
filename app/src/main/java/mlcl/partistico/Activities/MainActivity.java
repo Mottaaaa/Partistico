@@ -9,12 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import Database.FirebaseAdapter;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
 import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
-import mlcl.partistico.Activities.WarmupActivities.WarmupListActivity;
+import mlcl.partistico.Activities.WarmupActivities.WarmUpListActivity;
 import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void warmupAction(View view) {
-        Intent intent = new Intent(this, WarmupListActivity.class);
+        Intent intent = new Intent(this, WarmUpListActivity.class);
         startActivity(intent);
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="mlcl.partistico">
 
-   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -11,6 +11,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-feature android:name="android.hardware.location.gps" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -120,7 +121,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Activities.WarmupActivities.WarmupListActivity"
+        <activity
+            android:name=".Activities.WarmupActivities.WarmUpListActivity"
             android:label="@string/title_activity_warmup_list"
             android:parentActivityName=".Activities.MainActivity"
             android:screenOrientation="portrait">
@@ -135,7 +137,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity android:name=".Activities.WarmupActivities.WarmUpProfileActivity"></activity>
     </application>
-
 
 </manifest>

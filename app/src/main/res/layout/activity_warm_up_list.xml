@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.WarmupActivities.WarmupListActivity"
+    tools:context=".Activities.WarmupActivities.WarmUpListActivity"
     android:id="@+id/list_warmup_activity"
     android:background="@color/profileBackground">
 

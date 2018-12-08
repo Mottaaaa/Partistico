@@ -2,14 +2,11 @@ package mlcl.partistico.Activities.WarmupActivities;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,21 +14,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-
-import java.security.CodeSigner;
 
 import Database.BDWarmup;
 import Model.Utils;
 import Model.WarmupCustomListAdapter;
 import mlcl.partistico.R;
 
-public class WarmupListActivity extends AppCompatActivity {
+public class WarmUpListActivity extends AppCompatActivity {
 
-    final WarmupListActivity activity = this;
+    final WarmUpListActivity activity = this;
     private View layout;
     private PopupWindow popup;
     private Button addBtn;
@@ -39,7 +33,7 @@ public class WarmupListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_warmup_list);
+        setContentView(R.layout.activity_warm_up_list);
 
 
         popup = new PopupWindow(this);
