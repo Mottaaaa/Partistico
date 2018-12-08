@@ -117,7 +117,7 @@
                             android:layout_weight="1"
                             android:text="@string/btn_atheletes"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -144,7 +144,7 @@
                             android:layout_marginStart="16dp"
                             android:text="@string/btn_non_atheletes"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -171,7 +171,7 @@
                             android:layout_marginStart="16dp"
                             android:text="@string/btn_competition"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -198,7 +198,7 @@
                             android:layout_marginStart="16dp"
                             android:text="@string/btn_exercises"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -224,7 +224,7 @@
                             android:layout_marginStart="16dp"
                             android:text="@string/btn_exit"
                             android:textColor="#000"
-                            android:textSize="16sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                 </LinearLayout>
