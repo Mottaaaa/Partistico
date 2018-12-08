@@ -31,10 +31,10 @@
     <string name="title_activity_non_athlete_profile">Não Atleta - Perfil</string>
     <string name="title_activity_competition_list">Provas</string>
     <string name="title_activity_competition_profile">Prova</string>
+    <string name="title_activity_warmup_list">Aquecimentos</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="dates">Data Início | Data Fim</string>
     <string name="echelons">Escalões</string>
@@ -65,6 +65,9 @@
     <string name="test">TESTE</string>
 
     <string name="title_activity_competition_profile_localization_fragment">Mapa</string>
+    <string name="create_warmup_title">Criar Aquecimento</string>
+    <string name="reject">Rejeitar</string>
+    <string name="accept">Aceitar</string>
 
 
 </resources>
