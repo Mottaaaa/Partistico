@@ -33,7 +33,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -137,10 +137,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".Activities.ExerciseActivities.ExerciseProfileActivity"
+        <activity
+            android:name=".Activities.ExerciseActivities.ExerciseProfileActivity"
             android:label="@string/title_activity_exercise_profile"
             android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
