@@ -119,7 +119,12 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         // range += RANGE_INCREMENT;
         //}
 
-        series.appendData((new DataPoint(index, inclination)), true, 1000);
+        if (inclination <= 90) {
+            series.appendData((new DataPoint(index, inclination + 90)), true, 1000);
+        } else {
+            series.appendData((new DataPoint(index, inclination - 90)), true, 1000);
+        }
+
         graph.onDataChanged(false, false);
         index++;
     }
