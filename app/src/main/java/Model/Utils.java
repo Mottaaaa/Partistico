@@ -58,6 +58,10 @@ public class Utils {
         this.context = context;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public BDAthlete getActiveAthlete() {
         return activeAthlete;
     }
