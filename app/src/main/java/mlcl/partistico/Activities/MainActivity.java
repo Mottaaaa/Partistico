@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
             //Utils.getInstance().populateDB();
-            Utils.getInstance().getDataFromFirebase();
+            //Utils.getInstance().getDataFromFirebase();
 
 
             return null;

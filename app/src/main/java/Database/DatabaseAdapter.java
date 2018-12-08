@@ -469,4 +469,173 @@ public class DatabaseAdapter {
 
         return competition;
     }
+
+    public long insertWarmup(BDWarmup warmup) {
+        long id = -1;
+        try {
+            ContentValues newValues = new ContentValues();
+            newValues.put(BDWarmup.KEY_NAME, warmup.getName());
+
+            db = dbHelper.getWritableDatabase();
+            id = db.insert(BDWarmup.TABLE_WARMUP, null, newValues);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
+    public List<BDWarmup> getWarmups() {
+        List<BDWarmup> warmups = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDWarmup.KEY_NAME},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDWarmup warmup = new BDWarmup();
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+                warmups.add(warmup);
+            } while (cursor.moveToNext());
+        }
+
+        return warmups;
+    }
+
+    public List<BDWarmup> getWarmupsByName(String name) {
+
+        List<BDWarmup> warmups = new ArrayList<>();
+
+        Cursor cursor = db.query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDCompetition.KEY_NAME},
+                BDWarmup.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                BDWarmup warmup = new BDWarmup();
+
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+
+
+                warmups.add(warmup);
+            } while (cursor.moveToNext());
+        }
+
+        return warmups;
+    }
+
+    public BDWarmup getWarmupByID(int id) {
+
+        BDWarmup warmup = new BDWarmup();
+
+        Cursor cursor = db.query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDWarmup.KEY_NAME},
+                BDWarmup.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+
+            } while (cursor.moveToNext());
+        }
+
+        return warmup;
+    }
+
+    public long insertExercise(BDExercise exercise) {
+        long id = -1;
+        try {
+            ContentValues newValues = new ContentValues();
+            newValues.put(BDExercise.KEY_NAME, exercise.getName());
+            newValues.put(BDExercise.KEY_WARMUP_ID, exercise.getWarmupID());
+
+            db = dbHelper.getWritableDatabase();
+            id = db.insert(BDExercise.TABLE_EXERCISE, null, newValues);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
+    public List<BDExercise> getExercises() {
+        List<BDExercise> exercises = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_WARMUP_ID},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDExercise exercise = new BDExercise();
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+                exercises.add(exercise);
+            } while (cursor.moveToNext());
+        }
+
+        return exercises;
+    }
+
+    public List<BDExercise> getExercisesByName(String name) {
+
+        List<BDExercise> exercises = new ArrayList<>();
+
+        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_WARMUP_ID},
+                BDExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                BDExercise exercise = new BDExercise();
+
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+
+
+                exercises.add(exercise);
+            } while (cursor.moveToNext());
+        }
+
+        return exercises;
+    }
+
+    public BDExercise getExerciseByID(int id) {
+
+        BDExercise exercise = new BDExercise();
+
+        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_WARMUP_ID},
+                BDExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+
+            } while (cursor.moveToNext());
+        }
+
+        return exercise;
+    }
+
+    public List<BDExercise> getExercisesByWarmup(int warmupID) {
+        List<BDExercise> exercises = new ArrayList<>();
+
+        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_WARMUP_ID},
+                "warmupID = ?", new String[]{warmupID + ""}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                BDExercise exercise = new BDExercise();
+
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+
+                exercises.add(exercise);
+            } while (cursor.moveToNext());
+        }
+
+        return exercises;
+    }
 }
