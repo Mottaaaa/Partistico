@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -60,23 +61,19 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(180);
 
+
         // use static labels for horizontal and vertical labels
-        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setVerticalLabels(new String[] {"Good", "Middle", "Bad", "Middle", "Good"});
-        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graph.getGridLabelRenderer().setPadding(0);
+        graph.getGridLabelRenderer().setGridColor(255);
 
         graph.addSeries(series);
 
         dataPoints = new ArrayList<>();
-
-        //mSeries1 = new LineGraphSeries<>(generateData());
-
-        /*GraphView graph2 = (GraphView) rootView.findViewById(R.id.graph2);
-        mSeries2 = new LineGraphSeries<>();
-        graph2.addSeries(mSeries2);
-        graph2.getViewport().setXAxisBoundsManual(true);
-        graph2.getViewport().setMinX(0);
-        graph2.getViewport().setMaxX(40);*/
 
     }
 
