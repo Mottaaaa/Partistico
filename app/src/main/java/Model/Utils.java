@@ -26,6 +26,7 @@ import Database.BDClub;
 import Database.BDCompetition;
 import Database.BDExercise;
 import Database.BDNonAthlete;
+import Database.BDTraining;
 import Database.BDWarmup;
 import Database.DatabaseAdapter;
 import Database.FirebaseAdapter;
@@ -148,6 +149,9 @@ public class Utils {
         //Populate Competition
         dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "38.5587448/-9.0402922644068/Manjar do Norte", "28/07/1914", "11/11/1918", "WAR", "1/3/5/7", "1/3/5", "A Primeira Grande Guerra")));
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "38.520872350000005/-8.83894542882081/Instituto Politécnico de Setúbal", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
+
+        //Populate Training
+        dbAdapter.insertTraining(new BDTraining(1,"Avião"));
 
         dbAdapter.close();
 
@@ -355,6 +359,38 @@ public class Utils {
         List<BDExercise> exercises = adapter.getExercisesByWarmup(warmupID);
         adapter.close();
         return exercises;
+    }
+
+    //BDTraining
+    public void insertTraining(BDTraining training){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.insertTraining(training);
+        adapter.close();
+    }
+
+    public List<BDTraining> getTrainings(){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        List<BDTraining> trainings = adapter.getTrainings();
+        adapter.close();
+        return trainings;
+    }
+
+    public List<BDTraining> getTrainingsByName(String name){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        List<BDTraining> trainings = adapter.getTrainingsByName(name);
+        adapter.close();
+        return trainings;
+    }
+
+    public BDTraining getTrainingByID(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        BDTraining training = adapter.getTrainingByID(id);
+        adapter.close();
+        return training;
     }
 
     //Firebase
