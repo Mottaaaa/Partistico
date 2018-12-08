@@ -32,6 +32,7 @@ public class AthleteProfileNotesFragment extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
         View view = getView();
         if (view != null) {
             TextView history = (TextView) getView().findViewById(R.id.lbl_notes);

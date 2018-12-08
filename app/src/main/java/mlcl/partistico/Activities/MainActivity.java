@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            //getApplicationContext().deleteDatabase("Database.db");
             Utils.getInstance().setContext(getApplicationContext());
             //FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
