@@ -68,10 +68,11 @@ public class FirebaseAdapter {
                     //BDClub club = snap.getValue(BDClub.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    //String image = snap.child("image").getValue(String.class);
-                    BDClub club = new BDClub(id, name);
+                    String image = snap.child("image").getValue(String.class);
+                    //BDClub club = new BDClub(id, name);
+                    BDClub club = new BDClub(id, name, image);
                     list.add(club);
-                    getClubImageFromFirebase(id);
+                    //getClubImageFromFirebase(id);
                 }
                 util.populateClubs(list);
             }
@@ -98,7 +99,7 @@ public class FirebaseAdapter {
                     //BDAthlete athlete = snap.getValue(BDAthlete.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    //String image = snap.child("image").getValue(String.class);
+                    String image = snap.child("image").getValue(String.class);
 
                     String birthday = snap.child("birthday").getValue(String.class);
                     String expirationDate = snap.child("expirationDate").getValue(String.class);
@@ -107,9 +108,10 @@ public class FirebaseAdapter {
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
-                    BDAthlete athlete = new BDAthlete(id, name, birthday, expirationDate, echelon, gender, history, clubID);
+                    //BDAthlete athlete = new BDAthlete(id, name, birthday, expirationDate, echelon, gender, history, clubID);
+                    BDAthlete athlete = new BDAthlete(id, image, name, birthday, expirationDate, echelon, gender, history, clubID);
                     athletes.add(athlete);
-                    getAthleteImageFromFirebase(id);
+                    //getAthleteImageFromFirebase(id);
 
                 }
 
@@ -139,16 +141,17 @@ public class FirebaseAdapter {
 
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    //String image = snap.child("image").getValue(String.class);
+                    String image = snap.child("image").getValue(String.class);
                     String birthday = snap.child("birthday").getValue(String.class);
                     String role = snap.child("role").getValue(String.class);
                     String gender = snap.child("gender").getValue(String.class);
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
-                    BDNonAthlete nonAthlete = new BDNonAthlete(id, name, birthday, role, gender, history, clubID);
+                    //BDNonAthlete nonAthlete = new BDNonAthlete(id, name, birthday, role, gender, history, clubID);
+                    BDNonAthlete nonAthlete = new BDNonAthlete(id,image, name, birthday, role, gender, history, clubID);
                     nonAthletes.add(nonAthlete);
-                    getNonAthleteImageFromFirebase(id);
+                    //getNonAthleteImageFromFirebase(id);
                 }
 
                 util.populateNonAthletes(nonAthletes);
@@ -173,9 +176,9 @@ public class FirebaseAdapter {
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
 
-        clubs.add(new BDClub(1, "Axis", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
-        clubs.add(new BDClub(2, "Allies", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
-        clubs.add(new BDClub(3, "Neutrals", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler))));
+        clubs.add(new BDClub(1, "Axis", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.axis))));
+        clubs.add(new BDClub(2, "Allies", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.allies))));
+        clubs.add(new BDClub(3, "Neutrals", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.neutrals))));
 
         database.getReference().child("clubs").setValue(clubs);
     }

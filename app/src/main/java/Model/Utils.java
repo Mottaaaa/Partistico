@@ -191,7 +191,6 @@ public class Utils {
     public void populateAthletes(List<BDAthlete> athletes){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-
         for(BDAthlete athlete : athletes){
             adapter.insertAthlete(athlete);
         }
@@ -396,6 +395,10 @@ public class Utils {
     //Firebase
     public void getDataFromFirebase(){
         FirebaseAdapter fa = new FirebaseAdapter(context,this);
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+
+        adapter.delete();
+
         fa.getClubs();
         fa.getAthletes();
         fa.getNonAthletes();
@@ -427,4 +430,5 @@ public class Utils {
             }
         }
     }
+
 }

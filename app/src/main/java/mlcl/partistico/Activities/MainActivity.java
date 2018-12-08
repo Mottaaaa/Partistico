@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import Database.FirebaseAdapter;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
@@ -67,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
             Utils.getInstance().setContext(getApplicationContext());
             //FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
-            Utils.getInstance().populateDB();
-            //Utils.getInstance().getDataFromFirebase();
+            //Utils.getInstance().populateDB();
+            Utils.getInstance().getDataFromFirebase();
 
 
             return null;
