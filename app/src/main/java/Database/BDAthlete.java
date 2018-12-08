@@ -2,6 +2,8 @@ package Database;
 
 import android.graphics.Bitmap;
 
+import com.bumptech.glide.util.Util;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class BDAthlete implements Serializable {
     public static final String KEY_EXPIRATION_DATE = "expirationDate";
     public static final String KEY_ECHELON = "echelon";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_NOTES = "notes";
     public static final String KEY_HISTORY = "history";
     public static final String KEY_CLUB_ID = "club_id";
     public static final String FOREIGN_DATABASE_ID = "foreignID";
@@ -28,17 +31,31 @@ public class BDAthlete implements Serializable {
     private String expirationDate;
     private String echelon;
     private String gender;
+    private String notes;
     private String history;
     private int clubID;
 
     public static final String DATABASE_CREATE = "create table " + TABLE_ATHLETE +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_IMAGE + " blob not null, " + KEY_NAME + " text not null, "
             + KEY_BIRTHDAY + " text not null, " + KEY_EXPIRATION_DATE + " text not null, "
-            + KEY_ECHELON + " text not null, " + KEY_GENDER + " text not null, "
+            + KEY_ECHELON + " text not null, " + KEY_GENDER + " text not null, " + KEY_NOTES + " text not null, "
             + KEY_HISTORY + " text not null," + KEY_CLUB_ID + " integer not null, "
             + FOREIGN_DATABASE_ID + " integer not null);";
 
-    public BDAthlete(int id, Bitmap image, String name, String birthday, String expirationDate, String echelon, String gender, String history, int clubID) {
+    public BDAthlete(int id, String image, String name, String birthday, String expirationDate, String echelon, String gender, String notes, String history, int clubID) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.birthday = birthday;
+        this.expirationDate = expirationDate;
+        this.echelon = echelon;
+        this.gender = gender;
+        this.notes = notes;
+        this.history = history;
+        this.clubID = clubID;
+    }
+
+    public BDAthlete(int id, Bitmap image, String name, String birthday, String expirationDate, String echelon, String gender, String notes, String history, int clubID) {
         this.id = id;
         this.image = Utils.bitmapToString(image);
         this.name = name;
@@ -46,6 +63,7 @@ public class BDAthlete implements Serializable {
         this.expirationDate = expirationDate;
         this.echelon = echelon;
         this.gender = gender;
+        this.notes = notes;
         this.history = history;
         this.clubID = clubID;
     }
@@ -138,6 +156,14 @@ public class BDAthlete implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getHistory() {
