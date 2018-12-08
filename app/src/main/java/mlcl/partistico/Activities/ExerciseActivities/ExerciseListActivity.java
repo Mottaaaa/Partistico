@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities.WarmupActivities;
+package mlcl.partistico.Activities.ExerciseActivities;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -23,9 +23,9 @@ import Model.Utils;
 import Model.WarmupCustomListAdapter;
 import mlcl.partistico.R;
 
-public class WarmUpListActivity extends AppCompatActivity {
+public class ExerciseListActivity extends AppCompatActivity {
 
-    final WarmUpListActivity activity = this;
+    final ExerciseListActivity activity = this;
     private View layout;
     private PopupWindow popup;
     private Button addBtn;
@@ -33,7 +33,7 @@ public class WarmUpListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_warm_up_list);
+        setContentView(R.layout.activity_exercise_list);
 
 
         popup = new PopupWindow(this);

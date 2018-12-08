@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities.WarmupActivities;
+package mlcl.partistico.Activities.ExerciseActivities;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import mlcl.partistico.R;
 
-import static android.util.Half.EPSILON;
-
-public class WarmUpProfileActivity extends AppCompatActivity implements SensorEventListener {
+public class ExerciseProfileActivity extends AppCompatActivity implements SensorEventListener {
 
     SensorManager sensorManager;
     private Sensor sensor;
@@ -28,7 +26,7 @@ public class WarmUpProfileActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_warm_up_profile);
+        setContentView(R.layout.activity_exercise_profile);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -74,30 +72,8 @@ public class WarmUpProfileActivity extends AppCompatActivity implements SensorEv
         else
         {
             // device is not flat
-
             outputX.setText("Not Flat");
-            int rotation = (int) Math.round(Math.toDegrees(Math.atan2(g[0], g[1])));
         }
-
-
-
-
-
-        /*synchronized (this) {
-            switch (event.sensor.getType()) {
-                case Sensor.TYPE_GYROSCOPE:
-                    outputX.setText("x:" + Float.toString(event.values[0]));
-                    outputY.setText("y:" + Float.toString(event.values[1]));
-                    outputZ.setText("z:" + Float.toString(event.values[2]));
-                    break;
-            }
-        }*/
-
-
-        // This timestep's delta rotation to be multiplied by the current rotation
-        // after computing it from the gyro sample data.
-
-
     }
 
     @Override
