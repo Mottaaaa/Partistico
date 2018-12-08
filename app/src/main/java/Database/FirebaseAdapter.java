@@ -68,10 +68,10 @@ public class FirebaseAdapter {
                     //BDClub club = snap.getValue(BDClub.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    String image = snap.child("image").getValue(String.class);
-                    BDClub club = new BDClub(id, name, image);
+                    //String image = snap.child("image").getValue(String.class);
+                    BDClub club = new BDClub(id, name);
                     list.add(club);
-                    //getClubImageFromFirebase(id);
+                    getClubImageFromFirebase(id);
                 }
                 util.populateClubs(list);
             }
@@ -98,7 +98,8 @@ public class FirebaseAdapter {
                     //BDAthlete athlete = snap.getValue(BDAthlete.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    String image = snap.child("image").getValue(String.class);
+                    //String image = snap.child("image").getValue(String.class);
+
                     String birthday = snap.child("birthday").getValue(String.class);
                     String expirationDate = snap.child("expirationDate").getValue(String.class);
                     String echelon = snap.child("echelon").getValue(String.class);
@@ -106,10 +107,10 @@ public class FirebaseAdapter {
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
-                    BDAthlete athlete = new BDAthlete(id, image, name, birthday, expirationDate, echelon, gender, history, clubID);
+                    BDAthlete athlete = new BDAthlete(id, name, birthday, expirationDate, echelon, gender, history, clubID);
                     athletes.add(athlete);
-                    //getAthleteImageFromFirebase(id);
-                    ;
+                    getAthleteImageFromFirebase(id);
+
                 }
 
                 util.populateAthletes(athletes);
@@ -138,16 +139,16 @@ public class FirebaseAdapter {
 
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    String image = snap.child("image").getValue(String.class);
+                    //String image = snap.child("image").getValue(String.class);
                     String birthday = snap.child("birthday").getValue(String.class);
                     String role = snap.child("role").getValue(String.class);
                     String gender = snap.child("gender").getValue(String.class);
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
-                    BDNonAthlete nonAthlete = new BDNonAthlete(id, image, name, birthday, role, gender, history, clubID);
+                    BDNonAthlete nonAthlete = new BDNonAthlete(id, name, birthday, role, gender, history, clubID);
                     nonAthletes.add(nonAthlete);
-                    //getNonAthleteImageFromFirebase(id);
+                    getNonAthleteImageFromFirebase(id);
                 }
 
                 util.populateNonAthletes(nonAthletes);
@@ -201,8 +202,25 @@ public class FirebaseAdapter {
 
     public void getAthleteImageFromFirebase(int id) {
         final int i = id;
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference ref = storage.getReference().child("athletes/" + id + ".png");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
+                Utils.getInstance().setAthleteImg(i, bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
+        /*
         ref.getFile(localAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -214,6 +232,7 @@ public class FirebaseAdapter {
             public void onFailure(@NonNull Exception e) {
             }
         });
+        */
 
     }
 
@@ -221,6 +240,22 @@ public class FirebaseAdapter {
         final int i = id;
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
         StorageReference ref = storage.getReference().child("nonathletes/" + id + "png");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
+                Utils.getInstance().setNonAthleteImg(i, bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+        /*
         ref.getFile(localNonAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -232,13 +267,30 @@ public class FirebaseAdapter {
             public void onFailure(@NonNull Exception e) {
             }
         });
-
+        */
     }
 
     public void getClubImageFromFirebase(int id) {
         final int i = id;
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
         StorageReference ref = storage.getReference().child("clubs/" + id + "png");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
+                Utils.getInstance().setClubImg(i, bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
+        /*
         ref.getFile(localClubFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -250,9 +302,11 @@ public class FirebaseAdapter {
             public void onFailure(@NonNull Exception e) {
             }
         });
+        */
 
     }
 
+    /*
     public void setAthleteImg(int id, Bitmap image) {
         for (BDAthlete athlete : athletes) {
             if (athlete.getId() == id) {
@@ -260,6 +314,7 @@ public class FirebaseAdapter {
             }
         }
     }
+
 
     public void setNonAthleteImg(int id, Bitmap image) {
         for (BDNonAthlete nonAthlete : nonAthletes) {
@@ -276,4 +331,5 @@ public class FirebaseAdapter {
             }
         }
     }
+    */
 }

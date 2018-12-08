@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v7.app.WindowDecorActionBar;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -269,5 +270,30 @@ public class Utils {
         fa.getNonAthletes();
     }
 
+    public void setAthleteImg(int id, Bitmap img){
+        List<BDAthlete> athletes = getDBAthletes();
+        for(BDAthlete a : athletes){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
 
+    public void setNonAthleteImg(int id, Bitmap img){
+        List<BDNonAthlete> nonAthletes = getNonAthletes();
+        for(BDNonAthlete a : nonAthletes){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
+
+    public void setClubImg(int id, Bitmap img){
+        List<BDClub> clubs = getDBClubs();
+        for(BDClub a : clubs){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
 }
