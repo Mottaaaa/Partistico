@@ -256,6 +256,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
+                            android:onClick="warmupAction"
                             android:orientation="horizontal"
                             android:paddingTop="4dp"
                             android:paddingBottom="4dp">
