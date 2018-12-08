@@ -29,6 +29,7 @@ public class FirebaseAdapter {
     List<BDClub> list;
     List<BDAthlete> athletes;
     List<BDNonAthlete> nonAthletes;
+    List<BDCompetition> competitions;
     Utils util;
     Bitmap image;
     private static File localAthleteFile;
@@ -43,6 +44,7 @@ public class FirebaseAdapter {
         this.athletes = new ArrayList<>();
         this.nonAthletes = new ArrayList<>();
         this.list = new ArrayList<>();
+        this.competitions = new ArrayList<>();
     }
 
     public static void createTempFiles() {
@@ -129,13 +131,14 @@ public class FirebaseAdapter {
 
     public void getNonAthletes() {
 
+        final DatabaseAdapter adapter = new DatabaseAdapter(context);
         nonAthletes.clear();
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                adapter.deleteNonAthleteTable();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     //BDNonAthlete nonAthlete = snap.getValue(BDNonAthlete.class);
 
@@ -166,6 +169,46 @@ public class FirebaseAdapter {
         database.getReference("nonathletes").addValueEventListener(listener);
     }
 
+    public void getCompetitions() {
+
+        final DatabaseAdapter databaseAdapter = new DatabaseAdapter(context);
+        competitions.clear();
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                databaseAdapter.deleteCompetitionTable();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    //BDNonAthlete nonAthlete = snap.getValue(BDNonAthlete.class);
+
+                    int id = snap.child("id").getValue(int.class);
+                    String name = snap.child("name").getValue(String.class);
+                    String coordinates = snap.child("coordinates").getValue(String.class);
+                    String startDate = snap.child("startDate").getValue(String.class);
+                    String endDate = snap.child("endDate").getValue(String.class);
+                    String typeOfCompetition = snap.child("typeOfCompetition").getValue(String.class);
+                    String echelons = snap.child("echelons").getValue(String.class);
+                    String specializations = snap.child("specializations").getValue(String.class);
+                    String information = snap.child("information").getValue(String.class);
+
+                    //BDNonAthlete nonAthlete = new BDNonAthlete(id, name, birthday, role, gender, history, clubID);
+                    BDCompetition competition = new BDCompetition(id, name, coordinates, startDate, endDate, typeOfCompetition, echelons, specializations, information);
+                    competitions.add(competition);
+                    //getNonAthleteImageFromFirebase(id);
+                }
+
+                util.populateCompetitions(competitions);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        database.getReference("competitions").addValueEventListener(listener);
+    }
 
     public void populate() {
         populateNonAthletes();

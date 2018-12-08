@@ -41,6 +41,31 @@ public class DatabaseAdapter {
         db.delete(BDTraining.TABLE_TRAINING, null, null);
     }
 
+    public void deleteClubTable(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDClub.TABLE_CLUB, null, null);
+    }
+
+    public void deleteAthleteTable(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDAthlete.TABLE_ATHLETE, null, null);
+    }
+
+    public void deleteNonAthleteTable(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDNonAthlete.TABLE_NON_ATHLETE, null, null);
+    }
+
+    public void deleteTrainingTable(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDTraining.TABLE_TRAINING, null, null);
+    }
+
+    public void deleteCompetitionTable(){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDCompetition.TABLE_COMPETITION, null, null);
+    }
+
     // Escrever abaixo desta linha para fazer os gets e sets à base de dados
 
     //BDClub

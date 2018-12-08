@@ -261,6 +261,17 @@ public class Utils {
     }
 
     //BDCompetition
+    public void populateCompetitions(List<BDCompetition> competitions){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDCompetition competition : competitions){
+            adapter.insertCompetition(competition);
+        }
+
+        adapter.close();
+    }
+
     public List<BDCompetition> getDBCompetitions() {
 
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
@@ -402,6 +413,7 @@ public class Utils {
         fa.getClubs();
         fa.getAthletes();
         fa.getNonAthletes();
+        fa.getCompetitions();
     }
 
     public void setAthleteImg(int id, Bitmap img){
