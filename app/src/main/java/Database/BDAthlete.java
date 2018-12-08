@@ -2,9 +2,12 @@ package Database;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BDAthlete {
+import Model.Utils;
+
+public class BDAthlete implements Serializable {
 
     public static final String TABLE_ATHLETE = "Athlete";
     public static final String KEY_ID = "id";
@@ -19,7 +22,7 @@ public class BDAthlete {
     public static final String FOREIGN_DATABASE_ID = "foreignID";
 
     private int id;
-    private Bitmap image;
+    private String image;
     private String name;
     private String birthday;
     private String expirationDate;
@@ -37,6 +40,18 @@ public class BDAthlete {
 
     public BDAthlete(int id, Bitmap image, String name, String birthday, String expirationDate, String echelon, String gender, String history, int clubID) {
         this.id = id;
+        this.image = Utils.bitmapToString(image);
+        this.name = name;
+        this.birthday = birthday;
+        this.expirationDate = expirationDate;
+        this.echelon = echelon;
+        this.gender = gender;
+        this.history = history;
+        this.clubID = clubID;
+    }
+
+    public BDAthlete(int id, String image, String name, String birthday, String expirationDate, String echelon, String gender, String history, int clubID) {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.birthday = birthday;
@@ -47,6 +62,16 @@ public class BDAthlete {
         this.clubID = clubID;
     }
 
+    public BDAthlete(int id, String name, String birthday, String expirationDate, String echelon, String gender, String history, int clubID) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.expirationDate = expirationDate;
+        this.echelon = echelon;
+        this.gender = gender;
+        this.history = history;
+        this.clubID = clubID;
+    }
 
     public BDAthlete() {
     }
@@ -76,11 +101,11 @@ public class BDAthlete {
     }
 
     public Bitmap getImage() {
-        return image;
+        return Utils.stringToBitmap(image);
     }
 
     public void setImage(Bitmap image) {
-        this.image = image;
+        this.image = Utils.bitmapToString(image);
     }
 
     public String getBirthday() {

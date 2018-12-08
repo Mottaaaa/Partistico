@@ -1,9 +1,24 @@
 package Model;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.v7.app.WindowDecorActionBar;
+import android.util.Base64;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import Database.BDAthlete;
@@ -18,7 +33,7 @@ public class Utils {
 
     private Context context;
     private static Utils instance;
-
+    private Bitmap image;
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
@@ -58,6 +73,25 @@ public class Utils {
         this.activeNonAthlete = getNonAthleteByID(id);
     }
 
+    public static String bitmapToString(Bitmap image){
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG,100, byteStream);
+        byte [] b = byteStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public static Bitmap stringToBitmap(String str){
+        try{
+            byte [] encodeByte = Base64.decode(str,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
     public BDCompetition getActiveCompetition() {
         return activeCompetition;
     }
@@ -67,10 +101,10 @@ public class Utils {
     }
 
     public void populateDB() {
+
+
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
-
-
 
         //Populate Clubs
         dbAdapter.insertClub(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
@@ -94,6 +128,7 @@ public class Utils {
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "38.520872350000005/-8.83894542882081/Instituto Politécnico de Setúbal", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
         dbAdapter.close();
+
     }
 
     //BDClub
@@ -195,8 +230,70 @@ public class Utils {
         return competition;
     }
 
-    /*public String getOla(){
-        FirebaseAdapter adapter = new FirebaseAdapter(context);
-        return adapter.getOla();
-    }*/
+    public void populateClubs(List<BDClub> clubs){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDClub club : clubs){
+            adapter.insertClub(club);
+        }
+
+        adapter.close();
+    }
+
+    public void populateAthletes(List<BDAthlete> athletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDAthlete athlete : athletes){
+            adapter.insertAthlete(athlete);
+        }
+
+        adapter.close();
+    }
+
+    public void populateNonAthletes(List<BDNonAthlete> nonAthletes){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+
+        for(BDNonAthlete nonAthlete : nonAthletes){
+            adapter.insertNonAthlete(nonAthlete);
+        }
+
+        adapter.close();
+    }
+
+    public void getDataFromFirebase(){
+        FirebaseAdapter fa = new FirebaseAdapter(context,this);
+        fa.getClubs();
+        fa.getAthletes();
+        fa.getNonAthletes();
+    }
+
+    public void setAthleteImg(int id, Bitmap img){
+        List<BDAthlete> athletes = getDBAthletes();
+        for(BDAthlete a : athletes){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
+
+    public void setNonAthleteImg(int id, Bitmap img){
+        List<BDNonAthlete> nonAthletes = getNonAthletes();
+        for(BDNonAthlete a : nonAthletes){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
+
+    public void setClubImg(int id, Bitmap img){
+        List<BDClub> clubs = getDBClubs();
+        for(BDClub a : clubs){
+            if(a.getId() == id){
+                a.setImage(img);
+            }
+        }
+    }
 }

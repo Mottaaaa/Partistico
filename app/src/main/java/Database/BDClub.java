@@ -1,8 +1,14 @@
 package Database;
 
 import android.graphics.Bitmap;
+import android.util.Base64;
 
-public class BDClub {
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
+
+import Model.Utils;
+
+public class BDClub implements Serializable {
 
     public static final String TABLE_CLUB = "CLUB";
     public static final String KEY_ID = "id";
@@ -12,7 +18,7 @@ public class BDClub {
 
     private int id;
     private String name;
-    private Bitmap image;
+    private String image;
 
     public static final String DATABASE_CREATE = "create table " + TABLE_CLUB +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null, " + KEY_IMAGE + " blob not null, "
@@ -21,12 +27,23 @@ public class BDClub {
     public BDClub(int id, String name, Bitmap image) {
         this.id = id;
         this.name = name;
+        this.image = Utils.bitmapToString(image);
+    }
+
+    public BDClub(int id, String name, String image) {
+        this.id = id;
+        this.name = name;
         this.image = image;
     }
 
+    public BDClub(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public BDClub() {
     }
+
 
     public int getId() {
         return id;
@@ -45,10 +62,10 @@ public class BDClub {
     }
 
     public Bitmap getImage() {
-        return image;
+        return Utils.stringToBitmap(this.image);
     }
 
     public void setImage(Bitmap image) {
-        this.image = image;
+        this.image = Utils.bitmapToString(image);
     }
 }

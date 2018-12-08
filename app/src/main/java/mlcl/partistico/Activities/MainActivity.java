@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         PopulateDBTask populateTask = new PopulateDBTask();
-        FirebaseAdapter fb = new FirebaseAdapter(getApplicationContext());
-
         populateTask.execute();
 
     }
@@ -50,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Utils.getInstance().setContext(getApplicationContext());
-            Utils.getInstance().populateDB();
+            FirebaseAdapter.createTempFiles();
+            //new FirebaseAdapter(getApplicationContext(),null).populate();
+            //Utils.getInstance().populateDB();
+            Utils.getInstance().getDataFromFirebase();
 
-            //para tirar
-            FirebaseAdapter f = new FirebaseAdapter(getApplicationContext());
-            f.bosta();
 
             return null;
         }
