@@ -35,7 +35,7 @@ public class CompetitionCustomListAdapter extends ArrayAdapter<BDCompetition> {
         TextView type = (TextView) rowView.findViewById(R.id.lbl_type);
 
         name.setText(competitions.get(position).getName());
-        address.setText(competitions.get(position).getCoordinates());
+        address.setText(competitions.get(position).getLocation());
         dates.setText(competitions.get(position).getStartDate() + " | " + competitions.get(position).getEndDate());
         type.setText(competitions.get(position).getTypeOfCompetition());
 

@@ -68,16 +68,23 @@ public class BDCompetition {
 
     public double[] getCoordinatesArray() {
 
-        String splitedCoordinates[] = coordinates.split("/");
+        String split[] = coordinates.split("/");
 
-        double[] coordinatesArray = new double[2];
+        double[] coordinatesArray = new double[split.length];
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) { // só apanha a latitude e longitude
 
-            coordinatesArray[i] = Double.parseDouble(splitedCoordinates[i]);
+            coordinatesArray[i] = Double.parseDouble(split[i]);
         }
 
         return coordinatesArray;
+    }
+
+    public String getLocation(){ // só apanha o local
+
+        String[] split = coordinates.split("/");
+
+        return split[2];
     }
 
     public String getCoordinates(){

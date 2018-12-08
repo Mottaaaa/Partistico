@@ -62,8 +62,11 @@ public class CompetitionProfileLocalizationFragment extends Fragment implements 
 
         // Add a marker in Sydney and move the camera
         double[] coordinatesArray = Utils.getInstance().getActiveCompetition().getCoordinatesArray();
+        float zoomLevel = 21.0f; //This goes up to 21
         LatLng coordinates = new LatLng(coordinatesArray[0], coordinatesArray[1]);
+
         mMap.addMarker(new MarkerOptions().position(coordinates));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, zoomLevel));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
     }
 
@@ -86,30 +89,15 @@ public class CompetitionProfileLocalizationFragment extends Fragment implements 
 
                 String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                 String city = addresses.get(0).getLocality();
-                String state = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
 
-                tvAddress.setText(address);
-                tvLocation.setText(city + ", " + state);
+                tvAddress.setText(Utils.getInstance().getActiveCompetition().getLocation());
+                tvLocation.setText(city + ", " + country);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-    }
-
-    private void bosta() {
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(getContext(), Locale.getDefault());
-
-        /*addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName();*/
     }
 }
