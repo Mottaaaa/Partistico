@@ -151,11 +151,12 @@ public class FirebaseAdapter {
                     String birthday = snap.child("birthday").getValue(String.class);
                     String role = snap.child("role").getValue(String.class);
                     String gender = snap.child("gender").getValue(String.class);
+                    String notes = snap.child("notes").getValue(String.class);
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
                     //BDNonAthlete nonAthlete = new BDNonAthlete(id, name, birthday, role, gender, history, clubID);
-                    BDNonAthlete nonAthlete = new BDNonAthlete(id,image, name, birthday, role, gender, history, clubID);
+                    BDNonAthlete nonAthlete = new BDNonAthlete(id,image, name, birthday, role, gender, notes, history, clubID);
                     nonAthletes.add(nonAthlete);
                     //getNonAthleteImageFromFirebase(id);
                 }

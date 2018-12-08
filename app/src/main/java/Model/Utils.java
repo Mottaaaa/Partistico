@@ -142,9 +142,9 @@ public class Utils {
         dbAdapter.insertAthlete(new BDAthlete(5, BitmapFactory.decodeResource(context.getResources(), R.drawable.hirohito), "Hirohito", "29/04/1901", "07/01/1989", "Emperor", "Masculino", "Nota", "Levou com duas bombas que se lixou", 1));
 
         //Populate NonAthletes
-        dbAdapter.insertNonAthlete((new BDNonAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Caiu da cadeira", 3)));
-        dbAdapter.insertNonAthlete((new BDNonAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.franco), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3)));
-        dbAdapter.insertNonAthlete((new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2)));
+        dbAdapter.insertNonAthlete((new BDNonAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Nota", "Caiu da cadeira", 3)));
+        dbAdapter.insertNonAthlete((new BDNonAthlete(2, BitmapFactory.decodeResource(context.getResources(), R.drawable.franco), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Nota", "Ficou com ciúmes do Salazar", 3)));
+        dbAdapter.insertNonAthlete((new BDNonAthlete(3, BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Nota", "Ficou triste por a guerra estar a acabar e morreu", 2)));
 
         //Populate Competition
         dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "38.5587448/-9.0402922644068/Manjar do Norte", "28/07/1914", "11/11/1918", "WAR", "1/3/5/7", "1/3/5", "A Primeira Grande Guerra")));

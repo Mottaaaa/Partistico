@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities.AthleteActivities;
+package mlcl.partistico.Activities.NonAthleteActivities;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import mlcl.partistico.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AthleteProfileNotesFragment extends Fragment {
+public class NonAthleteProfileNotesFragment extends Fragment {
 
 
-    public AthleteProfileNotesFragment() {
+    public NonAthleteProfileNotesFragment() {
         // Required empty public constructor
     }
 
@@ -26,8 +26,7 @@ public class AthleteProfileNotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_athlete_profile_notes, container, false);
-
+        return inflater.inflate(R.layout.fragment_non_athlete_profile_notes, container, false);
     }
 
     @Override
@@ -36,7 +35,7 @@ public class AthleteProfileNotesFragment extends Fragment {
         View view = getView();
         if (view != null) {
             TextView notes = (TextView) getView().findViewById(R.id.lbl_notes);
-            notes.setText(Utils.getInstance().getActiveAthlete().getNotes());
+            notes.setText(Utils.getInstance().getActiveNonAthlete().getNotes());
         }
     }
 

@@ -15,6 +15,7 @@ public class BDNonAthlete implements Serializable {
     public static final String KEY_BIRTHDAY = "birthday";
     public static final String KEY_ROLE = "role";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_NOTES = "notes";
     public static final String KEY_HISTORY = "history";
     public static final String KEY_CLUB_ID = "club_id";
     public static final String FOREIGN_DATABASE_ID = "foreignID";
@@ -25,23 +26,37 @@ public class BDNonAthlete implements Serializable {
     private String birthday;
     private String role;
     private String gender;
+    private String notes;
     private String history;
     private int clubID;
 
     public static final String DATABASE_CREATE = "create table " + TABLE_NON_ATHLETE +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_IMAGE + " blob not null, " + KEY_NAME + " text not null, "
             + KEY_BIRTHDAY + " text not null, " + KEY_ROLE + " text not null, "
-            + KEY_GENDER + " text not null, " + KEY_HISTORY + " text not null,"
+            + KEY_GENDER + " text not null, " + KEY_NOTES + " text not null, " + KEY_HISTORY + " text not null,"
             + KEY_CLUB_ID + " integer not null, " + FOREIGN_DATABASE_ID + " integer not null);";
 
 
-    public BDNonAthlete(int id, Bitmap image, String name, String birthday, String role, String gender, String history, int clubID) {
+    public BDNonAthlete(int id, Bitmap image, String name, String birthday, String role, String gender,String notes, String history, int clubID) {
         this.id = id;
         this.image = Utils.bitmapToString(image);
         this.name = name;
         this.birthday = birthday;
         this.role = role;
         this.gender = gender;
+        this.notes = notes;
+        this.history = history;
+        this.clubID = clubID;
+    }
+
+    public BDNonAthlete(int id, String image, String name, String birthday, String role, String gender, String notes, String history, int clubID) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.birthday = birthday;
+        this.role = role;
+        this.gender = gender;
+        this.notes = notes;
         this.history = history;
         this.clubID = clubID;
     }
@@ -116,6 +131,14 @@ public class BDNonAthlete implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getHistory() {
