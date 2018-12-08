@@ -151,6 +151,9 @@ public class AthleteProfileActivity extends AppCompatActivity {
                     fragment = new AthleteProfilePersonalDataFragment();
                     break;
                 case 1:
+                    fragment = new AthleteProfileNotesFragment();
+                    break;
+                case 2:
                     fragment = new AthleteProfileHistoryFragment();
                     break;
             }
@@ -161,7 +164,7 @@ public class AthleteProfileActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
     }
 }
