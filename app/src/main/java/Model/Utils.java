@@ -58,6 +58,13 @@ public class Utils {
         this.context = context;
     }
 
+    public void delete(){
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        dbAdapter.delete();
+        dbAdapter.close();
+    }
+
     public Context getContext() {
         return context;
     }

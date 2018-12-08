@@ -662,4 +662,8 @@ public class DatabaseAdapter {
 
         return exercises;
     }
+
+    public void delete(){
+        dbHelper.delete();
+    }
 }

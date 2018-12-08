@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bumptech.glide.util.Util;
+
+import Database.DatabaseAdapter;
 import Model.GpsTracker;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
@@ -68,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Utils.getInstance().setContext(getApplicationContext());
+            Utils.getInstance().delete();
+            //Utils.getInstance().delete();
             //FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
             Utils.getInstance().populateDB();
