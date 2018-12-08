@@ -112,11 +112,19 @@ public class CompetitionProfileLocalizationFragment extends Fragment implements 
 
         String[] originCoordinates = getLocation(view);
         double[] destinationCoordinates = Utils.getInstance().getActiveCompetition().getCoordinatesArray();
+        String strUri = "";
 
+        if (!originCoordinates[0].equals("0.0") && !originCoordinates[1].equals("0.0")) {
 
-        String strUri = "https://www.google.com/maps/dir/?api=1";
-        strUri += "&origin=" + originCoordinates[0] + "," + originCoordinates[1];
-        strUri += "&destination=" + destinationCoordinates[0] + "," + destinationCoordinates[1];
+            strUri = "https://www.google.com/maps/dir/?api=1";
+            strUri += "&origin=" + originCoordinates[0] + "," + originCoordinates[1];
+            strUri += "&destination=" + destinationCoordinates[0] + "," + destinationCoordinates[1];
+        } else {
+
+            strUri = "http://www.google.com/maps/place/";
+            strUri += destinationCoordinates[0] + "," + destinationCoordinates[1];
+        }
+
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
         startActivity(intent);
     }
