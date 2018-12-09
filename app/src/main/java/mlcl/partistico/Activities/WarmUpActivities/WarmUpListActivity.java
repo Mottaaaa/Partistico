@@ -162,4 +162,29 @@ public class WarmUpListActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    public void addAction(View view) {
+
+        //Intent intent = new Intent(this, CompetitionListActivity.class);
+        //startActivity(intent);
+    }
+
+    public void playAction(View view) {
+
+        //Intent intent = new Intent(this, CompetitionListActivity.class);
+        //startActivity(intent);
+    }
+
+    public void editAction(View view) {
+
+        //Intent intent = new Intent(this, CompetitionListActivity.class);
+        //startActivity(intent);
+    }
+
+    public void deleteAction(View view) {
+
+        //Intent intent = new Intent(this, CompetitionListActivity.class);
+        //startActivity(intent);
+    }
+
 }
