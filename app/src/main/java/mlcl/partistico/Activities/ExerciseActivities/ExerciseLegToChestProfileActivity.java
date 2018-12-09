@@ -62,8 +62,8 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         graphHorizontal.getViewport().setYAxisBoundsManual(true);
         graphHorizontal.getViewport().setMinY(0);
         graphHorizontal.getViewport().setMaxY(180);
-        //graphHorizontal.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        //graphHorizontal.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graphHorizontal.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graphHorizontal.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graphHorizontal.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graphHorizontal.getGridLabelRenderer().setPadding(0);
         graphHorizontal.getGridLabelRenderer().setGridColor(255);
