@@ -14,7 +14,7 @@ import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
 import mlcl.partistico.Activities.ExerciseActivities.ExerciseListActivity;
 import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
-import mlcl.partistico.Activities.ExerciseActivities.ExerciseProfileActivity;
+import mlcl.partistico.Activities.WarmUpActivities.WarmUpListActivity;
 import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void warmUpAction(View view) {
+        Intent intent = new Intent(this, WarmUpListActivity.class);
+        startActivity(intent);
+    }
+
     private class PopulateDBTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -81,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
             //FirebaseAdapter.createTempFiles();
             //new FirebaseAdapter(getApplicationContext(),null).populate();
             //Utils.getInstance().populateDB();
-            Utils.getInstance().populateExercises();
+
+            Utils.getInstance().populateTESTE();
+
             Utils.getInstance().getDataFromFirebase();
 
 

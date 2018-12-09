@@ -511,14 +511,14 @@ public class DatabaseAdapter {
     }
 
     //BDWarmup
-    public long insertWarmup(BDWarmup warmup) {
+    public long insertWarmUp(BDWarmUp warmup) {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
-            newValues.put(BDWarmup.KEY_NAME, warmup.getName());
+            newValues.put(BDWarmUp.KEY_NAME, warmup.getName());
 
             db = dbHelper.getWritableDatabase();
-            id = db.insert(BDWarmup.TABLE_WARMUP, null, newValues);
+            id = db.insert(BDWarmUp.TABLE_WARMUP, null, newValues);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -526,16 +526,16 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public List<BDWarmup> getWarmups() {
-        List<BDWarmup> warmups = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDWarmup.KEY_NAME},
+    public List<BDWarmUp> getWarmups() {
+        List<BDWarmUp> warmups = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmUp.TABLE_WARMUP, new String[]{BDWarmUp.KEY_ID, BDWarmUp.KEY_NAME},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                BDWarmup warmup = new BDWarmup();
-                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
-                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+                BDWarmUp warmup = new BDWarmUp();
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmUp.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmUp.KEY_NAME)));
                 warmups.add(warmup);
             } while (cursor.moveToNext());
         }
@@ -543,20 +543,20 @@ public class DatabaseAdapter {
         return warmups;
     }
 
-    public List<BDWarmup> getWarmupsByName(String name) {
+    public List<BDWarmUp> getWarmupsByName(String name) {
 
-        List<BDWarmup> warmups = new ArrayList<>();
+        List<BDWarmUp> warmups = new ArrayList<>();
 
-        Cursor cursor = db.query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDCompetition.KEY_NAME},
-                BDWarmup.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+        Cursor cursor = db.query(BDWarmUp.TABLE_WARMUP, new String[]{BDWarmUp.KEY_ID, BDCompetition.KEY_NAME},
+                BDWarmUp.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                BDWarmup warmup = new BDWarmup();
+                BDWarmUp warmup = new BDWarmUp();
 
-                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
-                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmUp.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmUp.KEY_NAME)));
 
 
                 warmups.add(warmup);
@@ -566,18 +566,18 @@ public class DatabaseAdapter {
         return warmups;
     }
 
-    public BDWarmup getWarmupByID(int id) {
+    public BDWarmUp getWarmupByID(int id) {
 
-        BDWarmup warmup = new BDWarmup();
+        BDWarmUp warmup = new BDWarmUp();
 
-        Cursor cursor = db.query(BDWarmup.TABLE_WARMUP, new String[]{BDWarmup.KEY_ID, BDWarmup.KEY_NAME},
-                BDWarmup.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
+        Cursor cursor = db.query(BDWarmUp.TABLE_WARMUP, new String[]{BDWarmUp.KEY_ID, BDWarmUp.KEY_NAME},
+                BDWarmUp.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmup.KEY_ID)));
-                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmup.KEY_NAME)));
+                warmup.setId(cursor.getInt(cursor.getColumnIndex(BDWarmUp.KEY_ID)));
+                warmup.setName(cursor.getString(cursor.getColumnIndex(BDWarmUp.KEY_NAME)));
 
             } while (cursor.moveToNext());
         }

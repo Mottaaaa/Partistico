@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import Database.BDNonAthlete;
-import Model.NonAthleteCustomListAdapter;
+import Model.CustomListAdapters.NonAthleteCustomListAdapter;
 import Model.Utils;
 import mlcl.partistico.R;
 

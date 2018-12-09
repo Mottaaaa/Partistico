@@ -14,7 +14,7 @@ import Database.BDCompetition;
 import Database.BDWarmUpExercise;
 import Database.BDNonAthlete;
 import Database.BDExercise;
-import Database.BDWarmup;
+import Database.BDWarmUp;
 import Database.DatabaseAdapter;
 import Database.FirebaseAdapter;
 import mlcl.partistico.R;
@@ -26,7 +26,7 @@ public class Utils {
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
-    private BDWarmup activeWarmup;
+    private BDWarmUp activeWarmup;
     private BDExercise activeExercise;
 
     private Utils() {
@@ -66,12 +66,12 @@ public class Utils {
         this.activeAthlete = getAthleteByID(id);
     }
 
-    public BDWarmup getActiveWarmup() {
+    public BDWarmUp getActiveWarmup() {
         return activeWarmup;
     }
 
     public void setActiveWarmup(int id) {
-        this.activeWarmup = getBDWarmupByID(id);
+        this.activeWarmup = getBDWarmUpByID(id);
     }
 
     public BDNonAthlete getActiveNonAthlete() {
@@ -294,33 +294,33 @@ public class Utils {
     }
 
     //BDWarmup
-    public void insertBDWarmup(BDWarmup warmup){
+    public void insertBDWarmUp(BDWarmUp warmup){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        adapter.insertWarmup(warmup);
+        adapter.insertWarmUp(warmup);
         adapter.close();
     }
 
-    public List<BDWarmup> getBDWarmups(){
+    public List<BDWarmUp> getBDWarmUps(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDWarmup> warmups = adapter.getWarmups();
-        adapter.close();
-        return warmups;
-    }
-
-    public List<BDWarmup> getBDWarmupByName(String name){
-        DatabaseAdapter adapter = new DatabaseAdapter(context);
-        adapter.open();
-        List<BDWarmup> warmups = adapter.getWarmupsByName(name);
+        List<BDWarmUp> warmups = adapter.getWarmups();
         adapter.close();
         return warmups;
     }
 
-    public BDWarmup getBDWarmupByID(int id){
+    public List<BDWarmUp> getBDWarmUpByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        BDWarmup warmup = adapter.getWarmupByID(id);
+        List<BDWarmUp> warmups = adapter.getWarmupsByName(name);
+        adapter.close();
+        return warmups;
+    }
+
+    public BDWarmUp getBDWarmUpByID(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        BDWarmUp warmup = adapter.getWarmupByID(id);
         adapter.close();
         return warmup;
     }
@@ -366,11 +366,11 @@ public class Utils {
     }
 
     //BDExercise
-    public void populateExercises(){
+    public void populateTESTE(){
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
         dbAdapter.deleteExerciseTable();
-        dbAdapter.insertExercise(new BDExercise(1,"Avião"));
+        dbAdapter.insertWarmUp(new BDWarmUp(1,"BOSta"));
         dbAdapter.close();
     }
 

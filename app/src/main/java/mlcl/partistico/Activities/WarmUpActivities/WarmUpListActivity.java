@@ -1,4 +1,4 @@
-package mlcl.partistico.Activities.CompetitionActivities;
+package mlcl.partistico.Activities.WarmUpActivities;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -18,12 +18,12 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
-import Database.BDCompetition;
-import Model.CustomListAdapters.CompetitionCustomListAdapter;
+import Database.BDWarmUp;
+import Model.CustomListAdapters.WarmUpCustomListAdapter;
 import Model.Utils;
 import mlcl.partistico.R;
 
-public class CompetitionListActivity extends AppCompatActivity {
+public class WarmUpListActivity extends AppCompatActivity {
 
     ListView list;
     final Activity activity = this;
@@ -31,23 +31,23 @@ public class CompetitionListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_competition_list);
+        setContentView(R.layout.activity_warm_up_list);
+
         handleIntent(getIntent());
 
         new GetListTask().execute();
-
     }
 
     private void search(String query) {
-        List<BDCompetition> competitions;
+        List<BDWarmUp> warmUps;
 
         if (query.equals(""))
-            competitions = Utils.getInstance().getDBCompetitions();
+            warmUps = Utils.getInstance().getBDWarmUps();
         else
-            competitions = Utils.getInstance().getDBCompetitionsByName(query);
+            warmUps = Utils.getInstance().getBDWarmUpByName(query);
 
-        ListView list = (ListView) findViewById(R.id.list_competition);
-        CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(this, competitions);
+        ListView list = (ListView) findViewById(R.id.list_warm_ups);
+        WarmUpCustomListAdapter adapter = new WarmUpCustomListAdapter(this, warmUps);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,7 +57,7 @@ public class CompetitionListActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Utils.getInstance().setActiveCompetition((Integer) view.getTag());
-                Intent intent = new Intent(CompetitionListActivity.this, CompetitionProfileActivity.class);
+                Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
                 startActivity(intent);
 
             }
@@ -136,8 +136,8 @@ public class CompetitionListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.list_competition);
-                    CompetitionCustomListAdapter adapter = new CompetitionCustomListAdapter(activity, Utils.getInstance().getDBCompetitions());
+                    ListView list = (ListView) findViewById(R.id.list_warm_ups);
+                    WarmUpCustomListAdapter adapter = new WarmUpCustomListAdapter(activity, Utils.getInstance().getBDWarmUps());
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,13 +147,14 @@ public class CompetitionListActivity extends AppCompatActivity {
                                                 int position, long id) {
 
                             Utils.getInstance().setActiveCompetition((Integer) view.getTag());
-                            Intent intent = new Intent(CompetitionListActivity.this, CompetitionProfileActivity.class);
+                            Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
                             startActivity(intent);
+
                         }
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_competitionList);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_warm_upsList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });

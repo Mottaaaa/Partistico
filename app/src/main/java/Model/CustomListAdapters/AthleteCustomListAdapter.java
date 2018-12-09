@@ -1,4 +1,4 @@
-package Model;
+package Model.CustomListAdapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,46 +11,49 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.List;
 
-import Database.BDNonAthlete;
+import Database.BDAthlete;
 import mlcl.partistico.R;
 
-public class NonAthleteCustomListAdapter extends ArrayAdapter<BDNonAthlete> {
+public class AthleteCustomListAdapter extends ArrayAdapter<BDAthlete> {
+
     private final Activity context;
-    private List<BDNonAthlete> nonAthletes;
+    private List<BDAthlete> athletes;
 
-    public NonAthleteCustomListAdapter(Activity context, List<BDNonAthlete> nonAthletes) {
-        super(context, R.layout.non_athlete_list_item, nonAthletes);
+    public AthleteCustomListAdapter(Activity context, List<BDAthlete> athletes) {
+        super(context, R.layout.athlete_list_item, athletes);
 
-        this.nonAthletes = nonAthletes;
+        this.athletes = athletes;
         this.context = context;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
 
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.non_athlete_list_item, null, true);
+        View rowView = inflater.inflate(R.layout.athlete_list_item, null, true);
 
         ImageView icon = (ImageView) rowView.findViewById(R.id.iv_icon);
         TextView name = (TextView) rowView.findViewById(R.id.lbl_name);
         TextView age = (TextView) rowView.findViewById(R.id.lbl_age);
-        TextView role = (TextView) rowView.findViewById(R.id.lbl_role);
+        TextView expirationDate = (TextView) rowView.findViewById(R.id.lbl_expirationDate);
+        TextView echelon = (TextView) rowView.findViewById(R.id.lbl_echelon);
 
 
-        icon.setImageBitmap(nonAthletes.get(position).getImage());
+        icon.setImageBitmap(athletes.get(position).getImage());
 
-        name.setText(nonAthletes.get(position).getName());
+        name.setText(athletes.get(position).getName());
 
-        String date = nonAthletes.get(position).getBirthday();
+        String date = athletes.get(position).getBirthday();
         String[] calend = date.split("/");
         int day = Integer.parseInt(calend[0]);
         int month = Integer.parseInt(calend[1]);
         int year = Integer.parseInt(calend[2]);
         age.setText(getAge(year, month, day) + " Anos");
 
+        expirationDate.setText("Validade Atestado: " + athletes.get(position).getExpirationDate());
 
-        role.setText(nonAthletes.get(position).getRole());
+        echelon.setText(athletes.get(position).getEchelon());
 
-        rowView.setTag(nonAthletes.get(position).getId());
+        rowView.setTag(athletes.get(position).getId());
 
         return rowView;
 

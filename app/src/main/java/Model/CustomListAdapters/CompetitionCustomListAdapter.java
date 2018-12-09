@@ -1,4 +1,4 @@
-package Model;
+package Model.CustomListAdapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
