@@ -38,7 +38,6 @@ public class DatabaseAdapter {
         db.delete(BDAthlete.TABLE_ATHLETE, null, null);
         db.delete(BDNonAthlete.TABLE_NON_ATHLETE, null, null);
         db.delete(BDCompetition.TABLE_COMPETITION, null, null);
-        db.delete(BDExercise.TABLE_EXERCISE, null, null);
     }
 
     public void deleteClubTable(){
@@ -724,21 +723,21 @@ public class DatabaseAdapter {
     }
 
     public List<BDExercise> getExercises() {
-        List<BDExercise> trainings = new ArrayList<>();
+        List<BDExercise> exercises = new ArrayList<>();
         Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                BDExercise training = new BDExercise();
-                training.setId(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_ID)));
-                training.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
+                BDExercise exercise = new BDExercise();
+                exercise.setId(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_ID)));
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
 
-                trainings.add(training);
+                exercises.add(exercise);
             } while (cursor.moveToNext());
         }
 
-        return trainings;
+        return exercises;
     }
 
     public List<BDExercise> getExercisesByName(String name) {

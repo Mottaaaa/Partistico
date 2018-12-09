@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + BDAthlete.TABLE_ATHLETE);
             db.execSQL("DROP TABLE IF EXISTS " + BDNonAthlete.TABLE_NON_ATHLETE);
             db.execSQL("DROP TABLE IF EXISTS " + BDCompetition.TABLE_COMPETITION);
-            db.execSQL("DROP TABLE IF EXISTS " + BDExercise.TABLE_EXERCISE);
+            //db.execSQL("DROP TABLE IF EXISTS " + BDExercise.TABLE_EXERCISE);
 
             //inserir aqui mais instruções de criação de tabelas
             db.execSQL(BDClub.DATABASE_CREATE);

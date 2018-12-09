@@ -377,6 +377,7 @@ public class Utils {
     public void insertBDExercise(BDExercise training){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
+
         adapter.insertExercise(training);
         adapter.close();
     }
