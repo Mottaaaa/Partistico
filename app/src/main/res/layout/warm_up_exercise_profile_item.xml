@@ -12,16 +12,20 @@
         android:id="@+id/btn_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="1"
         android:checked="false"
-        android:text="@string/test" />
+        android:text="@string/test"
+        android:ellipsize="end"
+        android:maxLines="1" />
 
     <ImageButton
         android:id="@+id/btn_edit"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="4dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/round_button"
         android:onClick="editPopup"
         android:src="@drawable/ic_edit_black_25dp"
@@ -32,7 +36,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="4dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/round_button"
         android:onClick="delete"
