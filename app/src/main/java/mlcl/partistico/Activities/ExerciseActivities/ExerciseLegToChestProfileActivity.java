@@ -186,11 +186,13 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         }
 
 
-        if (inclination <= 90) {
+        /*if (inclination <= 90) {
             seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination + 90)), true, 100);
         } else {
             seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination - 90)), true, 100);
-        }
+        }*/
+
+        seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination)), true, 100);
 
         //********graph.getViewport().setMinY(inclination - 10);
         //********graph.getViewport().setMaxY(inclination + 10);
