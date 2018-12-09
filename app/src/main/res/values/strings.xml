@@ -68,7 +68,9 @@
     <string name="welcome">Bem-vindo ao Partistico</string>
     <string name="title_activity_competition_profile_localization_fragment">Mapa</string>
     <string name="create_warmup_title">Criar Aquecimento</string>
+    <string name="create_warmup_exercise_title">Criar Exercício</string>
     <string name="edit_warmup_title">Editar Aquecimento</string>
+    <string name="edit_warmup_exercise_title">Editar Exercício</string>
     <string name="reject">Rejeitar</string>
     <string name="accept">Aceitar</string>
 

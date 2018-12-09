@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.WarmUpActivities.WarmUpProfileActivity">
+    android:id="@+id/const_layout"
+    tools:context=".Activities.WarmUpActivities.WarmUpListActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +31,9 @@
                 android:id="@+id/tv_warm_up_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test" />
+                android:text="@string/test"
+                android:textColor="#000"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
@@ -69,4 +74,16 @@
         </ScrollView>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_add2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/round_button"
+        android:onClick="addPopup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 </android.support.constraint.ConstraintLayout>
