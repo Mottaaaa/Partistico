@@ -142,9 +142,15 @@
             android:label="@string/title_activity_exercise_profile"
             android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".Activities.ExerciseActivities.ExerciseLegToChestActivity"
+            android:label="@string/title_activity_exercise_profile"
+            android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".Activities.WarmUpActivities.WarmUpListActivity" />
         <activity android:name=".Activities.WarmUpActivities.WarmUpProfileActivity" />
-        <activity android:name=".Activities.ExerciseActivities.ExerciseLegToChestActivity"></activity>
+
     </application>
 
 </manifest>
