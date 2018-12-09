@@ -143,7 +143,8 @@
             android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.WarmUpActivities.WarmUpListActivity" />
-        <activity android:name=".Activities.WarmUpActivities.WarmUpProfileActivity"></activity>
+        <activity android:name=".Activities.WarmUpActivities.WarmUpProfileActivity" />
+        <activity android:name=".Activities.ExerciseActivities.ExerciseLegToChestActivity"></activity>
     </application>
 
 </manifest>

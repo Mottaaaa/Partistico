@@ -21,9 +21,6 @@ import mlcl.partistico.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SensorManager sensorManager;
-    private Sensor sensor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         //startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         PopulateDBTask populateTask = new PopulateDBTask();
         populateTask.execute();
