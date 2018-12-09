@@ -251,4 +251,12 @@ public class WarmUpListActivity extends AppCompatActivity {
         }
     }
 
+    public void itemAction(View view) {
+
+        Utils.getInstance().setActiveWarmup((Integer) view.getTag());
+
+        Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
+        startActivity(intent);
+    }
+
 }
