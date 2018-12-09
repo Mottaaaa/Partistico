@@ -138,12 +138,12 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".Activities.ExerciseActivities.ExerciseProfileActivity"
+            android:name=".Activities.ExerciseActivities.ExerciseAirplaneProfileActivity"
             android:label="@string/title_activity_exercise_profile"
             android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".Activities.ExerciseActivities.ExerciseLegToChestActivity"
+        <activity android:name=".Activities.ExerciseActivities.ExerciseLegToChestProfileActivity"
             android:label="@string/title_activity_exercise_profile"
             android:parentActivityName=".Activities.ExerciseActivities.ExerciseListActivity"
             android:screenOrientation="portrait"/>

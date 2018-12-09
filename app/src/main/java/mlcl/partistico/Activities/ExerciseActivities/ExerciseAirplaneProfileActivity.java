@@ -7,9 +7,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.MediaController;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
@@ -23,7 +21,7 @@ import java.util.List;
 import Model.Utils;
 import mlcl.partistico.R;
 
-public class ExerciseProfileActivity extends AppCompatActivity implements SensorEventListener {
+public class ExerciseAirplaneProfileActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -39,7 +37,7 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_profile);
+        setContentView(R.layout.activity_exercise_airplane_profile);
 
         getSupportActionBar().setTitle(Utils.getInstance().getActiveExercise().getName());
 
@@ -57,10 +55,10 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(50);
         graph.getViewport().setYAxisBoundsManual(true);
-        //graph.getViewport().setMinY(0);
-        //graph.getViewport().setMaxY(180);
-        //graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        //graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(180);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getGridLabelRenderer().setPadding(0);
         graph.getGridLabelRenderer().setGridColor(255);
@@ -75,7 +73,6 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
-
     }
 
     @Override
@@ -115,13 +112,13 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         }
 
         if (inclination <= 90) {
-            series.appendData((new DataPoint(index, inclination)), true, 100);
+            series.appendData((new DataPoint(index, inclination + 90)), true, 100);
         } else {
-            series.appendData((new DataPoint(index, inclination)), true, 100);
+            series.appendData((new DataPoint(index, inclination - 90)), true, 100);
         }
 
-        graph.getViewport().setMinY(inclination - 40);
-        graph.getViewport().setMaxY(inclination + 40);
+        //********graph.getViewport().setMinY(inclination - 10);
+        //********graph.getViewport().setMaxY(inclination + 10);
 
         graph.onDataChanged(false, false);
         index++;
@@ -138,13 +135,6 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
     }
 
     private void updateGraph() {
-
-        //DataPoint[] dataPointsArr = new DataPoint[dataPoints.size()]; // declare an array of DataPoint objects with the same size as your list
-
-        //for (int i = 0; i < dataPoints.size(); i++) {
-        // add new DataPoint object to the array for each of your list entries
-        //dataPointsArr[i] = dataPoints.get(i); // not sure but I think the second argument should be of type double
-        //}
 
         DataPoint[] dataPointsArr = ((List<DataPoint>) dataPoints).toArray(new DataPoint[dataPoints.size()]);
 

@@ -56,7 +56,7 @@ public class ExerciseListActivity extends AppCompatActivity {
                                     int position, long id) {
 
                 Utils.getInstance().setActiveExercise((Integer) view.getTag());
-                Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                Intent intent = new Intent(ExerciseListActivity.this, ExerciseAirplaneProfileActivity.class);
                 startActivity(intent);
 
             }
@@ -147,14 +147,14 @@ public class ExerciseListActivity extends AppCompatActivity {
 
                             Utils.getInstance().setActiveExercise((Integer) view.getTag());
 
-                            Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                            Intent intent = new Intent(ExerciseListActivity.this, ExerciseAirplaneProfileActivity.class);
 
                             switch (Utils.getInstance().getActiveExercise().getId()){
                                 case 1:
-                                    intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                                    intent = new Intent(ExerciseListActivity.this, ExerciseAirplaneProfileActivity.class);
                                     break;
                                 case 2:
-                                    intent = new Intent(ExerciseListActivity.this, ExerciseLegToChestActivity.class);
+                                    intent = new Intent(ExerciseListActivity.this, ExerciseLegToChestProfileActivity.class);
                                     break;
                             }
                             startActivity(intent);

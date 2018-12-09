@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import mlcl.partistico.R;
 
-public class ExerciseLegToChestActivity extends AppCompatActivity implements SensorEventListener {
+public class ExerciseLegToChestProfileActivity extends AppCompatActivity implements SensorEventListener {
 
     private float[] mGravity = new float[3];
     private float[] mGeomagnetic = new float[3];
@@ -24,7 +24,7 @@ public class ExerciseLegToChestActivity extends AppCompatActivity implements Sen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_leg_to_chest);
+        setContentView(R.layout.activity_exercise_leg_to_chest_profile);
 
         //imageView = (ImageView) findViewById(R.id.compass);
 
