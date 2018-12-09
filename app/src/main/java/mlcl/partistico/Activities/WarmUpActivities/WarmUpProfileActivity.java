@@ -28,13 +28,11 @@ import mlcl.partistico.R;
 
 public class WarmUpProfileActivity extends AppCompatActivity {
 
-    ListView list;
     final Activity activity = this;
     Dialog dialogCreate;
     Dialog dialogEdit;
     EditText name;
     int warmupID;
-    boolean insertLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +49,6 @@ public class WarmUpProfileActivity extends AppCompatActivity {
 
         TextView warmUpName = findViewById(R.id.tv_warm_up_name);
         warmUpName.setText(Utils.getInstance().getActiveWarmup().getName());
-
-        boolean insertLeft = true;
         populateLists();
     }
 
@@ -64,11 +60,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View rowView = null;
         CheckBox checkBox;
-        LinearLayout layout = null;
-
-        layout = findViewById(R.id.list_check_buttons_left);
-        layout.removeAllViews();
-        layout = findViewById(R.id.list_check_buttons_right);
+        LinearLayout layout = findViewById(R.id.list_check_buttons);
         layout.removeAllViews();
 
         for (BDWarmUpExercise exercise : exercises) {
@@ -90,14 +82,6 @@ public class WarmUpProfileActivity extends AppCompatActivity {
                     Utils.getInstance().updateBDWarmUpExercise(exercise.getId(), exercise.getName(), isChecked);
                 }
             });
-
-
-            if (insertLeft) {
-                layout = findViewById(R.id.list_check_buttons_left);
-            } else {
-                layout = findViewById(R.id.list_check_buttons_right);
-            }
-            insertLeft = !insertLeft;
 
             rowView.setTag(exercise.getId());
             layout.addView(rowView);
