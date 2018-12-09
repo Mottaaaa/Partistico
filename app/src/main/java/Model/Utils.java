@@ -369,6 +369,7 @@ public class Utils {
     public void populateExercises(){
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
+        dbAdapter.deleteExerciseTable();
         dbAdapter.insertExercise(new BDExercise(1,"Avião"));
         dbAdapter.close();
     }

@@ -56,7 +56,7 @@ public class DatabaseAdapter {
         db.delete(BDNonAthlete.TABLE_NON_ATHLETE, null, null);
     }
 
-    public void deleteTrainingTable(){
+    public void deleteExerciseTable(){
         db = dbHelper.getWritableDatabase();
         db.delete(BDExercise.TABLE_EXERCISE, null, null);
     }
