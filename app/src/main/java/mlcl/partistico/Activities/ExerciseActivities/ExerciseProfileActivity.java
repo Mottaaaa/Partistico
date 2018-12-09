@@ -120,8 +120,8 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
             series.appendData((new DataPoint(index, inclination)), true, 100);
         }
 
-        graph.getViewport().setMinY(inclination - 10);
-        graph.getViewport().setMaxY(inclination + 10);
+        graph.getViewport().setMinY(inclination - 40);
+        graph.getViewport().setMaxY(inclination + 40);
 
         graph.onDataChanged(false, false);
         index++;
