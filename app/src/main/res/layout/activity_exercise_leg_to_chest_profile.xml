@@ -96,10 +96,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/graph_vertical"
+                <RelativeLayout
+                    android:id="@+id/graph_vertical_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/graph_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
 
             </FrameLayout>
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -84,14 +85,15 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         int w = graphVertical.getWidth();
         int h = graphVertical.getHeight();
 
-        graphVertical.setRotation(270.0f);
-        graphVertical.setTranslationX((w - h) / 2);
-        graphVertical.setTranslationY((h - w) / 2);
+        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.graph_vertical_layout);
+        mainLayout.setRotation(270.0f);
+        mainLayout.setTranslationX((w - h) / 2);
+        mainLayout.setTranslationY((h - w) / 2);
 
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) graphVertical.getLayoutParams();
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) mainLayout.getLayoutParams();
         lp.height = w;
         lp.width = h;
-        graphVertical.requestLayout();
+        mainLayout.requestLayout();
     }
 
     @Override
