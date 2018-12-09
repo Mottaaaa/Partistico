@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/separator1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider" />
@@ -62,6 +62,12 @@
 
             </LinearLayout>
         </ScrollView>
+
+        <TextView
+            android:id="@+id/separator2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
 
     </LinearLayout>
 

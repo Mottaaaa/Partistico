@@ -4,43 +4,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:paddingTop="6dp"
     android:paddingBottom="6dp">
 
-    <CheckBox
-        android:id="@+id/btn_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_weight="1"
-        android:checked="false"
-        android:text="@string/test"
-        android:ellipsize="end"
-        android:maxLines="1" />
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/btn_edit"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/round_button"
-        android:onClick="editPopup"
-        android:src="@drawable/ic_edit_black_25dp"
-        android:visibility="visible" />
+        <CheckBox
+            android:id="@+id/btn_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/test" />
 
-    <ImageButton
-        android:id="@+id/btn_delete"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/round_button"
-        android:onClick="delete"
-        android:src="@drawable/ic_delete_black_24dp"
-        android:visibility="visible" />
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/round_button"
+            android:onClick="editPopup"
+            android:src="@drawable/ic_edit_black_25dp"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/round_button"
+            android:onClick="delete"
+            android:src="@drawable/ic_delete_black_24dp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@color/divider" />
 
 </LinearLayout>
