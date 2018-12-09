@@ -62,7 +62,7 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
 
         VideoView videoView = (VideoView) findViewById(R.id.vv_video);
 
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.hitler_techno;
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video_exercise_airplane;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
 

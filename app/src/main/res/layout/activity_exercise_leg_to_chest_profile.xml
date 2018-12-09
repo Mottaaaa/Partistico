@@ -30,6 +30,19 @@
                 android:layout_margin="2dp"
                 android:background="#000" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:orientation="vertical">
+
+                <VideoView
+                    android:id="@+id/vv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
         </FrameLayout>
 
         <FrameLayout
