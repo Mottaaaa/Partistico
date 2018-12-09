@@ -71,8 +71,8 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         graphVertical.getViewport().setScrollable(true);
         graphVertical.getViewport().setXAxisBoundsManual(true);
         graphVertical.getViewport().setYAxisBoundsManual(true);
-        graphVertical.getViewport().setMinY(0);
-        graphVertical.getViewport().setMaxY(50);
+        graphVertical.getViewport().setMinX(0);
+        graphVertical.getViewport().setMaxX(50);
         graphVertical.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graphVertical.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graphVertical.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
@@ -149,10 +149,10 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 animation.setRepeatCount(0);
                 animation.setFillAfter(true);*/
 
-                seriesVertical.appendData((new DataPoint(orientation[0], indexVertical)), true, 100);
+                seriesVertical.appendData((new DataPoint(indexVertical, orientation[0])), true, 100);
 
-                graphVertical.getViewport().setMinX(orientation[0] - 1);
-                graphVertical.getViewport().setMaxX(orientation[0] + 1);
+                graphVertical.getViewport().setMinY(orientation[0] - 1);
+                graphVertical.getViewport().setMaxY(orientation[0] + 1);
 
                 graphVertical.onDataChanged(false, false);
                 indexVertical++;
@@ -183,6 +183,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
             //outputX.setText("Not Flat");
         }
 
+        /*
         if (inclination <= 90) {
             seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination + 90)), true, 100);
         } else {
@@ -193,6 +194,6 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         //********graph.getViewport().setMaxY(inclination + 10);
 
         graphHorizontal.onDataChanged(false, false);
-        indexHorizontal++;
+        indexHorizontal++;*/
     }
 }
