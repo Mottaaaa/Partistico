@@ -33,6 +33,9 @@
     <string name="title_activity_competition_profile">Prova</string>
     <string name="title_activity_exercise_list">Exercícios</string>
     <string name="title_activity_exercise_profile">Exercício</string>
+    <string name="title_activity_warm_up_list">Aquecimentos</string>
+    <string name="title_activity_warm_up_profile">Aquecimento</string>
+
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
@@ -73,6 +76,7 @@
     <string name="edit_warmup_exercise_title">Editar Exercício</string>
     <string name="reject">Rejeitar</string>
     <string name="accept">Aceitar</string>
+
 
     <string name="btn_atheletes">Atletas</string>
     <string name="btn_non_atheletes">Não Atletas</string>

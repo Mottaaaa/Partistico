@@ -149,7 +149,9 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".Activities.WarmUpActivities.WarmUpListActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.MainActivity"
+            android:label="@string/title_activity_warm_up_list">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -162,7 +164,9 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".Activities.WarmUpActivities.WarmUpProfileActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Activities.WarmUpActivities.WarmUpListActivity"
+            android:label="@string/title_activity_warm_up_profile"/>
 
     </application>
 
