@@ -81,19 +81,6 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         graphVertical.getGridLabelRenderer().setPadding(0);
         graphVertical.getGridLabelRenderer().setGridColor(255);
         graphVertical.addSeries(seriesVertical);
-
-        int w = graphVertical.getWidth();
-        int h = graphVertical.getHeight();
-
-        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.graph_vertical_layout);
-        mainLayout.setRotation(270.0f);
-        mainLayout.setTranslationX((w - h) / 2);
-        mainLayout.setTranslationY((h - w) / 2);
-
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) mainLayout.getLayoutParams();
-        lp.height = w;
-        lp.width = h;
-        mainLayout.requestLayout();
     }
 
     @Override
@@ -127,24 +114,24 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
         //rotation
         final float alpha = 0.97f;
-        synchronized (this){
-            if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-                mGravity[0] = alpha*mGravity[0]+(1-alpha)*event.values[0];
-                mGravity[1] = alpha*mGravity[1]+(1-alpha)*event.values[1];
-                mGravity[2] = alpha*mGravity[2]+(1-alpha)*event.values[2];
+        synchronized (this) {
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0];
+                mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1];
+                mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2];
             }
-            if(event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
-                mGeomagnetic[0] = alpha*mGeomagnetic[0]+(1-alpha)*event.values[0];
-                mGeomagnetic[1] = alpha*mGeomagnetic[1]+(1-alpha)*event.values[1];
-                mGeomagnetic[2] = alpha*mGeomagnetic[2]+(1-alpha)*event.values[2];
+            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0];
+                mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1];
+                mGeomagnetic[2] = alpha * mGeomagnetic[2] + (1 - alpha) * event.values[2];
             }
 
             float r[] = new float[9];
             float i[] = new float[9];
             boolean success = SensorManager.getRotationMatrix(r, i, mGravity, mGeomagnetic);
-            if (success){
+            if (success) {
                 float orientation[] = new float[3];
-                SensorManager.getOrientation(r,orientation);
+                SensorManager.getOrientation(r, orientation);
 
                 /*TextView t3 = (TextView) findViewById(R.id.textView3);
                 TextView t4 =(TextView) findViewById(R.id.textView4);
@@ -198,7 +185,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
             //outputX.setText("Not Flat");
         }
 
-        /*
+
         if (inclination <= 90) {
             seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination + 90)), true, 100);
         } else {
@@ -209,6 +196,6 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         //********graph.getViewport().setMaxY(inclination + 10);
 
         graphHorizontal.onDataChanged(false, false);
-        indexHorizontal++;*/
+        indexHorizontal++;
     }
 }
