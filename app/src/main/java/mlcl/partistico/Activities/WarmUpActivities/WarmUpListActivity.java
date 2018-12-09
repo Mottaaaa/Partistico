@@ -128,6 +128,7 @@ public class WarmUpListActivity extends AppCompatActivity {
                 if(!name.getText().toString().equals("")) {
                     Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
                     new GetListTask().execute();
+                    name.setText("");
                     dialog.dismiss();
                 }
             }
@@ -161,6 +162,7 @@ public class WarmUpListActivity extends AppCompatActivity {
                 if (!name.getText().toString().equals("")) {
                     Utils.getInstance().updateBDWarmup(warmupID, name.getText().toString());
                     new GetListTask().execute();
+                    name.setText("");
                     dialog.dismiss();
                 }
             }
