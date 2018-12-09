@@ -34,7 +34,8 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     ListView list;
     final Activity activity = this;
-    Dialog dialog;
+    Dialog dialogCreate;
+    Dialog dialogEdit;
     EditText name;
     int warmupID;
 
@@ -45,10 +46,13 @@ public class WarmUpListActivity extends AppCompatActivity {
 
         handleIntent(getIntent());
 
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.add_warm_up_pop_up);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogCreate = new Dialog(this);
+        dialogCreate.setContentView(R.layout.add_warm_up_pop_up);
+        dialogCreate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        dialogEdit = new Dialog(this);
+        dialogEdit.setContentView(R.layout.edit_warm_up_pop_up);
+        dialogEdit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         new GetListTask().execute();
     }
@@ -117,10 +121,10 @@ public class WarmUpListActivity extends AppCompatActivity {
     }
 
     public void addPopup(View view){
-        name = dialog.findViewById(R.id.warmup_name);
-        dialog.show();
-        Button accept = (Button) dialog.findViewById(R.id.accept);
-        Button reject = (Button) dialog.findViewById(R.id.reject);
+        name = dialogCreate.findViewById(R.id.warmup_name);
+        dialogCreate.show();
+        Button accept = (Button) dialogCreate.findViewById(R.id.accept);
+        Button reject = (Button) dialogCreate.findViewById(R.id.reject);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +133,7 @@ public class WarmUpListActivity extends AppCompatActivity {
                     Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
                     new GetListTask().execute();
                     name.setText("");
-                    dialog.dismiss();
+                    dialogCreate.dismiss();
                 }
             }
         });
@@ -138,7 +142,7 @@ public class WarmUpListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name.setText("");
-                dialog.dismiss();
+                dialogCreate.dismiss();
             }
         });
     }
@@ -150,11 +154,11 @@ public class WarmUpListActivity extends AppCompatActivity {
         Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
         BDWarmUp temp = Utils.getInstance().getActiveWarmup();
         warmupID = temp.getId();
-        name = dialog.findViewById(R.id.warmup_name);
+        name = dialogEdit.findViewById(R.id.warmup_name);
         name.setText(temp.getName());
-        dialog.show();
-        Button accept = (Button) dialog.findViewById(R.id.accept);
-        Button reject = (Button) dialog.findViewById(R.id.reject);
+        dialogEdit.show();
+        Button accept = (Button) dialogEdit.findViewById(R.id.accept);
+        Button reject = (Button) dialogEdit.findViewById(R.id.reject);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +167,7 @@ public class WarmUpListActivity extends AppCompatActivity {
                     Utils.getInstance().updateBDWarmup(warmupID, name.getText().toString());
                     new GetListTask().execute();
                     name.setText("");
-                    dialog.dismiss();
+                    dialogEdit.dismiss();
                 }
             }
         });
@@ -172,7 +176,7 @@ public class WarmUpListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name.setText("");
-                dialog.dismiss();
+                dialogEdit.dismiss();
             }
         });
     }

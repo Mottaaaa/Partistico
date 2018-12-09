@@ -30,7 +30,8 @@ public class WarmUpProfileActivity extends AppCompatActivity {
 
     ListView list;
     final Activity activity = this;
-    Dialog dialog;
+    Dialog dialogCreate;
+    Dialog dialogEdit;
     EditText name;
     int warmupID;
     boolean insertLeft;
@@ -40,9 +41,13 @@ public class WarmUpProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_warm_up_exercise_profile);
 
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.add_warm_up_pop_up);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogCreate = new Dialog(this);
+        dialogCreate.setContentView(R.layout.add_warm_up_pop_up);
+        dialogCreate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialogEdit = new Dialog(this);
+        dialogEdit.setContentView(R.layout.edit_warm_up_pop_up);
+        dialogEdit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView warmUpName = findViewById(R.id.tv_warm_up_name);
         warmUpName.setText(Utils.getInstance().getActiveWarmup().getName());
@@ -101,10 +106,10 @@ public class WarmUpProfileActivity extends AppCompatActivity {
     }
 
     public void addPopup(View view) {
-        name = dialog.findViewById(R.id.warmup_name);
-        dialog.show();
-        Button accept = (Button) dialog.findViewById(R.id.accept);
-        Button reject = (Button) dialog.findViewById(R.id.reject);
+        name = dialogCreate.findViewById(R.id.warmup_name);
+        dialogCreate.show();
+        Button accept = (Button) dialogCreate.findViewById(R.id.accept);
+        Button reject = (Button) dialogCreate.findViewById(R.id.reject);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +118,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
                     Utils.getInstance().insertBDWarmUpExercise(new BDWarmUpExercise(name.getText().toString(), 0, warmupID));
                     populateLists();
                     name.setText("");
-                    dialog.dismiss();
+                    dialogCreate.dismiss();
                 }
             }
         });
@@ -122,7 +127,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name.setText("");
-                dialog.dismiss();
+                dialogCreate.dismiss();
             }
         });
     }
@@ -130,11 +135,11 @@ public class WarmUpProfileActivity extends AppCompatActivity {
     public void editPopup(View view) {
         LinearLayout linearLayout = (LinearLayout) view.getParent();
         final BDWarmUpExercise exercise = Utils.getInstance().getBDWarmUpExerciseByID((Integer) linearLayout.getTag());
-        name = dialog.findViewById(R.id.warmup_name);
+        name = dialogEdit.findViewById(R.id.warmup_name);
         name.setText(exercise.getName());
-        dialog.show();
-        Button accept = (Button) dialog.findViewById(R.id.accept);
-        Button reject = (Button) dialog.findViewById(R.id.reject);
+        dialogEdit.show();
+        Button accept = (Button) dialogEdit.findViewById(R.id.accept);
+        Button reject = (Button) dialogEdit.findViewById(R.id.reject);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +148,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
                     Utils.getInstance().updateBDWarmUpExercise(exercise.getId(), name.getText().toString(), exercise.isDone());
                     populateLists();
                     name.setText("");
-                    dialog.dismiss();
+                    dialogEdit.dismiss();
                 }
             }
         });
@@ -152,7 +157,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name.setText("");
-                dialog.dismiss();
+                dialogEdit.dismiss();
             }
         });
     }

@@ -195,41 +195,4 @@ public class FirebaseAdapter {
 
         database.getReference("competitions").addValueEventListener(listener);
     }
-
-    public void populate() {
-        populateNonAthletes();
-        populateAthletes();
-        populateClubs();
-    }
-
-    public void populateClubs() {
-        List<BDClub> clubs = new ArrayList<>();
-
-        clubs.add(new BDClub(1, "Axis" ));
-        clubs.add(new BDClub(2, "Allies"));
-        clubs.add(new BDClub(3, "Neutrals"));
-
-        database.getReference().child("clubs").setValue(clubs);
-    }
-
-    public void populateAthletes() {
-        List<BDAthlete> athletes = new ArrayList<>();
-        athletes.add(new BDAthlete(1, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)), "Adolf Hitler", "20/04/1889", "30/04/1945", "Führer", "Masculino", "Genocia", 2));
-        athletes.add(new BDAthlete(2, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin)), "Joseph Stalin", "18/12/1878", "05/03/1953", "General Secretary", "Masculino", "Arquinimigo do Hitler", 2));
-        athletes.add(new BDAthlete(3, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill)), "Winston Churchill", "30/11/1874", "24/01/1965", "Prime Minister", "Masculino", "Fez um brilhante discurso", 2));
-        athletes.add(new BDAthlete(4, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.mussolini)), "Benito Mussolini", "29/07/1883", "28/04/1945", "Duce", "Masculino", "Compincha do Hitler", 1));
-        athletes.add(new BDAthlete(5, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.hirohito)), "Hirohito", "29/04/1901", "07/01/1989", "Emperor", "Masculino", "Levou com duas bombas que se lixou", 1));
-
-        database.getReference().child("athletes").setValue(athletes);
-    }
-
-    public void populateNonAthletes() {
-        List<BDNonAthlete> nonAthletes = new ArrayList<>();
-        nonAthletes.add(new BDNonAthlete(1, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.salazar)), "António de Oliveira Salazar", "28/04/1889", "Presidente", "Masculino", "Caiu da cadeira", 3));
-        nonAthletes.add(new BDNonAthlete(2, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.franco)), "Francisco Franco", "04/12/1892", "Presidente", "Masculino", "Ficou com ciúmes do Salazar", 3));
-        nonAthletes.add(new BDNonAthlete(3, Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.roosevelt)), "Franklin Delano Roosevelt", "30/01/1882", "President", "Masculino", "Ficou triste por a guerra estar a acabar e morreu", 2));
-
-        database.getReference().child("nonathletes").setValue(nonAthletes);
-    }
-
 }
