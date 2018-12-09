@@ -370,6 +370,7 @@ public class Utils {
         DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
         dbAdapter.open();
         dbAdapter.deleteExerciseTable();
+        dbAdapter.insertExercise(new BDExercise(1, "Avião"));
         dbAdapter.insertWarmUp(new BDWarmUp(1,"BOSta"));
         dbAdapter.close();
     }

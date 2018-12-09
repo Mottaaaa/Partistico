@@ -146,7 +146,8 @@ public class ExerciseListActivity extends AppCompatActivity {
                                                 int position, long id) {
 
                             Utils.getInstance().setActiveExercise((Integer) view.getTag());
-                            Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                            //Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                            Intent intent = new Intent(ExerciseListActivity.this, ExerciseLegToChestActivity.class);
                             startActivity(intent);
                         }
                     });
