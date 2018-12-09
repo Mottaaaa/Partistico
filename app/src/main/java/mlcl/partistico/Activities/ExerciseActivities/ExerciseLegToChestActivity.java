@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.TextView;
 
 import mlcl.partistico.R;
 
@@ -67,6 +68,15 @@ public class ExerciseLegToChestActivity extends AppCompatActivity implements Sen
             if (success){
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(r,orientation);
+
+                TextView t3 = (TextView) findViewById(R.id.textView3);
+                TextView t4 =(TextView) findViewById(R.id.textView4);
+                TextView t5 =(TextView) findViewById(R.id.textView5);
+                t3.setText(""+orientation[0]);
+                t4.setText(""+orientation[1]);
+                t5.setText(""+orientation[2]);
+
+
                 azimuth = (float)Math.toDegrees(orientation[0]);
                 azimuth = (azimuth*360)%360;
 
