@@ -12,6 +12,7 @@ import android.view.View;
 import Model.Utils;
 import mlcl.partistico.Activities.AthleteActivities.AthleteListActivity;
 import mlcl.partistico.Activities.CompetitionActivities.CompetitionListActivity;
+import mlcl.partistico.Activities.ExerciseActivities.ExerciseListActivity;
 import mlcl.partistico.Activities.NonAthleteActivities.NonAthleteListActivity;
 import mlcl.partistico.Activities.ExerciseActivities.ExerciseProfileActivity;
 import mlcl.partistico.R;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exerciseAction(View view) {
-        Intent intent = new Intent(this, ExerciseProfileActivity.class);
+        Intent intent = new Intent(this, ExerciseListActivity.class);
         startActivity(intent);
     }
 

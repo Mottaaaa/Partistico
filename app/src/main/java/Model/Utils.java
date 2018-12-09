@@ -87,8 +87,8 @@ public class Utils {
         return activeExercise;
     }
 
-    public void setActiveExercise(BDExercise activeExercise) {
-        this.activeExercise = activeExercise;
+    public void setActiveExercise(int id) {
+        this.activeExercise = getBDExerciseByID(id);
     }
 
     public static String bitmapToString(Bitmap image){

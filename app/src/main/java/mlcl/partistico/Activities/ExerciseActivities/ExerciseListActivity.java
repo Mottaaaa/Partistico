@@ -60,7 +60,7 @@ public class ExerciseListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Utils.getInstance().setActiveCompetition((Integer) view.getTag());
+                Utils.getInstance().setActiveExercise((Integer) view.getTag());
                 Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
                 startActivity(intent);
 
