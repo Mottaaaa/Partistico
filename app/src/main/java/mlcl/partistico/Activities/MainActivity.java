@@ -21,11 +21,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Descomentar para testar o Splash Screen
+        /*
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        */
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
 
