@@ -7,39 +7,32 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Utils;
 import mlcl.partistico.R;
 
 public class ExerciseProfileActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
-    private TextView outputX;
-    private TextView outputY;
-    private TextView outputZ;
+    //private TextView outputX;
 
     private LineGraphSeries<DataPoint> series;
 
     private GraphView graph;
     private int index = 1;
-    private int range = 100;
-    private final int RANGE_INCREMENT = 100;
     private List<DataPoint> dataPoints = null;
 
 
@@ -48,10 +41,12 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_profile);
 
+        getSupportActionBar().setTitle(Utils.getInstance().getActiveExercise().getName());
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        outputX = (TextView) findViewById(R.id.textViewX);
+        //outputX = (TextView) findViewById(R.id.textViewX);
 
         graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<>();
@@ -72,7 +67,8 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         graph.addSeries(series);
 
         VideoView videoView = (VideoView) findViewById(R.id.vv_video);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.hitler_techo;
+
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.hitler_techno;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
 
@@ -112,22 +108,16 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
 
         if (inclination < 25 || inclination > 155) {
             // device is flat
-            outputX.setText("Flat");
+            //outputX.setText("Flat");
         } else {
             // device is not flat
-            outputX.setText("Not Flat");
+            //outputX.setText("Not Flat");
         }
 
-        //if(index < range) {
-        //dataPoints.add((new DataPoint(index, inclination)));
-        //updateGraph();
-        // range += RANGE_INCREMENT;
-        //}
-
         if (inclination <= 90) {
-            series.appendData((new DataPoint(index, inclination + 90)), true, 1000);
+            series.appendData((new DataPoint(index, inclination + 90)), true, 100);
         } else {
-            series.appendData((new DataPoint(index, inclination - 90)), true, 1000);
+            series.appendData((new DataPoint(index, inclination - 90)), true, 100);
         }
 
         graph.onDataChanged(false, false);

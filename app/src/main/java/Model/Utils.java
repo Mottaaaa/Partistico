@@ -3,30 +3,17 @@ package Model;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.WindowDecorActionBar;
 import android.util.Base64;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import Database.BDAthlete;
 import Database.BDClub;
 import Database.BDCompetition;
-import Database.BDExercise;
+import Database.BDWarmUpExercise;
 import Database.BDNonAthlete;
-import Database.BDTraining;
+import Database.BDExercise;
 import Database.BDWarmup;
 import Database.DatabaseAdapter;
 import Database.FirebaseAdapter;
@@ -41,6 +28,7 @@ public class Utils {
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
     private BDWarmup activeWarmup;
+    private BDExercise activeExercise = new BDExercise(1, "Hitler Techno");
 
     private Utils() {
     }
@@ -94,6 +82,14 @@ public class Utils {
     public void setActiveNonAthlete(int id) {
 
         this.activeNonAthlete = getNonAthleteByID(id);
+    }
+
+    public BDExercise getActiveExercise() {
+        return activeExercise;
+    }
+
+    public void setActiveExercise(BDExercise activeExercise) {
+        this.activeExercise = activeExercise;
     }
 
     public static String bitmapToString(Bitmap image){
@@ -151,7 +147,7 @@ public class Utils {
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "38.520872350000005/-8.83894542882081/Instituto Politécnico de Setúbal", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
         //Populate Training
-        dbAdapter.insertTraining(new BDTraining(1,"Avião"));
+        dbAdapter.insertTraining(new BDExercise(1,"Avião"));
 
         dbAdapter.close();
 
@@ -332,73 +328,73 @@ public class Utils {
     }
 
     //BDExercises
-    public void insertExercise(BDExercise exercise){
+    public void insertExercise(BDWarmUpExercise exercise){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         adapter.insertExercise(exercise);
         adapter.close();
     }
 
-    public List<BDExercise> getExercises(){
+    public List<BDWarmUpExercise> getExercises(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDExercise> exercises = adapter.getExercises();
+        List<BDWarmUpExercise> exercises = adapter.getExercises();
         adapter.close();
         return exercises;
     }
 
-    public List<BDExercise> getExercisesByName(String name){
+    public List<BDWarmUpExercise> getExercisesByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDExercise> exercises = adapter.getExercisesByName(name);
+        List<BDWarmUpExercise> exercises = adapter.getExercisesByName(name);
         adapter.close();
         return exercises;
     }
 
-    public BDExercise getExerciseByID(int id){
+    public BDWarmUpExercise getExerciseByID(int id){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        BDExercise exercise = adapter.getExerciseByID(id);
+        BDWarmUpExercise exercise = adapter.getExerciseByID(id);
         adapter.close();
         return exercise;
     }
 
-    public List<BDExercise> getExercisesByWarmup(int warmupID){
+    public List<BDWarmUpExercise> getExercisesByWarmup(int warmupID){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDExercise> exercises = adapter.getExercisesByWarmup(warmupID);
+        List<BDWarmUpExercise> exercises = adapter.getExercisesByWarmup(warmupID);
         adapter.close();
         return exercises;
     }
 
     //BDTraining
-    public void insertTraining(BDTraining training){
+    public void insertTraining(BDExercise training){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         adapter.insertTraining(training);
         adapter.close();
     }
 
-    public List<BDTraining> getTrainings(){
+    public List<BDExercise> getTrainings(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDTraining> trainings = adapter.getTrainings();
+        List<BDExercise> trainings = adapter.getTrainings();
         adapter.close();
         return trainings;
     }
 
-    public List<BDTraining> getTrainingsByName(String name){
+    public List<BDExercise> getTrainingsByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDTraining> trainings = adapter.getTrainingsByName(name);
+        List<BDExercise> trainings = adapter.getTrainingsByName(name);
         adapter.close();
         return trainings;
     }
 
-    public BDTraining getTrainingByID(int id){
+    public BDExercise getTrainingByID(int id){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        BDTraining training = adapter.getTrainingByID(id);
+        BDExercise training = adapter.getTrainingByID(id);
         adapter.close();
         return training;
     }

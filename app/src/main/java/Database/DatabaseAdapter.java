@@ -38,7 +38,7 @@ public class DatabaseAdapter {
         db.delete(BDAthlete.TABLE_ATHLETE, null, null);
         db.delete(BDNonAthlete.TABLE_NON_ATHLETE, null, null);
         db.delete(BDCompetition.TABLE_COMPETITION, null, null);
-        db.delete(BDTraining.TABLE_TRAINING, null, null);
+        db.delete(BDExercise.TABLE_TRAINING, null, null);
     }
 
     public void deleteClubTable(){
@@ -58,7 +58,7 @@ public class DatabaseAdapter {
 
     public void deleteTrainingTable(){
         db = dbHelper.getWritableDatabase();
-        db.delete(BDTraining.TABLE_TRAINING, null, null);
+        db.delete(BDExercise.TABLE_TRAINING, null, null);
     }
 
     public void deleteCompetitionTable(){
@@ -587,19 +587,19 @@ public class DatabaseAdapter {
     }
 
     //BDExercise
-    public long insertExercise(BDExercise exercise) {
+    public long insertExercise(BDWarmUpExercise exercise) {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
-            newValues.put(BDExercise.KEY_NAME, exercise.getName());
-            newValues.put(BDExercise.KEY_TYPE, exercise.getType());
-            newValues.put(BDExercise.KEY_REPETITIONS, exercise.getRepetitions());
-            newValues.put(BDExercise.KEY_SERIES, exercise.getSeries());
-            newValues.put(BDExercise.KEY_TIME, exercise.getTime());
-            newValues.put(BDExercise.KEY_WARMUP_ID, exercise.getWarmupID());
+            newValues.put(BDWarmUpExercise.KEY_NAME, exercise.getName());
+            newValues.put(BDWarmUpExercise.KEY_TYPE, exercise.getType());
+            newValues.put(BDWarmUpExercise.KEY_REPETITIONS, exercise.getRepetitions());
+            newValues.put(BDWarmUpExercise.KEY_SERIES, exercise.getSeries());
+            newValues.put(BDWarmUpExercise.KEY_TIME, exercise.getTime());
+            newValues.put(BDWarmUpExercise.KEY_WARMUP_ID, exercise.getWarmupID());
 
             db = dbHelper.getWritableDatabase();
-            id = db.insert(BDExercise.TABLE_EXERCISE, null, newValues);
+            id = db.insert(BDWarmUpExercise.TABLE_EXERCISE, null, newValues);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -607,21 +607,21 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public List<BDExercise> getExercises() {
-        List<BDExercise> exercises = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_TYPE,
-                        BDExercise.KEY_REPETITIONS, BDExercise.KEY_SERIES, BDExercise.KEY_TIME, BDExercise.KEY_WARMUP_ID},
+    public List<BDWarmUpExercise> getExercises() {
+        List<BDWarmUpExercise> exercises = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+                        BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                BDExercise exercise = new BDExercise();
-                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
-                exercise.setType(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TYPE)));
-                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_REPETITIONS)));
-                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_SERIES)));
-                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TIME)));
-                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+                BDWarmUpExercise exercise = new BDWarmUpExercise();
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_NAME)));
+                exercise.setType(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TYPE)));
+                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_REPETITIONS)));
+                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_SERIES)));
+                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TIME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDWarmUpExercise.KEY_WARMUP_ID)));
                 exercises.add(exercise);
             } while (cursor.moveToNext());
         }
@@ -629,25 +629,25 @@ public class DatabaseAdapter {
         return exercises;
     }
 
-    public List<BDExercise> getExercisesByName(String name) {
+    public List<BDWarmUpExercise> getExercisesByName(String name) {
 
-        List<BDExercise> exercises = new ArrayList<>();
+        List<BDWarmUpExercise> exercises = new ArrayList<>();
 
-        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_TYPE,
-                        BDExercise.KEY_REPETITIONS, BDExercise.KEY_SERIES, BDExercise.KEY_TIME, BDExercise.KEY_WARMUP_ID},
-                BDExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+                        BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
+                BDWarmUpExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                BDExercise exercise = new BDExercise();
+                BDWarmUpExercise exercise = new BDWarmUpExercise();
 
-                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
-                exercise.setType(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TYPE)));
-                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_REPETITIONS)));
-                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_SERIES)));
-                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TIME)));
-                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_NAME)));
+                exercise.setType(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TYPE)));
+                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_REPETITIONS)));
+                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_SERIES)));
+                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TIME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDWarmUpExercise.KEY_WARMUP_ID)));
 
 
                 exercises.add(exercise);
@@ -657,23 +657,23 @@ public class DatabaseAdapter {
         return exercises;
     }
 
-    public BDExercise getExerciseByID(int id) {
+    public BDWarmUpExercise getExerciseByID(int id) {
 
-        BDExercise exercise = new BDExercise();
+        BDWarmUpExercise exercise = new BDWarmUpExercise();
 
-        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_TYPE,
-                        BDExercise.KEY_REPETITIONS, BDExercise.KEY_SERIES, BDExercise.KEY_TIME, BDExercise.KEY_WARMUP_ID},
-                BDExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+                        BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
+                BDWarmUpExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
-                exercise.setType(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TYPE)));
-                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_REPETITIONS)));
-                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_SERIES)));
-                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TIME)));
-                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_NAME)));
+                exercise.setType(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TYPE)));
+                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_REPETITIONS)));
+                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_SERIES)));
+                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TIME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDWarmUpExercise.KEY_WARMUP_ID)));
 
             } while (cursor.moveToNext());
         }
@@ -681,23 +681,23 @@ public class DatabaseAdapter {
         return exercise;
     }
 
-    public List<BDExercise> getExercisesByWarmup(int warmupID) {
-        List<BDExercise> exercises = new ArrayList<>();
+    public List<BDWarmUpExercise> getExercisesByWarmup(int warmupID) {
+        List<BDWarmUpExercise> exercises = new ArrayList<>();
 
-        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_NAME, BDExercise.KEY_TYPE,
-                        BDExercise.KEY_REPETITIONS, BDExercise.KEY_SERIES, BDExercise.KEY_TIME, BDExercise.KEY_WARMUP_ID},
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+                        BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 "warmupID = ?", new String[]{warmupID + ""}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                BDExercise exercise = new BDExercise();
+                BDWarmUpExercise exercise = new BDWarmUpExercise();
 
-                exercise.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
-                exercise.setType(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TYPE)));
-                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_REPETITIONS)));
-                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_SERIES)));
-                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_TIME)));
-                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_WARMUP_ID)));
+                exercise.setName(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_NAME)));
+                exercise.setType(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TYPE)));
+                exercise.setRepetitions(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_REPETITIONS)));
+                exercise.setSeries(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_SERIES)));
+                exercise.setTime(cursor.getString(cursor.getColumnIndex(BDWarmUpExercise.KEY_TIME)));
+                exercise.setWarmupID(cursor.getInt(cursor.getColumnIndex(BDWarmUpExercise.KEY_WARMUP_ID)));
 
                 exercises.add(exercise);
             } while (cursor.moveToNext());
@@ -707,14 +707,14 @@ public class DatabaseAdapter {
     }
 
     //BDTraining
-    public long insertTraining(BDTraining training) {
+    public long insertTraining(BDExercise training) {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
-            newValues.put(BDTraining.KEY_NAME, training.getName());
+            newValues.put(BDExercise.KEY_NAME, training.getName());
 
             db = dbHelper.getWritableDatabase();
-            id = db.insert(BDTraining.TABLE_TRAINING, null, newValues);
+            id = db.insert(BDExercise.TABLE_TRAINING, null, newValues);
             training.setId((int) id);
 
         } catch (Exception ex) {
@@ -723,16 +723,16 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public List<BDTraining> getTrainings() {
-        List<BDTraining> trainings = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDTraining.TABLE_TRAINING, new String[]{BDTraining.KEY_ID, BDTraining.KEY_NAME},
+    public List<BDExercise> getTrainings() {
+        List<BDExercise> trainings = new ArrayList<>();
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                BDTraining training = new BDTraining();
-                training.setId(cursor.getInt(cursor.getColumnIndex(BDTraining.KEY_ID)));
-                training.setName(cursor.getString(cursor.getColumnIndex(BDTraining.KEY_NAME)));
+                BDExercise training = new BDExercise();
+                training.setId(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_ID)));
+                training.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
 
                 trainings.add(training);
             } while (cursor.moveToNext());
@@ -741,20 +741,20 @@ public class DatabaseAdapter {
         return trainings;
     }
 
-    public List<BDTraining> getTrainingsByName(String name) {
+    public List<BDExercise> getTrainingsByName(String name) {
 
-        List<BDTraining> trainings = new ArrayList<>();
+        List<BDExercise> trainings = new ArrayList<>();
 
-        Cursor cursor = db.query(BDTraining.TABLE_TRAINING, new String[]{BDTraining.KEY_ID, BDTraining.KEY_NAME},
-                BDTraining.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
+        Cursor cursor = db.query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
+                BDExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                BDTraining training = new BDTraining();
+                BDExercise training = new BDExercise();
 
-                training.setId(cursor.getInt(cursor.getColumnIndex(BDTraining.KEY_ID)));
-                training.setName(cursor.getString(cursor.getColumnIndex(BDTraining.KEY_NAME)));
+                training.setId(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_ID)));
+                training.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
 
 
                 trainings.add(training);
@@ -764,18 +764,18 @@ public class DatabaseAdapter {
         return trainings;
     }
 
-    public BDTraining getTrainingByID(int id) {
+    public BDExercise getTrainingByID(int id) {
 
-        BDTraining training = new BDTraining();
+        BDExercise training = new BDExercise();
 
-        Cursor cursor = db.query(BDTraining.TABLE_TRAINING, new String[]{BDTraining.KEY_ID, BDTraining.KEY_NAME},
-                BDTraining.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
+        Cursor cursor = db.query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
+                BDExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
 
-                training.setId(cursor.getInt(cursor.getColumnIndex(BDTraining.KEY_ID)));
-                training.setName(cursor.getString(cursor.getColumnIndex(BDTraining.KEY_NAME)));
+                training.setId(cursor.getInt(cursor.getColumnIndex(BDExercise.KEY_ID)));
+                training.setName(cursor.getString(cursor.getColumnIndex(BDExercise.KEY_NAME)));
 
             } while (cursor.moveToNext());
         }
