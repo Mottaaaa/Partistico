@@ -347,6 +347,20 @@ public class Utils {
         adapter.close();
     }
 
+    public void updateBDWarmUpExercise(int id, String name, boolean isDone){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.updateWarmUpExercise(id,name,isDone);
+        adapter.close();
+    }
+
+    public void deleteBDWarmUpExercise(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.deleteWarmUpExercise(id);
+        adapter.close();
+    }
+
     public List<BDWarmUpExercise> getBDWarmUpExercises(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
