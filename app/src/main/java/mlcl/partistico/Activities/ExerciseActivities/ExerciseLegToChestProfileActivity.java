@@ -112,35 +112,13 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        float[] g = new float[3];
-        double norm_Of_g;
-        int inclination;
-
         //rotation
         final float alpha = 0.97f;
         synchronized (this) {
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-
-                //vertical
                 mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0];
                 mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1];
                 mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2];
-
-                //horizontal
-                g = event.values.clone();
-                norm_Of_g = Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2]);
-
-                // Normalize the accelerometer vector
-                g[0] = (float) (g[0] / norm_Of_g);
-                g[1] = (float) (g[1] / norm_Of_g);
-                g[2] = (float) (g[2] / norm_Of_g);
-
-                inclination = (int) Math.round(Math.toDegrees(Math.acos(g[2])));
-
-                seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination)), true, 100);
-                graphHorizontal.onDataChanged(false, false);
-                indexHorizontal++;
-
             }
             if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
                 mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0];
@@ -156,19 +134,36 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 SensorManager.getOrientation(r, orientation);
 
                 seriesVertical.appendData((new DataPoint(indexVertical, orientation[0])), true, 100);
+
                 graphVertical.getViewport().setMinY(orientation[0] - 1);
                 graphVertical.getViewport().setMaxY(orientation[0] + 1);
+
                 graphVertical.onDataChanged(false, false);
+                indexVertical++;
             }
         }
 
-        /*if (inclination < 25 || inclination > 155) {
+        //inclination
+        float[] g = new float[3];
+        g = event.values.clone();
+
+        double norm_Of_g = Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2]);
+
+        // Normalize the accelerometer vector
+        g[0] = (float) (g[0] / norm_Of_g);
+        g[1] = (float) (g[1] / norm_Of_g);
+        g[2] = (float) (g[2] / norm_Of_g);
+
+        //inclination can be calculated as
+        int inclination = (int) Math.round(Math.toDegrees(Math.acos(g[2])));
+
+        if (inclination < 25 || inclination > 155) {
             // device is flat
             //outputX.setText("Flat");
         } else {
             // device is not flat
             //outputX.setText("Not Flat");
-        }*/
+        }
 
 
         /*if (inclination <= 90) {
@@ -177,11 +172,12 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
             seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination - 90)), true, 100);
         }*/
 
-
+        seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination)), true, 100);
 
         //********graph.getViewport().setMinY(inclination - 10);
         //********graph.getViewport().setMaxY(inclination + 10);
 
-
+        graphHorizontal.onDataChanged(false, false);
+        indexHorizontal++;
     }
 }
