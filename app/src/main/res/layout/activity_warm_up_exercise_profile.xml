@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,7 +76,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/btn_add2"
+        android:id="@+id/btn_add"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"

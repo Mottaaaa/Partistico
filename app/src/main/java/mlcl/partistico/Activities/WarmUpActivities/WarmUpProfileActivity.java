@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bumptech.glide.util.Util;
 
@@ -42,6 +43,9 @@ public class WarmUpProfileActivity extends AppCompatActivity {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.add_warm_up_pop_up);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView warmUpName = findViewById(R.id.tv_warm_up_name);
+        warmUpName.setText(Utils.getInstance().getActiveWarmup().getName());
 
         boolean insertLeft = true;
         populateLists();
@@ -151,11 +155,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
     public void delete(View view) {
 
         LinearLayout linearLayout1 = (LinearLayout) view.getParent();
-        FrameLayout frameLayout1 = (FrameLayout) linearLayout1.getParent();
-        LinearLayout linearLayout2 = (LinearLayout) frameLayout1.getParent();
-        Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
-        int id = Utils.getInstance().getActiveWarmup().getId();
-        Utils.getInstance().deleteBDWarmup(id);
-
+        Utils.getInstance().deleteBDWarmUpExercise((Integer) linearLayout1.getTag());
+        populateLists();
     }
 }
