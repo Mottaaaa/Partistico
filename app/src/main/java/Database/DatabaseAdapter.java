@@ -73,10 +73,6 @@ public class DatabaseAdapter {
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(BDClub.KEY_NAME, club.getName());
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            club.getImage().compress(Bitmap.CompressFormat.PNG, 100, bos);
-            byte[] bArray = bos.toByteArray();
-            newValues.put(BDClub.KEY_IMAGE, bArray);
             newValues.put(BDClub.FOREIGN_DATABASE_ID, club.getId());
 
             db = dbHelper.getWritableDatabase();
@@ -91,16 +87,13 @@ public class DatabaseAdapter {
 
     public List<BDClub> getClubs() {
         List<BDClub> clubs = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.KEY_IMAGE, BDClub.FOREIGN_DATABASE_ID},
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.FOREIGN_DATABASE_ID},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 BDClub club = new BDClub();
                 club.setName(cursor.getString(cursor.getColumnIndex(BDClub.KEY_NAME)));
-                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDClub.KEY_IMAGE));
-                Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                club.setImage(image);
                 club.setId(cursor.getInt(cursor.getColumnIndex(BDClub.FOREIGN_DATABASE_ID)));
                 clubs.add(club);
             } while (cursor.moveToNext());
@@ -112,14 +105,11 @@ public class DatabaseAdapter {
     public BDClub getClubByID(int clubID) {
         BDClub club = new BDClub();
 
-        Cursor cursor = db.query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.KEY_IMAGE, BDClub.FOREIGN_DATABASE_ID},
+        Cursor cursor = db.query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.FOREIGN_DATABASE_ID},
                 "id=?", new String[]{clubID + ""}, null, null, null);
 
         if (cursor.moveToFirst()) {
             club.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
-            byte[] byteArray = cursor.getBlob(cursor.getColumnIndex(BDAthlete.KEY_IMAGE));
-            Bitmap image = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-            club.setImage(image);
             club.setId(cursor.getInt(cursor.getColumnIndex(BDClub.FOREIGN_DATABASE_ID)));
         }
 
@@ -247,7 +237,7 @@ public class DatabaseAdapter {
         return athelete;
     }
 
-    /*public List<BDAthlete> getAthletesByClub(int clubID) {
+    public List<BDAthlete> getAthletesByClub(int clubID) {
         List<BDAthlete> athletes = new ArrayList<>();
 
         Cursor cursor = db.query(BDAthlete.TABLE_ATHLETE, new String[]{BDAthlete.KEY_NAME, BDAthlete.KEY_IMAGE,
@@ -276,7 +266,7 @@ public class DatabaseAdapter {
         }
 
         return athletes;
-    }*/
+    }
 
     //BDNonAthlete
     public long insertNonAthlete(BDNonAthlete nonAthlete) {

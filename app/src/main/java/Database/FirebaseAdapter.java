@@ -47,16 +47,6 @@ public class FirebaseAdapter {
         this.competitions = new ArrayList<>();
     }
 
-    public static void createTempFiles() {
-        try {
-            localAthleteFile = File.createTempFile("Images/athlete", "bmp");
-            localNonAthleteFile = File.createTempFile("Images/nonathlete", "bmp");
-            localClubFile = File.createTempFile("Images/club", "bmp");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void getClubs() {
 
         final DatabaseAdapter adapter = new DatabaseAdapter(context);
@@ -68,14 +58,10 @@ public class FirebaseAdapter {
 
                 adapter.deleteClubTable();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    //BDClub club = snap.getValue(BDClub.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
-                    String image = snap.child("image").getValue(String.class);
-                    //BDClub club = new BDClub(id, name);
-                    BDClub club = new BDClub(id, name, image);
+                    BDClub club = new BDClub(id, name);
                     list.add(club);
-                    //getClubImageFromFirebase(id);
                 }
                 util.populateClubs(list);
             }
@@ -100,7 +86,6 @@ public class FirebaseAdapter {
 
                 adapter.deleteAthleteTable();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    //BDAthlete athlete = snap.getValue(BDAthlete.class);
                     int id = snap.child("id").getValue(int.class);
                     String name = snap.child("name").getValue(String.class);
                     String image = snap.child("image").getValue(String.class);
@@ -113,11 +98,8 @@ public class FirebaseAdapter {
                     String history = snap.child("history").getValue(String.class);
                     int clubID = snap.child("clubID").getValue(int.class);
 
-                    //BDAthlete athlete = new BDAthlete(id, name, birthday, expirationDate, echelon, gender, history, clubID);
                     BDAthlete athlete = new BDAthlete(id, image, name, birthday, expirationDate, echelon, gender, notes, history, clubID);
                     athletes.add(athlete);
-                    //getAthleteImageFromFirebase(id);
-
                 }
 
                 util.populateAthletes(athletes);
@@ -223,9 +205,9 @@ public class FirebaseAdapter {
     public void populateClubs() {
         List<BDClub> clubs = new ArrayList<>();
 
-        clubs.add(new BDClub(1, "Axis", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.axis))));
-        clubs.add(new BDClub(2, "Allies", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.allies))));
-        clubs.add(new BDClub(3, "Neutrals", Utils.bitmapToString(BitmapFactory.decodeResource(context.getResources(), R.drawable.neutrals))));
+        clubs.add(new BDClub(1, "Axis" ));
+        clubs.add(new BDClub(2, "Allies"));
+        clubs.add(new BDClub(3, "Neutrals"));
 
         database.getReference().child("clubs").setValue(clubs);
     }
@@ -250,136 +232,4 @@ public class FirebaseAdapter {
         database.getReference().child("nonathletes").setValue(nonAthletes);
     }
 
-    public void getAthleteImageFromFirebase(int id) {
-        final int i = id;
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference ref = storage.getReference().child("athletes/" + id + ".png");
-
-        final long ONE_MEGABYTE = 1024 * 1024;
-        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
-                Utils.getInstance().setAthleteImg(i, bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
-
-        /*
-        ref.getFile(localAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                image = BitmapFactory.decodeFile(localAthleteFile.getAbsolutePath());
-                setAthleteImg(i, image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
-        */
-
-    }
-
-    public void getNonAthleteImageFromFirebase(int id) {
-        final int i = id;
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
-        StorageReference ref = storage.getReference().child("nonathletes/" + id + "png");
-
-        final long ONE_MEGABYTE = 1024 * 1024;
-        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
-                Utils.getInstance().setNonAthleteImg(i, bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
-        /*
-        ref.getFile(localNonAthleteFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                image = BitmapFactory.decodeFile(localNonAthleteFile.getAbsolutePath());
-                setNonAthleteImg(i, image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
-        */
-    }
-
-    public void getClubImageFromFirebase(int id) {
-        final int i = id;
-        FirebaseStorage storage = FirebaseStorage.getInstance("gs://cmpartistico.appspot.com");
-        StorageReference ref = storage.getReference().child("clubs/" + id + "png");
-
-        final long ONE_MEGABYTE = 1024 * 1024;
-        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0, bytes .length);
-                Utils.getInstance().setClubImg(i, bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
-
-        /*
-        ref.getFile(localClubFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                image = BitmapFactory.decodeFile(localClubFile.getAbsolutePath());
-                setClubsImg(i, image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
-        */
-
-    }
-
-    /*
-    public void setAthleteImg(int id, Bitmap image) {
-        for (BDAthlete athlete : athletes) {
-            if (athlete.getId() == id) {
-                athlete.setImage(image);
-            }
-        }
-    }
-
-
-    public void setNonAthleteImg(int id, Bitmap image) {
-        for (BDNonAthlete nonAthlete : nonAthletes) {
-            if (nonAthlete.getId() == id) {
-                nonAthlete.setImage(image);
-            }
-        }
-    }
-
-    public void setClubsImg(int id, Bitmap image) {
-        for (BDClub club : list) {
-            if (club.getId() == id) {
-                club.setImage(image);
-            }
-        }
-    }
-    */
 }

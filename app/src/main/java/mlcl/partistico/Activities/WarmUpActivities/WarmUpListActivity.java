@@ -134,9 +134,11 @@ public class WarmUpListActivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
-                new GetListTask().execute();
-                dialog.dismiss();
+                if(!name.getText().toString().equals("")) {
+                    Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
+                    new GetListTask().execute();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -165,9 +167,11 @@ public class WarmUpListActivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().updateBDWarmup(warmupID, name.getText().toString());
-                new GetListTask().execute();
-                dialog.dismiss();
+                if (!name.getText().toString().equals("")) {
+                    Utils.getInstance().updateBDWarmup(warmupID, name.getText().toString());
+                    new GetListTask().execute();
+                    dialog.dismiss();
+                }
             }
         });
 
