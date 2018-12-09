@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -147,8 +148,17 @@ public class WarmUpListActivity extends AppCompatActivity {
                                                 int position, long id) {
 
                             Utils.getInstance().setActiveCompetition((Integer) view.getTag());
-                            Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
-                            startActivity(intent);
+
+                            ImageButton play = (ImageButton) findViewById(R.id.btn_play);
+                            ImageButton edit = (ImageButton) findViewById(R.id.btn_edit);
+                            ImageButton delete = (ImageButton) findViewById(R.id.btn_delete);
+
+                            play.setVisibility(View.VISIBLE);
+                            edit.setVisibility(View.VISIBLE);
+                            delete.setVisibility(View.VISIBLE);
+
+                            //Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
+                            //startActivity(intent);
 
                         }
                     });

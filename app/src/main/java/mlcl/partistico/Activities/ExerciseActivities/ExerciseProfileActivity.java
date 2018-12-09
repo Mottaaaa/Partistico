@@ -57,10 +57,10 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(50);
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(180);
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        //graph.getViewport().setMinY(0);
+        //graph.getViewport().setMaxY(180);
+        //graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        //graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getGridLabelRenderer().setPadding(0);
         graph.getGridLabelRenderer().setGridColor(255);
@@ -115,10 +115,13 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         }
 
         if (inclination <= 90) {
-            series.appendData((new DataPoint(index, inclination + 90)), true, 100);
+            series.appendData((new DataPoint(index, inclination)), true, 100);
         } else {
-            series.appendData((new DataPoint(index, inclination - 90)), true, 100);
+            series.appendData((new DataPoint(index, inclination)), true, 100);
         }
+
+        graph.getViewport().setMinY(inclination - 10);
+        graph.getViewport().setMaxY(inclination + 10);
 
         graph.onDataChanged(false, false);
         index++;

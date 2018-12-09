@@ -63,6 +63,7 @@
                     android:layout_height="55dp"
                     android:background="@drawable/round_button"
                     android:onClick="deleteAction"
+                    android:visibility="invisible"
                     app:srcCompat="@drawable/ic_delete_black_24dp" />
 
                 <ImageButton
@@ -71,6 +72,7 @@
                     android:layout_height="55dp"
                     android:background="@drawable/round_button"
                     android:onClick="editAction"
+                    android:visibility="invisible"
                     app:srcCompat="@drawable/ic_edit_black_24dp" />
 
                 <ImageButton
@@ -79,6 +81,7 @@
                     android:layout_height="55dp"
                     android:background="@drawable/round_button"
                     android:onClick="playAction"
+                    android:visibility="invisible"
                     app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
             </LinearLayout>
 
