@@ -125,9 +125,9 @@ public class Utils {
         dbAdapter.open();
 
         //Populate Clubs
-        dbAdapter.insertClub(new BDClub(1, "Axis", BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler)));
-        dbAdapter.insertClub(new BDClub(2, "Allies", BitmapFactory.decodeResource(context.getResources(), R.drawable.churchill)));
-        dbAdapter.insertClub(new BDClub(3, "Neutrals", BitmapFactory.decodeResource(context.getResources(), R.drawable.stalin)));
+        dbAdapter.insertClub(new BDClub(1, "Axis"));
+        dbAdapter.insertClub(new BDClub(2, "Allies"));
+        dbAdapter.insertClub(new BDClub(3, "Neutrals"));
 
         //Populate Athletes
         dbAdapter.insertAthlete(new BDAthlete(1, BitmapFactory.decodeResource(context.getResources(), R.drawable.hitler), "Adolf Hitler", "20/04/1889", "30/04/1945", "Führer", "Masculino","Nota", "Genocia", 1));
@@ -389,11 +389,10 @@ public class Utils {
         dbAdapter.close();
     }
 
-    public void insertBDExercise(BDExercise training){
+    public void insertBDExercise(BDWarmUpExercise exercise){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-
-        adapter.insertExercise(training);
+        adapter.insertWarmUpExercise(exercise);
         adapter.close();
     }
 
@@ -432,32 +431,5 @@ public class Utils {
         fa.getAthletes();
         fa.getNonAthletes();
         fa.getCompetitions();
-    }
-
-    public void setAthleteImg(int id, Bitmap img){
-        List<BDAthlete> athletes = getDBAthletes();
-        for(BDAthlete a : athletes){
-            if(a.getId() == id){
-                a.setImage(img);
-            }
-        }
-    }
-
-    public void setNonAthleteImg(int id, Bitmap img){
-        List<BDNonAthlete> nonAthletes = getNonAthletes();
-        for(BDNonAthlete a : nonAthletes){
-            if(a.getId() == id){
-                a.setImage(img);
-            }
-        }
-    }
-
-    public void setClubImg(int id, Bitmap img){
-        List<BDClub> clubs = getDBClubs();
-        for(BDClub a : clubs){
-            if(a.getId() == id){
-                a.setImage(img);
-            }
-        }
     }
 }
