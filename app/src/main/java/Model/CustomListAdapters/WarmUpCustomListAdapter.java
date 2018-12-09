@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class WarmUpCustomListAdapter extends ArrayAdapter<BDWarmUp> {
 
     private final Activity context;
     private List<BDWarmUp> warmUps;
+    private Button btnDelete;
+    private Button btnEdit;
 
     public WarmUpCustomListAdapter(Activity context, List<BDWarmUp> warmUps) {
         super(context, R.layout.warm_up_list_item, warmUps);

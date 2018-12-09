@@ -5,16 +5,21 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 
 import java.util.List;
@@ -28,6 +33,8 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     ListView list;
     final Activity activity = this;
+    PopupWindow popUp;
+    ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,11 @@ public class WarmUpListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_warm_up_list);
 
         handleIntent(getIntent());
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        popUp = new PopupWindow(inflater.inflate(R.layout.add_warmup_popup, null, false));
+        popUp.setFocusable(true);
 
         new GetListTask().execute();
     }
@@ -102,6 +114,10 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     }
 
+    public void addPopup(View v){
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -149,14 +165,6 @@ public class WarmUpListActivity extends AppCompatActivity {
 
                             Utils.getInstance().setActiveCompetition((Integer) view.getTag());
 
-                            ImageButton play = (ImageButton) findViewById(R.id.btn_play);
-                            ImageButton edit = (ImageButton) findViewById(R.id.btn_edit);
-                            ImageButton delete = (ImageButton) findViewById(R.id.btn_delete);
-
-                            play.setVisibility(View.VISIBLE);
-                            edit.setVisibility(View.VISIBLE);
-                            delete.setVisibility(View.VISIBLE);
-
                             //Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
                             //startActivity(intent);
 
@@ -174,6 +182,7 @@ public class WarmUpListActivity extends AppCompatActivity {
     }
 
     public void addAction(View view) {
+
 
         //Intent intent = new Intent(this, CompetitionListActivity.class);
         //startActivity(intent);
