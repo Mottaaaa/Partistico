@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BDExercise implements Serializable {
 
-    public static final String TABLE_TRAINING= "TRAINING";
+    public static final String TABLE_EXERCISE = "Exercise";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
 
@@ -12,7 +12,7 @@ public class BDExercise implements Serializable {
     private String name;
 
 
-    public static final String DATABASE_CREATE = "create table " + TABLE_TRAINING +
+    public static final String DATABASE_CREATE = "create table " + TABLE_EXERCISE +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null);";
 
     public BDExercise(int id, String name) {

@@ -10,7 +10,7 @@ import Model.Utils;
 
 public class BDClub implements Serializable {
 
-    public static final String TABLE_CLUB = "CLUB";
+    public static final String TABLE_CLUB = "Club";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_IMAGE = "image";

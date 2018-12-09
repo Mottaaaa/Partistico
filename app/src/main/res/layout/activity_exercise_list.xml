@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ExerciseActivities.ExerciseListActivity"
-    android:id="@+id/list_warmup_activity"
-    android:background="@color/profileBackground">
+    android:background="@color/profileBackground"
+    tools:context=".Activities.ExerciseActivities.ExerciseListActivity">
 
     <FrameLayout
         android:layout_width="0dp"
@@ -20,7 +19,7 @@
 
 
         <ListView
-            android:id="@+id/list_warmup"
+            android:id="@+id/list_exercises"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/divider"
@@ -33,22 +32,12 @@
         </ListView>
 
         <ProgressBar
-            android:id="@+id/progress_bar_warmupList"
+            android:id="@+id/progress_bar_exerciseList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="visible" />
 
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/round_button"
-            android:drawableTop="@drawable/ic_add_black_24dp"
-            android:onClick="addAction" />
     </FrameLayout>
 
 

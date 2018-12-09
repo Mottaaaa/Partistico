@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class BDWarmUpExercise implements Serializable {
 
-    public static final String TABLE_EXERCISE = "EXERCISE";
+    public static final String TABLE_WARM_UP_EXERCISE = "WarmUpExercise";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_TYPE = "type";
@@ -21,7 +21,7 @@ public class BDWarmUpExercise implements Serializable {
     private String time;
     private int warmupID;
 
-    public static final String DATABASE_CREATE = "create table " + TABLE_EXERCISE +
+    public static final String DATABASE_CREATE = "create table " + TABLE_WARM_UP_EXERCISE +
             " (" + KEY_ID + " integer primary key autoincrement, " + KEY_NAME + " text not null, "
             + KEY_TYPE + " text not null, " + KEY_REPETITIONS + " text not null, "
             + KEY_SERIES + " text not null, "+ KEY_TIME + " text not null, " + KEY_WARMUP_ID + " integer not null);";

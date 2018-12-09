@@ -1,7 +1,9 @@
 package mlcl.partistico.Activities.ExerciseActivities;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,43 +20,53 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 
+import java.util.List;
+
+import Database.BDExercise;
 import Database.BDWarmup;
 import Model.Utils;
-import Model.WarmupCustomListAdapter;
+import Model.ExerciseCustomListAdapter;
 import mlcl.partistico.R;
 
 public class ExerciseListActivity extends AppCompatActivity {
 
-    final ExerciseListActivity activity = this;
-    private View layout;
-    private PopupWindow popup;
-    private Button addBtn;
+    ListView list;
+    final Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_list);
-
-
-        popup = new PopupWindow(this);
-        layout = getLayoutInflater().inflate(R.layout.add_warmup_popup, null);
-        popup.setContentView(layout);
-        popup.getBackground().setAlpha(100);
-        popup.setFocusable(true);
-        popup.setOutsideTouchable(false);
-        popup.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-
-
-        addBtn = (Button) findViewById(R.id.btn_add);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addAction(v);
-            }
-        });
+        handleIntent(getIntent());
 
         new GetListTask().execute();
+    }
+
+    private void search(String query) {
+        List<BDExercise> exercises;
+
+        if (query.equals(""))
+            exercises = Utils.getInstance().getBDExercises();
+        else
+            exercises = Utils.getInstance().getBDExercisesByName(query);
+
+        ListView list = (ListView) findViewById(R.id.list_competition);
+        ExerciseCustomListAdapter adapter = new ExerciseCustomListAdapter(this, exercises);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                Utils.getInstance().setActiveCompetition((Integer) view.getTag());
+                Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -76,14 +88,14 @@ public class ExerciseListActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-                    //search(s);
+                    search(s);
                     return true;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String s) {
                     if (s.equals("")) {
-                        //search(s);
+                        search(s);
                     }
                     return false;
                 }
@@ -91,10 +103,6 @@ public class ExerciseListActivity extends AppCompatActivity {
         }
         return super.onCreateOptionsMenu(menu);
 
-    }
-
-    private void addAction(View view){
-        popup.showAtLocation(layout, Gravity.CENTER,0,0);
     }
 
     @Override
@@ -110,6 +118,19 @@ public class ExerciseListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //use the query to search your data somehow
+        }
+    }
+
     private class GetListTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -119,8 +140,8 @@ public class ExerciseListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.list_warmup);
-                    WarmupCustomListAdapter adapter = new WarmupCustomListAdapter(activity, Utils.getInstance().getWarmups());
+                    ListView list = (ListView) findViewById(R.id.list_competition);
+                    ExerciseCustomListAdapter adapter = new ExerciseCustomListAdapter(activity, Utils.getInstance().getBDExercises());
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,33 +150,18 @@ public class ExerciseListActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
 
-                            Utils.getInstance().setActiveWarmup((Integer) view.getTag());
-                            //Intent intent = new Intent(WarmupCustomListAdapter.this, NonAthleteProfileActivity.class);
-                            //startActivity(intent);
+                            Utils.getInstance().setActiveCompetition((Integer) view.getTag());
+                            Intent intent = new Intent(ExerciseListActivity.this, ExerciseProfileActivity.class);
+                            startActivity(intent);
                         }
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_warmupList);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_competitionList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
-            return null;
-        }
-    }
 
-    private class InsertListTask extends AsyncTask<BDWarmup, Void, Void> {
-
-
-        @Override
-        protected Void doInBackground(BDWarmup... warmups) {
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
             return null;
         }
     }

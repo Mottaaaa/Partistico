@@ -3,7 +3,7 @@ package Database;
 import java.io.Serializable;
 
 public class BDWarmup implements Serializable {
-    public static final String TABLE_WARMUP= "WARMUP";
+    public static final String TABLE_WARMUP= "Warmup";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
 

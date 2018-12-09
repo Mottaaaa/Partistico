@@ -38,7 +38,7 @@ public class DatabaseAdapter {
         db.delete(BDAthlete.TABLE_ATHLETE, null, null);
         db.delete(BDNonAthlete.TABLE_NON_ATHLETE, null, null);
         db.delete(BDCompetition.TABLE_COMPETITION, null, null);
-        db.delete(BDExercise.TABLE_TRAINING, null, null);
+        db.delete(BDExercise.TABLE_EXERCISE, null, null);
     }
 
     public void deleteClubTable(){
@@ -58,7 +58,7 @@ public class DatabaseAdapter {
 
     public void deleteTrainingTable(){
         db = dbHelper.getWritableDatabase();
-        db.delete(BDExercise.TABLE_TRAINING, null, null);
+        db.delete(BDExercise.TABLE_EXERCISE, null, null);
     }
 
     public void deleteCompetitionTable(){
@@ -587,7 +587,7 @@ public class DatabaseAdapter {
     }
 
     //BDExercise
-    public long insertExercise(BDWarmUpExercise exercise) {
+    public long insertWarmUpExercise(BDWarmUpExercise exercise) {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
@@ -599,7 +599,7 @@ public class DatabaseAdapter {
             newValues.put(BDWarmUpExercise.KEY_WARMUP_ID, exercise.getWarmupID());
 
             db = dbHelper.getWritableDatabase();
-            id = db.insert(BDWarmUpExercise.TABLE_EXERCISE, null, newValues);
+            id = db.insert(BDWarmUpExercise.TABLE_WARM_UP_EXERCISE, null, newValues);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -607,9 +607,9 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public List<BDWarmUpExercise> getExercises() {
+    public List<BDWarmUpExercise> getWarmUpExercises() {
         List<BDWarmUpExercise> exercises = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDWarmUpExercise.TABLE_WARM_UP_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
                         BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 null, null, null, null, null);
 
@@ -629,11 +629,11 @@ public class DatabaseAdapter {
         return exercises;
     }
 
-    public List<BDWarmUpExercise> getExercisesByName(String name) {
+    public List<BDWarmUpExercise> getWarmUpExercisesByName(String name) {
 
         List<BDWarmUpExercise> exercises = new ArrayList<>();
 
-        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_WARM_UP_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
                         BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 BDWarmUpExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
@@ -657,11 +657,11 @@ public class DatabaseAdapter {
         return exercises;
     }
 
-    public BDWarmUpExercise getExerciseByID(int id) {
+    public BDWarmUpExercise getWarmUpExercisesByID(int id) {
 
         BDWarmUpExercise exercise = new BDWarmUpExercise();
 
-        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_WARM_UP_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
                         BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 BDWarmUpExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
 
@@ -681,10 +681,10 @@ public class DatabaseAdapter {
         return exercise;
     }
 
-    public List<BDWarmUpExercise> getExercisesByWarmup(int warmupID) {
+    public List<BDWarmUpExercise> getWarmUpExercisesByWarmup(int warmupID) {
         List<BDWarmUpExercise> exercises = new ArrayList<>();
 
-        Cursor cursor = db.query(BDWarmUpExercise.TABLE_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
+        Cursor cursor = db.query(BDWarmUpExercise.TABLE_WARM_UP_EXERCISE, new String[]{BDWarmUpExercise.KEY_NAME, BDWarmUpExercise.KEY_TYPE,
                         BDWarmUpExercise.KEY_REPETITIONS, BDWarmUpExercise.KEY_SERIES, BDWarmUpExercise.KEY_TIME, BDWarmUpExercise.KEY_WARMUP_ID},
                 "warmupID = ?", new String[]{warmupID + ""}, null, null, null);
 
@@ -707,14 +707,14 @@ public class DatabaseAdapter {
     }
 
     //BDTraining
-    public long insertTraining(BDExercise training) {
+    public long insertExercise(BDExercise training) {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
             newValues.put(BDExercise.KEY_NAME, training.getName());
 
             db = dbHelper.getWritableDatabase();
-            id = db.insert(BDExercise.TABLE_TRAINING, null, newValues);
+            id = db.insert(BDExercise.TABLE_EXERCISE, null, newValues);
             training.setId((int) id);
 
         } catch (Exception ex) {
@@ -723,9 +723,9 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public List<BDExercise> getTrainings() {
+    public List<BDExercise> getExercises() {
         List<BDExercise> trainings = new ArrayList<>();
-        Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
+        Cursor cursor = dbHelper.getReadableDatabase().query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -741,11 +741,11 @@ public class DatabaseAdapter {
         return trainings;
     }
 
-    public List<BDExercise> getTrainingsByName(String name) {
+    public List<BDExercise> getExercisesByName(String name) {
 
         List<BDExercise> trainings = new ArrayList<>();
 
-        Cursor cursor = db.query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
+        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
                 BDExercise.KEY_NAME + " like ?", new String[]{"%" + name + "%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -764,11 +764,11 @@ public class DatabaseAdapter {
         return trainings;
     }
 
-    public BDExercise getTrainingByID(int id) {
+    public BDExercise getExerciseByID(int id) {
 
         BDExercise training = new BDExercise();
 
-        Cursor cursor = db.query(BDExercise.TABLE_TRAINING, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
+        Cursor cursor = db.query(BDExercise.TABLE_EXERCISE, new String[]{BDExercise.KEY_ID, BDExercise.KEY_NAME},
                 BDExercise.KEY_ID + " = ?", new String[]{"" + id}, null, null, null);
 
         if (cursor.moveToFirst()) {

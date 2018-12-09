@@ -23,7 +23,6 @@ public class Utils {
 
     private Context context;
     private static Utils instance;
-    private Bitmap image;
     private BDAthlete activeAthlete;
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
@@ -72,7 +71,7 @@ public class Utils {
     }
 
     public void setActiveWarmup(int id) {
-        this.activeWarmup = getWarmupByID(id);
+        this.activeWarmup = getBDWarmupByID(id);
     }
 
     public BDNonAthlete getActiveNonAthlete() {
@@ -146,11 +145,10 @@ public class Utils {
         dbAdapter.insertCompetition((new BDCompetition(1, "World War 1", "38.5587448/-9.0402922644068/Manjar do Norte", "28/07/1914", "11/11/1918", "WAR", "1/3/5/7", "1/3/5", "A Primeira Grande Guerra")));
         dbAdapter.insertCompetition((new BDCompetition(2, "World War 2", "38.520872350000005/-8.83894542882081/Instituto Politécnico de Setúbal", "1/09/1939", "2/09/1945", "WAR", "2/4/6/8", "2/4/6", "A Segunda Grande Guerra")));
 
-        //Populate Training
-        dbAdapter.insertTraining(new BDExercise(1,"Avião"));
+        //Populate Exercises
+        dbAdapter.insertExercise(new BDExercise(1,"Avião"));
 
         dbAdapter.close();
-
     }
 
     //BDClub
@@ -296,14 +294,14 @@ public class Utils {
     }
 
     //BDWarmup
-    public void insertWarmup(BDWarmup warmup){
+    public void insertBDWarmup(BDWarmup warmup){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         adapter.insertWarmup(warmup);
         adapter.close();
     }
 
-    public List<BDWarmup> getWarmups(){
+    public List<BDWarmup> getBDWarmups(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         List<BDWarmup> warmups = adapter.getWarmups();
@@ -311,7 +309,7 @@ public class Utils {
         return warmups;
     }
 
-    public List<BDWarmup> getWarmupsByName(String name){
+    public List<BDWarmup> getBDWarmupByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         List<BDWarmup> warmups = adapter.getWarmupsByName(name);
@@ -319,7 +317,7 @@ public class Utils {
         return warmups;
     }
 
-    public BDWarmup getWarmupByID(int id){
+    public BDWarmup getBDWarmupByID(int id){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
         BDWarmup warmup = adapter.getWarmupByID(id);
@@ -327,74 +325,81 @@ public class Utils {
         return warmup;
     }
 
-    //BDExercises
-    public void insertExercise(BDWarmUpExercise exercise){
+    //BDWarmUpExercise
+    public void insertBDWarmUpExercise(BDWarmUpExercise exercise){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        adapter.insertExercise(exercise);
+        adapter.insertWarmUpExercise(exercise);
         adapter.close();
     }
 
-    public List<BDWarmUpExercise> getExercises(){
+    public List<BDWarmUpExercise> getBDWarmUpExercises(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDWarmUpExercise> exercises = adapter.getExercises();
-        adapter.close();
-        return exercises;
-    }
-
-    public List<BDWarmUpExercise> getExercisesByName(String name){
-        DatabaseAdapter adapter = new DatabaseAdapter(context);
-        adapter.open();
-        List<BDWarmUpExercise> exercises = adapter.getExercisesByName(name);
+        List<BDWarmUpExercise> exercises = adapter.getWarmUpExercises();
         adapter.close();
         return exercises;
     }
 
-    public BDWarmUpExercise getExerciseByID(int id){
+    public List<BDWarmUpExercise> getBDWarmUpExerciseByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        BDWarmUpExercise exercise = adapter.getExerciseByID(id);
+        List<BDWarmUpExercise> exercises = adapter.getWarmUpExercisesByName(name);
+        adapter.close();
+        return exercises;
+    }
+
+    public BDWarmUpExercise getBDWarmUpExerciseByID(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        BDWarmUpExercise exercise = adapter.getWarmUpExercisesByID(id);
         adapter.close();
         return exercise;
     }
 
-    public List<BDWarmUpExercise> getExercisesByWarmup(int warmupID){
+    public List<BDWarmUpExercise> getBDWarmUpExercisesByWarmup(int warmupID){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDWarmUpExercise> exercises = adapter.getExercisesByWarmup(warmupID);
+        List<BDWarmUpExercise> exercises = adapter.getWarmUpExercisesByWarmup(warmupID);
         adapter.close();
         return exercises;
     }
 
-    //BDTraining
-    public void insertTraining(BDExercise training){
+    //BDExercise
+    public void populateExercises(){
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(context);
+        dbAdapter.open();
+        dbAdapter.insertExercise(new BDExercise(1,"Avião"));
+        dbAdapter.close();
+    }
+
+    public void insertBDExercise(BDExercise training){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        adapter.insertTraining(training);
+        adapter.insertExercise(training);
         adapter.close();
     }
 
-    public List<BDExercise> getTrainings(){
+    public List<BDExercise> getBDExercises(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDExercise> trainings = adapter.getTrainings();
+        List<BDExercise> trainings = adapter.getExercises();
         adapter.close();
         return trainings;
     }
 
-    public List<BDExercise> getTrainingsByName(String name){
+    public List<BDExercise> getBDExercisesByName(String name){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        List<BDExercise> trainings = adapter.getTrainingsByName(name);
+        List<BDExercise> trainings = adapter.getExercisesByName(name);
         adapter.close();
         return trainings;
     }
 
-    public BDExercise getTrainingByID(int id){
+    public BDExercise getBDExerciseByID(int id){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
-        BDExercise training = adapter.getTrainingByID(id);
+        BDExercise training = adapter.getExerciseByID(id);
         adapter.close();
         return training;
     }
@@ -438,5 +443,4 @@ public class Utils {
             }
         }
     }
-
 }

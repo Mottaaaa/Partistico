@@ -42,6 +42,5 @@ public class CompetitionCustomListAdapter extends ArrayAdapter<BDCompetition> {
         rowView.setTag(competitions.get(position).getId());
 
         return rowView;
-
     }
 }

@@ -161,5 +161,4 @@ public class CompetitionListActivity extends AppCompatActivity {
             return null;
         }
     }
-
 }
