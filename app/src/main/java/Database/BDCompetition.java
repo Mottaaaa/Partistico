@@ -9,23 +9,23 @@ public class BDCompetition {
     public static final String TABLE_COMPETITION = "Competition";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
-    public static final String KEY_COORDINATES = "coordinates"; // latitude/longitude/local
+    public static final String KEY_COORDINATES = "coordinates";
     public static final String KEY_START_DATE = "startDate";
     public static final String KEY_END_DATE = "endDate";
     public static final String KEY_TYPE_OF_COMPETITION = "typeOfCompetition";
-    public static final String KEY_ECHELONS = "echelons"; // 1/2/3/4 valores de 1 a 8
-    public static final String KEY_SPECIALIZATIONS = "specializations"; // 1/2/3 valores de 1 a 6
+    public static final String KEY_ECHELONS = "echelons";
+    public static final String KEY_SPECIALIZATIONS = "specializations";
     public static final String KEY_INFORMATION = "information";
     public static final String FOREIGN_DATABASE_ID = "foreignID";
 
     private int id;
     private String name;
-    private String coordinates;
+    private String coordinates; // latitude/longitude/local
     private String startDate;
     private String endDate;
     private String typeOfCompetition;
-    private String echelons;
-    private String specializations;
+    private String echelons; // 1/2/3/4 valores de 1 a 8
+    private String specializations; // 1/2/3 valores de 1 a 6
     private String information;
 
     public static final String DATABASE_CREATE = "create table " + TABLE_COMPETITION +
