@@ -50,7 +50,7 @@ public class ExerciseListActivity extends AppCompatActivity {
         else
             exercises = Utils.getInstance().getBDExercisesByName(query);
 
-        ListView list = (ListView) findViewById(R.id.list_competition);
+        ListView list = (ListView) findViewById(R.id.list_exercises);
         ExerciseCustomListAdapter adapter = new ExerciseCustomListAdapter(this, exercises);
         list.setAdapter(adapter);
 
@@ -140,7 +140,7 @@ public class ExerciseListActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ListView list = (ListView) findViewById(R.id.list_competition);
+                    ListView list = (ListView) findViewById(R.id.list_exercises);
                     ExerciseCustomListAdapter adapter = new ExerciseCustomListAdapter(activity, Utils.getInstance().getBDExercises());
                     list.setAdapter(adapter);
 
@@ -157,7 +157,7 @@ public class ExerciseListActivity extends AppCompatActivity {
                     });
                     adapter.notifyDataSetChanged();
 
-                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_competitionList);
+                    ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar_exerciseList);
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
