@@ -401,11 +401,13 @@ public class Utils {
         dbAdapter.insertExercise(new BDExercise(1, "Avião"));
         dbAdapter.insertExercise(new BDExercise(2, "Perna ao Peito"));
 
+        /*
         dbAdapter.insertWarmUp(new BDWarmUp("Aquecimento1"));
         dbAdapter.insertWarmUpExercise(new BDWarmUpExercise("Ex1", 1, 1));
         dbAdapter.insertWarmUpExercise(new BDWarmUpExercise("Ex2",0,1));
         dbAdapter.insertWarmUpExercise(new BDWarmUpExercise("Ex3",0,1));
         dbAdapter.insertWarmUpExercise(new BDWarmUpExercise("Ex4",0,1));
+        */
         dbAdapter.close();
     }
 
