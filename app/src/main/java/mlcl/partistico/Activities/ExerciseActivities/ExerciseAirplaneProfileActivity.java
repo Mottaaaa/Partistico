@@ -24,14 +24,12 @@ import mlcl.partistico.R;
 public class ExerciseAirplaneProfileActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
-    private Sensor sensor;
     //private TextView outputX;
 
     private LineGraphSeries<DataPoint> series;
 
     private GraphView graph;
     private int index = 1;
-    private List<DataPoint> dataPoints = null;
 
 
     @Override
@@ -42,13 +40,11 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
         getSupportActionBar().setTitle(Utils.getInstance().getActiveExercise().getName());
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         //outputX = (TextView) findViewById(R.id.textViewX);
 
         graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<>();
-        dataPoints = new ArrayList<>();
 
         graph.getViewport().setScrollable(true);
         graph.getViewport().setXAxisBoundsManual(true);
@@ -88,6 +84,17 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent event) {
 
         float[] g = new float[3];
@@ -122,23 +129,6 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
 
         graph.onDataChanged(false, false);
         index++;
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    private void updateGraph() {
-
-        DataPoint[] dataPointsArr = ((List<DataPoint>) dataPoints).toArray(new DataPoint[dataPoints.size()]);
-
-        series.resetData(dataPointsArr);
     }
 }
 

@@ -10,6 +10,15 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.Utils;
 import mlcl.partistico.R;
 
 public class ExerciseLegToChestProfileActivity extends AppCompatActivity implements SensorEventListener {
@@ -19,16 +28,57 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     private float azimuth = 0f;
     private float currentAzimuth = 0f;
     private SensorManager sensorManager;
-    //private ImageView imageView;
+
+    private LineGraphSeries<DataPoint> seriesHorizontal;
+    private LineGraphSeries<DataPoint> seriesVertical;
+
+    private GraphView graphHorizontal;
+    private GraphView graphVertical;
+    private int indexHorizontal = 1;
+    private int indexVertical = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_leg_to_chest_profile);
 
-        //imageView = (ImageView) findViewById(R.id.compass);
+        getSupportActionBar().setTitle(Utils.getInstance().getActiveExercise().getName());
 
-        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        graphHorizontal = (GraphView) findViewById(R.id.graph_horizontal);
+        graphVertical = (GraphView) findViewById(R.id.graph_vertical);
+
+        seriesHorizontal = new LineGraphSeries<>();
+        seriesVertical = new LineGraphSeries<>();
+
+        //set up horizontal graph
+        graphHorizontal.getViewport().setScrollable(true);
+        graphHorizontal.getViewport().setXAxisBoundsManual(true);
+        graphHorizontal.getViewport().setMinX(0);
+        graphHorizontal.getViewport().setMaxX(50);
+        graphHorizontal.getViewport().setYAxisBoundsManual(true);
+        graphHorizontal.getViewport().setMinY(0);
+        graphHorizontal.getViewport().setMaxY(180);
+        graphHorizontal.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graphHorizontal.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graphHorizontal.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graphHorizontal.getGridLabelRenderer().setPadding(0);
+        graphHorizontal.getGridLabelRenderer().setGridColor(255);
+        graphHorizontal.addSeries(seriesHorizontal);
+
+        //set up vertical graph
+        graphVertical.getViewport().setScrollable(true);
+        graphVertical.getViewport().setXAxisBoundsManual(true);
+        graphVertical.getViewport().setYAxisBoundsManual(true);
+        graphVertical.getViewport().setMinY(0);
+        graphVertical.getViewport().setMaxY(50);
+        graphVertical.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graphVertical.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graphVertical.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graphVertical.getGridLabelRenderer().setPadding(0);
+        graphVertical.getGridLabelRenderer().setGridColor(255);
+        graphVertical.addSeries(seriesVertical);
     }
 
     @Override
@@ -36,9 +86,14 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         super.onResume();
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
-
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
+        sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+    }
 
     @Override
     protected void onPause() {
@@ -48,7 +103,14 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     }
 
     @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent event) {
+
+        //rotation
         final float alpha = 0.97f;
         synchronized (this){
             if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
@@ -69,15 +131,15 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(r,orientation);
 
-                TextView t3 = (TextView) findViewById(R.id.textView3);
+                /*TextView t3 = (TextView) findViewById(R.id.textView3);
                 TextView t4 =(TextView) findViewById(R.id.textView4);
                 TextView t5 =(TextView) findViewById(R.id.textView5);
                 t3.setText(""+orientation[0]);
                 t4.setText(""+orientation[1]);
-                t5.setText(""+orientation[2]);
+                t5.setText(""+orientation[2]);*/
 
 
-                azimuth = (float)Math.toDegrees(orientation[0]);
+                /*azimuth = (float)Math.toDegrees(orientation[0]);
                 azimuth = (azimuth*360)%360;
 
                 Animation animation = new RotateAnimation(-currentAzimuth, -azimuth, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,0.5f);
@@ -85,15 +147,52 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
                 animation.setDuration(500);
                 animation.setRepeatCount(0);
-                animation.setFillAfter(true);
+                animation.setFillAfter(true);*/
+
+                seriesVertical.appendData((new DataPoint(orientation[0], indexVertical)), true, 100);
+
+                graphVertical.getViewport().setMinX(orientation[0] - 1);
+                graphVertical.getViewport().setMaxX(orientation[0] + 1);
+
+                graphVertical.onDataChanged(false, false);
+                indexVertical++;
 
                 //imageView.startAnimation(animation);
             }
         }
-    }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        //inclination
+        float[] g = new float[3];
+        g = event.values.clone();
 
+        double norm_Of_g = Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2]);
+
+        // Normalize the accelerometer vector
+        g[0] = (float) (g[0] / norm_Of_g);
+        g[1] = (float) (g[1] / norm_Of_g);
+        g[2] = (float) (g[2] / norm_Of_g);
+
+        //inclination can be calculated as
+        int inclination = (int) Math.round(Math.toDegrees(Math.acos(g[2])));
+
+        if (inclination < 25 || inclination > 155) {
+            // device is flat
+            //outputX.setText("Flat");
+        } else {
+            // device is not flat
+            //outputX.setText("Not Flat");
+        }
+
+        if (inclination <= 90) {
+            seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination + 90)), true, 100);
+        } else {
+            seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination - 90)), true, 100);
+        }
+
+        //********graph.getViewport().setMinY(inclination - 10);
+        //********graph.getViewport().setMaxY(inclination + 10);
+
+        graphHorizontal.onDataChanged(false, false);
+        indexHorizontal++;
     }
 }
