@@ -27,7 +27,7 @@ public class Utils {
     private BDNonAthlete activeNonAthlete;
     private BDCompetition activeCompetition;
     private BDWarmup activeWarmup;
-    private BDExercise activeExercise = new BDExercise(1, "Hitler Techno");
+    private BDExercise activeExercise;
 
     private Utils() {
     }

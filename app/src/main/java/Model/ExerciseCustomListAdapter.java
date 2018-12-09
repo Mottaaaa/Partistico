@@ -34,7 +34,7 @@ public class ExerciseCustomListAdapter extends ArrayAdapter<BDExercise> {
         TextView number = (TextView) rowView.findViewById(R.id.tv_number);
         TextView name = (TextView) rowView.findViewById(R.id.tv_name);
 
-        number.setText(exercises.get(position).getId());
+        number.setText("" + exercises.get(position).getId());
         name.setText(exercises.get(position).getName());
 
         rowView.setTag(exercises.get(position).getId());
