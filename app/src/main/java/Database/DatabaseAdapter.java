@@ -106,7 +106,7 @@ public class DatabaseAdapter {
         BDClub club = new BDClub();
 
         Cursor cursor = db.query(BDClub.TABLE_CLUB, new String[]{BDClub.KEY_NAME, BDClub.FOREIGN_DATABASE_ID},
-                "id=?", new String[]{clubID + ""}, null, null, null);
+                "foreignID = ?", new String[]{clubID + ""}, null, null, null);
 
         if (cursor.moveToFirst()) {
             club.setName(cursor.getString(cursor.getColumnIndex(BDAthlete.KEY_NAME)));
