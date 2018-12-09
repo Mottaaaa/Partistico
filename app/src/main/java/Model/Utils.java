@@ -371,7 +371,7 @@ public class Utils {
         dbAdapter.open();
         dbAdapter.deleteExerciseTable();
         dbAdapter.insertExercise(new BDExercise(1, "Avião"));
-        dbAdapter.insertExercise(new BDExercise(2, "Perna ao peito"));
+        dbAdapter.insertExercise(new BDExercise(2, "Perna ao Peito"));
         dbAdapter.insertWarmUp(new BDWarmUp(1,"BOSta"));
         dbAdapter.close();
     }
