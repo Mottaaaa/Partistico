@@ -95,12 +95,14 @@
                     android:id="@+id/graph_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:rotation="0" />
 
                 <com.jjoe64.graphview.GraphView
                     android:id="@+id/graph_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:rotation="-90" />
 
             </FrameLayout>
