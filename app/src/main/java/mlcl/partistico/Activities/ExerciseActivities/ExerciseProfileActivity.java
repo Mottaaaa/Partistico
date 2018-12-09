@@ -4,9 +4,16 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -45,35 +52,33 @@ public class ExerciseProfileActivity extends AppCompatActivity implements Sensor
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         outputX = (TextView) findViewById(R.id.textViewX);
-        outputY = (TextView) findViewById(R.id.textViewY);
-        outputZ = (TextView) findViewById(R.id.textViewZ);
 
         graph = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<>();
+        dataPoints = new ArrayList<>();
 
         graph.getViewport().setScrollable(true);
-
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(50);
-
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(180);
-
-
-        // use static labels for horizontal and vertical labels
-
-
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getGridLabelRenderer().setPadding(0);
         graph.getGridLabelRenderer().setGridColor(255);
-
         graph.addSeries(series);
 
-        dataPoints = new ArrayList<>();
+        VideoView videoView = (VideoView) findViewById(R.id.vv_video);
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.hitler_techo;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
 
     }
 
