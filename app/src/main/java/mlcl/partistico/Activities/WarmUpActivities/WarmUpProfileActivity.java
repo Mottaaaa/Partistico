@@ -79,6 +79,10 @@ public class WarmUpProfileActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                    LinearLayout linearLayout = (LinearLayout) buttonView.getParent();
+                    BDWarmUpExercise exercise = Utils.getInstance().getBDWarmUpExerciseByID((Integer) linearLayout.getTag());
+
+                    Utils.getInstance().updateBDWarmUpExercise(exercise.getId(), exercise.getName(), isChecked);
                 }
             });
 
