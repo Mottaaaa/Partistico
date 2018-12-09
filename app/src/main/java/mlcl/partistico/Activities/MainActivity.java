@@ -25,15 +25,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Descomentar para testar o Splash Screen
-        /*
+        PopulateDBTask populateTask = new PopulateDBTask();
+        populateTask.execute();
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        */
-        setTheme(R.style.AppTheme);
+
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
 
 
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         //startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
 
 
-        PopulateDBTask populateTask = new PopulateDBTask();
-        populateTask.execute();
+        //PopulateDBTask populateTask = new PopulateDBTask();
+        //populateTask.execute();
 
     }
 
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     public void warmUpAction(View view) {
         Intent intent = new Intent(this, WarmUpListActivity.class);
         startActivity(intent);
+    }
+
+    public void exit(View view){
+        finish();
+        System.exit(0);
     }
 
     private class PopulateDBTask extends AsyncTask<Void, Void, Void> {

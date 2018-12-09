@@ -65,6 +65,7 @@
 
     <string name="test">TESTE</string>
 
+    <string name="welcome">Bem-vindo ao Partistico</string>
     <string name="title_activity_competition_profile_localization_fragment">Mapa</string>
     <string name="create_warmup_title">Criar Aquecimento</string>
     <string name="edit_warmup_title">Editar Aquecimento</string>
