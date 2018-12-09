@@ -6,6 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
@@ -79,6 +80,18 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         graphVertical.getGridLabelRenderer().setPadding(0);
         graphVertical.getGridLabelRenderer().setGridColor(255);
         graphVertical.addSeries(seriesVertical);
+
+        int w = graphVertical.getWidth();
+        int h = graphVertical.getHeight();
+
+        graphVertical.setRotation(270.0f);
+        graphVertical.setTranslationX((w - h) / 2);
+        graphVertical.setTranslationY((h - w) / 2);
+
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) graphVertical.getLayoutParams();
+        lp.height = w;
+        lp.width = h;
+        graphVertical.requestLayout();
     }
 
     @Override
