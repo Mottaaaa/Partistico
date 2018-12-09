@@ -710,6 +710,7 @@ public class DatabaseAdapter {
         long id = -1;
         try {
             ContentValues newValues = new ContentValues();
+            newValues.put(BDExercise.KEY_ID,training.getId());
             newValues.put(BDExercise.KEY_NAME, training.getName());
 
             db = dbHelper.getWritableDatabase();
