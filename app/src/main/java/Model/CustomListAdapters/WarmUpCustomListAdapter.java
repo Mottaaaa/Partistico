@@ -35,7 +35,7 @@ public class WarmUpCustomListAdapter extends ArrayAdapter<BDWarmUp> {
         TextView number = (TextView) rowView.findViewById(R.id.tv_number);
         TextView name = (TextView) rowView.findViewById(R.id.tv_name);
 
-        number.setText("" + warmUps.get(position).getId());
+        number.setText("" + (position + 1));
         name.setText(warmUps.get(position).getName());
 
         rowView.setTag(warmUps.get(position).getId());
