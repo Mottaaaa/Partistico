@@ -302,6 +302,30 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_horizontal_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inclinação"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/graphLine1"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_vertival_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rotaçao em Y"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/graphLine2"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </FrameLayout>
 
         </FrameLayout>

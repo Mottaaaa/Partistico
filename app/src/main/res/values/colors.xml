@@ -10,4 +10,8 @@
     <color name="titleColor">#a0000000</color>
 
     <color name="divider">#e3e5e8</color>
+
+
+    <color name="graphLine1">#9900cc</color>
+    <color name="graphLine2">#0033cc</color>
 </resources>
