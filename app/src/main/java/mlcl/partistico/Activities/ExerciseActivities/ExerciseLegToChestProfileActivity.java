@@ -1,24 +1,17 @@
 package mlcl.partistico.Activities.ExerciseActivities;
 
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import Model.Utils;
 import mlcl.partistico.R;
@@ -81,6 +74,9 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         graphVertical.getGridLabelRenderer().setPadding(0);
         graphVertical.getGridLabelRenderer().setGridColor(255);
         graphVertical.addSeries(seriesVertical);
+
+        seriesVertical.setColor(Color.rgb(0, 51, 204));
+        seriesHorizontal.setColor(Color.rgb(153, 0, 204));
     }
 
     @Override
