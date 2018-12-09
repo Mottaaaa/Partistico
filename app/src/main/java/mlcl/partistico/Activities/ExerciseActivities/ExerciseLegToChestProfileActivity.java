@@ -5,8 +5,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -38,6 +41,16 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         setContentView(R.layout.activity_exercise_leg_to_chest_profile);
 
         getSupportActionBar().setTitle(Utils.getInstance().getActiveExercise().getName());
+
+        VideoView videoView = (VideoView) findViewById(R.id.vv_video);
+
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video_exercise_leg_to_chest;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 

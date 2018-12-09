@@ -19,7 +19,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"
+            android:layout_weight="0.4"
             android:background="@color/colorPrimary"
             android:gravity="center">
 
@@ -39,7 +39,8 @@
                 <VideoView
                     android:id="@+id/vv_video"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
         </FrameLayout>
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_weight="0.4">
+            android:layout_weight="0.6">
 
             <LinearLayout
                 android:layout_width="match_parent"
