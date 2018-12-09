@@ -585,6 +585,18 @@ public class DatabaseAdapter {
         return warmup;
     }
 
+    public void deleteWarmup(int id){
+        db = dbHelper.getWritableDatabase();
+        db.delete(BDWarmUp.TABLE_WARMUP, "id = ?",new String[]{""+id});
+    }
+
+    public void updateWarmup(int id, String name){
+        db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(BDWarmUp.KEY_NAME,name);
+        db.update(BDWarmUp.TABLE_WARMUP, cv, "id = ?", new String[]{""+id});
+    }
+
     //BDExercise
     public long insertWarmUpExercise(BDWarmUpExercise exercise) {
         long id = -1;

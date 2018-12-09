@@ -42,4 +42,5 @@ public class WarmUpCustomListAdapter extends ArrayAdapter<BDWarmUp> {
 
         return rowView;
     }
+
 }

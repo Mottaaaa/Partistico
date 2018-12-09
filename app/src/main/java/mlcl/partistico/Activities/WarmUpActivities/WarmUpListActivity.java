@@ -1,9 +1,12 @@
 package mlcl.partistico.Activities.WarmUpActivities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,12 +18,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -33,8 +43,9 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     ListView list;
     final Activity activity = this;
-    PopupWindow popUp;
-    ConstraintLayout layout;
+    Dialog dialog;
+    EditText name;
+    int warmupID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +54,10 @@ public class WarmUpListActivity extends AppCompatActivity {
 
         handleIntent(getIntent());
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.add_warmup_popup);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        popUp = new PopupWindow(inflater.inflate(R.layout.add_warmup_popup, null, false));
-        popUp.setFocusable(true);
 
         new GetListTask().execute();
     }
@@ -114,9 +125,73 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     }
 
-    public void addPopup(View v){
+    public void addPopup(View view){
+        name = dialog.findViewById(R.id.warmup_name);
+        dialog.show();
+        Button accept = (Button) dialog.findViewById(R.id.accept);
+        Button reject = (Button) dialog.findViewById(R.id.reject);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
+                new GetListTask().execute();
+                dialog.dismiss();
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name.setText("");
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void editPopup(View view){
+        LinearLayout linearLayout1 = (LinearLayout)view.getParent();
+        FrameLayout frameLayout1 = (FrameLayout) linearLayout1.getParent();
+        LinearLayout linearLayout2 = (LinearLayout)frameLayout1.getParent();
+        Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
+        BDWarmUp temp = Utils.getInstance().getActiveWarmup();
+        warmupID = temp.getId();
+        name = dialog.findViewById(R.id.warmup_name);
+        name.setText(temp.getName());
+        dialog.show();
+        Button accept = (Button) dialog.findViewById(R.id.accept);
+        Button reject = (Button) dialog.findViewById(R.id.reject);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.getInstance().updateBDWarmup(warmupID, name.getText().toString());
+                new GetListTask().execute();
+                dialog.dismiss();
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name.setText("");
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void delete(View view){
+
+        LinearLayout linearLayout1 = (LinearLayout)view.getParent();
+        FrameLayout frameLayout1 = (FrameLayout) linearLayout1.getParent();
+        LinearLayout linearLayout2 = (LinearLayout)frameLayout1.getParent();
+        Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
+        int id = Utils.getInstance().getActiveWarmup().getId();
+        Utils.getInstance().deleteBDWarmup(id);
+        new GetListTask().execute();
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -163,7 +238,7 @@ public class WarmUpListActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
 
-                            Utils.getInstance().setActiveCompetition((Integer) view.getTag());
+                            Utils.getInstance().setActiveWarmup((Integer) view.getTag());
 
                             //Intent intent = new Intent(WarmUpListActivity.this, WarmUpProfileActivity.class);
                             //startActivity(intent);
@@ -179,31 +254,6 @@ public class WarmUpListActivity extends AppCompatActivity {
 
             return null;
         }
-    }
-
-    public void addAction(View view) {
-
-
-        //Intent intent = new Intent(this, CompetitionListActivity.class);
-        //startActivity(intent);
-    }
-
-    public void playAction(View view) {
-
-        //Intent intent = new Intent(this, CompetitionListActivity.class);
-        //startActivity(intent);
-    }
-
-    public void editAction(View view) {
-
-        //Intent intent = new Intent(this, CompetitionListActivity.class);
-        //startActivity(intent);
-    }
-
-    public void deleteAction(View view) {
-
-        //Intent intent = new Intent(this, CompetitionListActivity.class);
-        //startActivity(intent);
     }
 
 }

@@ -301,6 +301,20 @@ public class Utils {
         adapter.close();
     }
 
+    public void deleteBDWarmup(int id){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.deleteWarmup(id);
+        adapter.close();
+    }
+
+    public void updateBDWarmup(int id, String name){
+        DatabaseAdapter adapter = new DatabaseAdapter(context);
+        adapter.open();
+        adapter.updateWarmup(id, name);
+        adapter.close();
+    }
+
     public List<BDWarmUp> getBDWarmUps(){
         DatabaseAdapter adapter = new DatabaseAdapter(context);
         adapter.open();
@@ -372,7 +386,6 @@ public class Utils {
         dbAdapter.deleteExerciseTable();
         dbAdapter.insertExercise(new BDExercise(1, "Avião"));
         dbAdapter.insertExercise(new BDExercise(2, "Perna ao Peito"));
-        dbAdapter.insertWarmUp(new BDWarmUp(1,"BOSta"));
         dbAdapter.close();
     }
 

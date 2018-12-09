@@ -67,6 +67,7 @@
 
     <string name="title_activity_competition_profile_localization_fragment">Mapa</string>
     <string name="create_warmup_title">Criar Aquecimento</string>
+    <string name="edit_warmup_title">Editar Aquecimento</string>
     <string name="reject">Rejeitar</string>
     <string name="accept">Aceitar</string>
 
@@ -76,9 +77,5 @@
     <string name="btn_exercises">Exercícios</string>
     <string name="btn_warm_ups">Aquecimentos</string>
     <string name="btn_exit">Sair</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
