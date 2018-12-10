@@ -53,7 +53,7 @@ public class NonAthleteListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Utils.getInstance().setActiveAthlete((Integer) view.getTag());
+                Utils.getInstance().setActiveNonAthlete((Integer) view.getTag());
                 Intent intent = new Intent(NonAthleteListActivity.this, NonAthleteProfileActivity.class);
                 startActivity(intent);
 
