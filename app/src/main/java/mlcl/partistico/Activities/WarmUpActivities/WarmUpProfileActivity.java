@@ -150,8 +150,9 @@ public class WarmUpProfileActivity extends AppCompatActivity {
 
     public void delete(View view) {
 
-        LinearLayout linearLayout1 = (LinearLayout) view.getParent();
-        Utils.getInstance().deleteBDWarmUpExercise((Integer) linearLayout1.getTag());
+        LinearLayout linearLayout = (LinearLayout) view.getParent();
+        LinearLayout linearLayout2 = (LinearLayout) linearLayout.getParent();
+        Utils.getInstance().deleteBDWarmUpExercise((Integer) linearLayout2.getTag());
         populateLists();
     }
 }
