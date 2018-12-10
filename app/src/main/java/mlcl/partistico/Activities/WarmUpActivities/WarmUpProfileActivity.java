@@ -119,7 +119,8 @@ public class WarmUpProfileActivity extends AppCompatActivity {
 
     public void editPopup(View view) {
         LinearLayout linearLayout = (LinearLayout) view.getParent();
-        final BDWarmUpExercise exercise = Utils.getInstance().getBDWarmUpExerciseByID((Integer) linearLayout.getTag());
+        LinearLayout linearLayout2 = (LinearLayout) linearLayout.getParent();
+        final BDWarmUpExercise exercise = Utils.getInstance().getBDWarmUpExerciseByID((Integer) linearLayout2.getTag());
         name = dialogEdit.findViewById(R.id.warmup_name);
         name.setText(exercise.getName());
         dialogEdit.show();
