@@ -32,7 +32,7 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     private GraphView graph;
     private int index = 1;
 
-    MediaPlayer mPlayer;
+    private MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

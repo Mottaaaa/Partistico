@@ -36,7 +36,12 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     private int indexHorizontal = 1;
     private int indexVertical = 1;
 
-    MediaPlayer mPlayer;
+    private float oldValue = -1;
+    private int threshold = 20;
+    private int incrementValue = 20;
+    private boolean oldValueCalcutated = false;
+
+    private MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +186,26 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
                 graphVertical.onDataChanged(false, false);
                 indexVertical++;
+
+                if(indexVertical >= threshold){
+
+                    threshold += incrementValue;
+
+                    if(oldValueCalcutated){
+                        if((Math.abs((orientation[0] - oldValue))) > 1){
+                            playSound();
+                        }
+                        else{
+                            stopSound();
+                        }
+                    }
+
+                    oldValue = orientation[0];
+                    oldValueCalcutated = true;
+                }
+
+
+
             }
         }
     }
