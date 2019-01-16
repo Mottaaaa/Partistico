@@ -75,7 +75,7 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
         mPlayer = new MediaPlayer();
         mPlayer = MediaPlayer.create(this, R.raw.nein);
         mPlayer.start();
-        mPlayer.stop();
+        mPlayer.pause();
     }
 
     @Override
