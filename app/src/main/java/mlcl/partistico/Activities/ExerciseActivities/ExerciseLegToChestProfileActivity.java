@@ -96,6 +96,8 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
         mPlayer = new MediaPlayer();
         mPlayer = MediaPlayer.create(this, R.raw.nein);
+        mPlayer.start();
+        mPlayer.stop();
     }
 
     @Override
