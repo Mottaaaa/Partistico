@@ -32,7 +32,7 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     private GraphView graph;
     private int index = 1;
 
-    MediaPlayer mp;
+    MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +71,6 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
-
-        mp = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -148,13 +146,15 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     }
 
     private void playSound() {
-
-        mp.start();
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
+        mPlayer.start();
     }
 
     private void stopSound() {
-
-        mp.pause();
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
+        mPlayer.pause();
     }
 }
 

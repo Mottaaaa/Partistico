@@ -36,7 +36,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     private int indexHorizontal = 1;
     private int indexVertical = 1;
 
-    MediaPlayer mp;
+    MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,6 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
         seriesVertical.setColor(Color.rgb(0, 51, 204));
         seriesHorizontal.setColor(Color.rgb(153, 0, 204));
-
-        mp = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -109,14 +107,12 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         super.onStop();
         sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
         sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
-        mp.release();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
-
     }
 
     @Override
@@ -153,9 +149,9 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 graphHorizontal.onDataChanged(false, false);
                 indexHorizontal++;
 
-                if(inclination <= 60 || inclination >= 120){
+                if (inclination <= 60 || inclination >= 120) {
                     playSound();
-                }else{
+                } else {
                     stopSound();
                 }
             }
@@ -185,12 +181,14 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     }
 
     private void playSound() {
-
-        mp.start();
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
+        mPlayer.start();
     }
 
     private void stopSound() {
-
-        mp.pause();
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
+        mPlayer.pause();
     }
 }
