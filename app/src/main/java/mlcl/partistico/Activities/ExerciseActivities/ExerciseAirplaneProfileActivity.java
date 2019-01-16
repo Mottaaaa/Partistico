@@ -91,7 +91,6 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
-
     }
 
     @Override
