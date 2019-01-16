@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     private GraphView graph;
     private int index = 1;
 
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
+
+        mp = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -118,17 +122,40 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
             //outputX.setText("Not Flat");
         }
 
+        int aux;
+
         if (inclination <= 90) {
-            series.appendData((new DataPoint(index, inclination + 90)), true, 100);
+            aux = inclination + 90;
+
         } else {
-            series.appendData((new DataPoint(index, inclination - 90)), true, 100);
+            aux = inclination - 90;
         }
+
+        series.appendData((new DataPoint(index, aux)), true, 100);
+
+        System.out.println(aux);
 
         //********graph.getViewport().setMinY(inclination - 10);
         //********graph.getViewport().setMaxY(inclination + 10);
 
         graph.onDataChanged(false, false);
         index++;
+
+        if(aux <= 60 || aux >= 120){
+            playSound();
+        }else{
+            stopSound();
+        }
+    }
+
+    private void playSound() {
+
+        mp.start();
+    }
+
+    private void stopSound() {
+
+        mp.pause();
     }
 }
 

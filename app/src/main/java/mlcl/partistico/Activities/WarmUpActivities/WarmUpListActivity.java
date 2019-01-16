@@ -36,6 +36,7 @@ public class WarmUpListActivity extends AppCompatActivity {
     final Activity activity = this;
     Dialog dialogCreate;
     Dialog dialogEdit;
+    Dialog dialogDelete;
     EditText name;
     int warmupID;
 
@@ -47,12 +48,16 @@ public class WarmUpListActivity extends AppCompatActivity {
         handleIntent(getIntent());
 
         dialogCreate = new Dialog(this);
-        dialogCreate.setContentView(R.layout.add_warm_up_pop_up);
+        dialogCreate.setContentView(R.layout.warm_up_add_pop_up);
         dialogCreate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         dialogEdit = new Dialog(this);
-        dialogEdit.setContentView(R.layout.edit_warm_up_pop_up);
+        dialogEdit.setContentView(R.layout.warm_up_edit_pop_up);
         dialogEdit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialogDelete = new Dialog(this);
+        dialogDelete.setContentView(R.layout.warm_up_delete_pop_up);
+        dialogDelete.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         new GetListTask().execute();
     }
@@ -120,7 +125,8 @@ public class WarmUpListActivity extends AppCompatActivity {
 
     }
 
-    public void addPopup(View view){
+    public void addPopup(View view) {
+
         name = dialogCreate.findViewById(R.id.warmup_name);
         dialogCreate.show();
         Button accept = (Button) dialogCreate.findViewById(R.id.accept);
@@ -129,7 +135,7 @@ public class WarmUpListActivity extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!name.getText().toString().equals("")) {
+                if (!name.getText().toString().equals("")) {
                     Utils.getInstance().insertBDWarmUp(new BDWarmUp(name.getText().toString()));
                     new GetListTask().execute();
                     name.setText("");
@@ -147,10 +153,11 @@ public class WarmUpListActivity extends AppCompatActivity {
         });
     }
 
-    public void editPopup(View view){
-        LinearLayout linearLayout1 = (LinearLayout)view.getParent();
+    public void editPopup(View view) {
+
+        LinearLayout linearLayout1 = (LinearLayout) view.getParent();
         FrameLayout frameLayout1 = (FrameLayout) linearLayout1.getParent();
-        LinearLayout linearLayout2 = (LinearLayout)frameLayout1.getParent();
+        LinearLayout linearLayout2 = (LinearLayout) frameLayout1.getParent();
         Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
         BDWarmUp temp = Utils.getInstance().getActiveWarmup();
         warmupID = temp.getId();
@@ -181,18 +188,33 @@ public class WarmUpListActivity extends AppCompatActivity {
         });
     }
 
-    public void delete(View view){
+    public void deletePopup(View view) {
 
-        LinearLayout linearLayout1 = (LinearLayout)view.getParent();
+        LinearLayout linearLayout1 = (LinearLayout) view.getParent();
         FrameLayout frameLayout1 = (FrameLayout) linearLayout1.getParent();
-        LinearLayout linearLayout2 = (LinearLayout)frameLayout1.getParent();
+        LinearLayout linearLayout2 = (LinearLayout) frameLayout1.getParent();
         Utils.getInstance().setActiveWarmup((Integer) linearLayout2.getTag());
-        int id = Utils.getInstance().getActiveWarmup().getId();
-        Utils.getInstance().deleteBDWarmup(id);
-        new GetListTask().execute();
+        dialogDelete.show();
+        Button accept = (Button) dialogDelete.findViewById(R.id.accept);
+        Button reject = (Button) dialogDelete.findViewById(R.id.reject);
 
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    int id = Utils.getInstance().getActiveWarmup().getId();
+                    Utils.getInstance().deleteBDWarmup(id);
+                    new GetListTask().execute();
+                    dialogDelete.dismiss();
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogDelete.dismiss();
+            }
+        });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

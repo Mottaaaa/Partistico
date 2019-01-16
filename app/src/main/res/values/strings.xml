@@ -74,6 +74,10 @@
     <string name="create_warmup_exercise_title">Criar Exercício</string>
     <string name="edit_warmup_title">Editar Aquecimento</string>
     <string name="edit_warmup_exercise_title">Editar Exercício</string>
+    <string name="delete_warmup_title">Eliminar Aquecimento</string>
+    <string name="delete_warmup_message">Tem a certeza que pretende eliminar o aquecimento?</string>
+    <string name="delete_warmup_exercise_title">Eliminar Exercício</string>
+    <string name="delete_warmup_exercise_message">Tem a certeza que pretende eliminar o exercício?</string>
     <string name="reject">Rejeitar</string>
     <string name="accept">Aceitar</string>
 

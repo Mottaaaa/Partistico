@@ -47,7 +47,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/round_button"
-            android:onClick="delete"
+            android:onClick="deletePopup"
             android:src="@drawable/ic_delete_black_24dp"
             android:visibility="visible" />
     </LinearLayout>

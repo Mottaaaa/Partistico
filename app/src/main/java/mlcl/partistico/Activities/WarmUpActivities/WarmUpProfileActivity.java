@@ -12,16 +12,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import com.bumptech.glide.util.Util;
 
 import java.util.List;
 
-import Database.BDWarmUp;
 import Database.BDWarmUpExercise;
 import Model.Utils;
 import mlcl.partistico.R;
@@ -31,6 +26,7 @@ public class WarmUpProfileActivity extends AppCompatActivity {
     final Activity activity = this;
     Dialog dialogCreate;
     Dialog dialogEdit;
+    Dialog dialogDelete;
     EditText name;
     int warmupID;
 
@@ -40,12 +36,16 @@ public class WarmUpProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_warm_up_exercise_profile);
 
         dialogCreate = new Dialog(this);
-        dialogCreate.setContentView(R.layout.add_warm_up_pop_up);
+        dialogCreate.setContentView(R.layout.warm_up_exercise_add_pop_up);
         dialogCreate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         dialogEdit = new Dialog(this);
-        dialogEdit.setContentView(R.layout.edit_warm_up_pop_up);
+        dialogEdit.setContentView(R.layout.warm_up_exercise_edit_pop_up);
         dialogEdit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialogDelete = new Dialog(this);
+        dialogDelete.setContentView(R.layout.warm_up_exercise_delete_pop_up);
+        dialogDelete.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView warmUpName = findViewById(R.id.tv_warm_up_name);
         warmUpName.setText(Utils.getInstance().getActiveWarmup().getName());
@@ -148,11 +148,30 @@ public class WarmUpProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void delete(View view) {
+    public void deletePopup(View view) {
 
-        LinearLayout linearLayout = (LinearLayout) view.getParent();
-        LinearLayout linearLayout2 = (LinearLayout) linearLayout.getParent();
-        Utils.getInstance().deleteBDWarmUpExercise((Integer) linearLayout2.getTag());
-        populateLists();
+        final View auxView = view;
+
+        dialogDelete.show();
+        Button accept = (Button) dialogDelete.findViewById(R.id.accept);
+        Button reject = (Button) dialogDelete.findViewById(R.id.reject);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    LinearLayout linearLayout = (LinearLayout) auxView.getParent();
+                    LinearLayout linearLayout2 = (LinearLayout) linearLayout.getParent();
+                    Utils.getInstance().deleteBDWarmUpExercise((Integer) linearLayout2.getTag());
+                    populateLists();
+                    dialogDelete.dismiss();
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogDelete.dismiss();
+            }
+        });
     }
 }

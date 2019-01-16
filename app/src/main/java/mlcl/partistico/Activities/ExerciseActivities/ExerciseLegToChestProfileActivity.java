@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     private GraphView graphVertical;
     private int indexHorizontal = 1;
     private int indexVertical = 1;
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,8 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
         seriesVertical.setColor(Color.rgb(0, 51, 204));
         seriesHorizontal.setColor(Color.rgb(153, 0, 204));
+
+        mp = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -104,6 +109,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
         super.onStop();
         sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD));
         sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+        mp.release();
     }
 
     @Override
@@ -143,18 +149,17 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 //inclination can be calculated as
                 int inclination = (int) Math.round(Math.toDegrees(Math.acos(g[2])));
 
-                //if (inclination < 25 || inclination > 155) {
-                // device is flat
-                //outputX.setText("Flat");
-                //} else {
-                // device is not flat
-                //outputX.setText("Not Flat");
-                //}
-
                 seriesHorizontal.appendData((new DataPoint(indexHorizontal, inclination)), true, 100);
                 graphHorizontal.onDataChanged(false, false);
                 indexHorizontal++;
+
+                if(inclination <= 60 || inclination >= 120){
+                    playSound();
+                }else{
+                    stopSound();
+                }
             }
+
             if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
                 mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0];
                 mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1];
@@ -177,5 +182,15 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 indexVertical++;
             }
         }
+    }
+
+    private void playSound() {
+
+        mp.start();
+    }
+
+    private void stopSound() {
+
+        mp.pause();
     }
 }
