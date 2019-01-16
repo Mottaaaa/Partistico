@@ -153,7 +153,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                 graphHorizontal.onDataChanged(false, false);
                 indexHorizontal++;
 
-                if(inclination <= 55 || inclination >= 125){
+                if(inclination <= 60 || inclination >= 120){
                     playSound();
                 }else{
                     stopSound();
