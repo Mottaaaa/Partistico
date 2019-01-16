@@ -93,6 +93,9 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
 
         seriesVertical.setColor(Color.rgb(0, 51, 204));
         seriesHorizontal.setColor(Color.rgb(153, 0, 204));
+
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -181,14 +184,10 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     }
 
     private void playSound() {
-        mPlayer = new MediaPlayer();
-        mPlayer = MediaPlayer.create(this, R.raw.nein);
         mPlayer.start();
     }
 
     private void stopSound() {
-        mPlayer = new MediaPlayer();
-        mPlayer = MediaPlayer.create(this, R.raw.nein);
         mPlayer.pause();
     }
 }

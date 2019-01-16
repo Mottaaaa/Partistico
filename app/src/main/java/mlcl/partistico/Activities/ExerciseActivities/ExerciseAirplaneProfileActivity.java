@@ -71,6 +71,9 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
+
+        mPlayer = new MediaPlayer();
+        mPlayer = MediaPlayer.create(this, R.raw.nein);
     }
 
     @Override
@@ -146,14 +149,10 @@ public class ExerciseAirplaneProfileActivity extends AppCompatActivity implement
     }
 
     private void playSound() {
-        mPlayer = new MediaPlayer();
-        mPlayer = MediaPlayer.create(this, R.raw.nein);
         mPlayer.start();
     }
 
     private void stopSound() {
-        mPlayer = new MediaPlayer();
-        mPlayer = MediaPlayer.create(this, R.raw.nein);
         mPlayer.pause();
     }
 }
