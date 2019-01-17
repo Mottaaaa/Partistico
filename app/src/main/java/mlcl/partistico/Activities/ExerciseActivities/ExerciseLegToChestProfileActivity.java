@@ -36,9 +36,9 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
     private int indexHorizontal = 1;
     private int indexVertical = 1;
 
-    private float oldValue = -1;
-    private int threshold = 20;
-    private int incrementValue = 20;
+    private float oldValue;
+    private int threshold = 50;
+    private int incrementValue = 50;
     private boolean oldValueCalcutated = false;
 
     private MediaPlayer mPlayer;
@@ -192,7 +192,7 @@ public class ExerciseLegToChestProfileActivity extends AppCompatActivity impleme
                     threshold += incrementValue;
 
                     if(oldValueCalcutated){
-                        if((Math.abs((orientation[0] - oldValue))) > 1){
+                        if((Math.abs((orientation[0] - oldValue))) > 0.1){
                             playSound();
                         }
                         else{
