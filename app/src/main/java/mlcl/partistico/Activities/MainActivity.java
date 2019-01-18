@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void contentAction(View view) {
+
+        //TODO implementar integração com o React Native
+    }
+
     public void exerciseAction(View view) {
         Intent intent = new Intent(this, ExerciseListActivity.class);
         startActivity(intent);

@@ -85,6 +85,7 @@
     <string name="btn_atheletes">Atletas</string>
     <string name="btn_non_atheletes">Não Atletas</string>
     <string name="btn_competition">Provas</string>
+    <string name="btn_contents">Conteúdos</string>
     <string name="btn_exercises">Exercícios</string>
     <string name="btn_warm_ups">Aquecimentos</string>
     <string name="btn_exit">Sair</string>
